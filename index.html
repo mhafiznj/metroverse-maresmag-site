@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARESMAG TUITION SITES | Metroverse Edition</title>
+  <title>MARESMAG METROVERSE | Portal Tusyen MRSM Gerik</title>
   
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   
-  <!-- Google Fonts: Orbitron, Rajdhani & Inter -->
+  <!-- Fonts: Orbitron, Rajdhani & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            cyber: {
-              black: '#030712',
-              dark: '#0B132B',
-              card: 'rgba(15, 23, 42, 0.75)',
-              cyan: '#00F0FF',
-              blue: '#1C2541',
-              purple: '#7928CA',
-              glow: 'rgba(0, 240, 255, 0.35)'
+            brand: {
+              black: '#02040a',
+              card: 'rgba(7, 16, 38, 0.75)',
+              border: 'rgba(0, 242, 254, 0.25)',
+              cyan: '#00F2FE',
+              blue: '#4FACFE',
+              purple: '#7F00FF',
+              accent: '#00ffcc'
             }
           },
           fontFamily: {
             orbitron: ['Orbitron', 'sans-serif'],
             rajdhani: ['Rajdhani', 'sans-serif'],
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
           }
         }
       }
@@ -41,152 +41,179 @@
 
   <style>
     body {
-      background-color: #030712;
+      background-color: #02040a;
+      color: #e2e8f0;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(121, 40, 202, 0.08) 0%, transparent 45%);
+        radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(127, 0, 255, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+      background-attachment: fixed;
     }
-    .neon-border {
-      border: 1px solid rgba(0, 240, 255, 0.35);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-    }
-    .neon-glow-btn {
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-    }
+    
     .glass-nav {
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(2, 4, 10, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.15);
     }
-    .glass-card {
-      background: rgba(11, 19, 43, 0.65);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+
+    .pro-card {
+      background: rgba(10, 20, 42, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 242, 254, 0.18);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .glass-card:hover {
-      border-color: rgba(0, 240, 255, 0.6);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    .pro-card:hover {
+      border-color: rgba(0, 242, 254, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(0, 242, 254, 0.25);
     }
+
+    .cyber-gradient-text {
+      background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .neon-btn {
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.2));
+      border: 1px solid #00F2FE;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+    }
+    .neon-btn:hover {
+      background: #00F2FE;
+      color: #02040a;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #02040a; }
+    ::-webkit-scrollbar-thumb { background: #00F2FE; border-radius: 3px; }
   </style>
 </head>
-<body class="text-slate-200 font-sans min-h-screen flex flex-col selection:bg-cyber-cyan selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
   <!-- ================= NAVBAR ================= -->
-  <nav class="sticky top-0 z-50 glass-nav border-b border-cyan-500/20 px-4 lg:px-8 py-3.5 transition-all">
+  <nav class="sticky top-0 z-50 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Brand & MRSM Identity -->
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center p-1.5 shadow-[0_0_12px_rgba(0,240,255,0.3)]">
-          <i data-lucide="graduation-cap" class="text-cyber-cyan w-6 h-6"></i>
+      <!-- Brand & School Logo Badge -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-400/40 flex items-center justify-center p-2 shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:scale-105 transition">
+          <i data-lucide="shield-alert" class="text-brand-cyan w-6 h-6"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-orbitron font-black text-base md:text-lg tracking-wider text-white">MARESMAG</span>
-            <span class="text-cyber-cyan font-orbitron font-bold text-xs px-2 py-0.5 rounded bg-cyan-950/70 border border-cyan-500/40">METROVERSE</span>
+            <span class="font-orbitron font-black text-lg tracking-wider text-white">MARESMAG</span>
+            <span class="text-[11px] font-orbitron font-bold px-2 py-0.5 rounded bg-cyan-950/80 border border-brand-cyan text-brand-cyan shadow-[0_0_10px_rgba(0,242,254,0.3)]">METROVERSE</span>
           </div>
-          <p class="text-[10px] text-slate-400 tracking-widest font-semibold uppercase">MRSM Gerik • Tingkatan 5 Portal</p>
+          <p class="text-[10px] text-slate-400 tracking-widest font-rajdhani font-semibold uppercase">Pusat Rujukan Tingkatan 5 • MRSM Gerik</p>
         </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
+        <a href="#hero" class="hover:text-brand-cyan transition">Utama</a>
+        <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
+        <a href="#guru" class="hover:text-brand-cyan transition">Tenaga Pengajar</a>
+        <a href="#bahan" class="hover:text-brand-cyan transition">Bahan & Modul</a>
+        <a href="#rakaman" class="hover:text-brand-cyan transition">Video Rakaman</a>
       </div>
 
-      <!-- Nav Menu -->
-      <div class="hidden md:flex items-center space-x-6 text-xs font-semibold tracking-wider font-rajdhani uppercase">
-        <a href="#hero" class="text-slate-300 hover:text-cyber-cyan transition-colors">Utama</a>
-        <a href="#jadual" class="text-slate-300 hover:text-cyber-cyan transition-colors">Jadual Tusyen</a>
-        <a href="#guru" class="text-slate-300 hover:text-cyber-cyan transition-colors">Tenaga Pengajar</a>
-        <a href="#bahan" class="text-slate-300 hover:text-cyber-cyan transition-colors">Bahan & Nota</a>
-        <a href="#rakaman" class="text-slate-300 hover:text-cyber-cyan transition-colors">Rakaman Kelas</a>
-      </div>
-
-      <!-- Admin Access Button -->
-      <button onclick="openAdminModal()" class="px-3.5 py-1.5 text-xs font-rajdhani font-bold tracking-wider rounded-lg border border-cyan-500/50 bg-cyan-500/10 text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all flex items-center gap-2 shadow-[0_0_10px_rgba(0,240,255,0.2)]">
-        <i data-lucide="shield-check" class="w-4 h-4"></i> ADMIN PORTAL
+      <!-- Admin Portal Trigger -->
+      <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold tracking-wider text-brand-cyan flex items-center gap-2 transition-all">
+        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+        <span>PANEL ADMIN</span>
       </button>
     </div>
   </nav>
 
-  <!-- ================= HERO & POSTER SLIDER ================= -->
+  <!-- ================= HERO SLIDER ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div class="relative overflow-hidden rounded-2xl neon-border bg-slate-900/80 h-[280px] sm:h-[380px] md:h-[450px] flex items-center justify-center">
+    <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 h-[320px] sm:h-[420px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex items-center justify-center">
       
       <!-- Slide Content -->
-      <div id="slider-content" class="w-full h-full relative">
-        <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-12 bg-gradient-to-t from-black via-black/50 to-transparent z-10">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyber-cyan text-xs font-semibold w-fit mb-3">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> BATCH TINGKATAN 5 METROVERSE
+      <div id="slider-content" class="w-full h-full relative flex items-end">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 flex flex-col justify-end p-6 sm:p-10 md:p-14">
+          <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
+            <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+            <span>POSTER & PENGUMUMAN BATCH METROVERSE</span>
           </div>
-          <h2 id="slider-title" class="font-orbitron text-xl sm:text-2xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+          <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-5xl text-white mb-2 leading-tight">
             Selamat Datang ke Portal Rujukan Tusyen
-          </h2>
+          </h1>
           <p id="slider-desc" class="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl font-light">
-            Satu pusat sehenti untuk para pelajar, guru dan ibu bapa mengakses jadual, bahan modul tusyen, dan arkib rakaman video SPM MRSM Gerik.
+            Platform rasmi perkongsian nota, jadual waktu tusyen intensif SPM dan arkib rakaman kuliah MRSM Gerik.
           </p>
         </div>
-        <img id="slider-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop" class="w-full h-full object-cover transition-opacity duration-700 opacity-60" alt="Banner Metroverse">
+        <img id="slider-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400" class="w-full h-full object-cover transition-all duration-700 opacity-60" alt="Slider Banner">
       </div>
 
-      <!-- Controls -->
-      <button onclick="prevSlide()" class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-cyan-500/40 flex items-center justify-center text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all">
-        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+      <!-- Indicators -->
+      <div id="slider-dots" class="absolute bottom-4 right-6 z-20 flex items-center gap-1.5"></div>
+
+      <!-- Nav Buttons -->
+      <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition">
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
       </button>
-      <button onclick="nextSlide()" class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/60 border border-cyan-500/40 flex items-center justify-center text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all">
-        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+      <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition">
+        <i data-lucide="chevron-right" class="w-6 h-6"></i>
       </button>
     </div>
   </section>
 
   <!-- ================= 1. JADUAL KELAS TUSYEN ================= -->
-  <section id="jadual" class="py-8 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyber-cyan">
-        <i data-lucide="calendar-days" class="w-6 h-6"></i>
-      </div>
-      <div>
-        <h2 class="font-orbitron text-xl md:text-2xl font-bold text-white tracking-wide">JADUAL KELAS TUSYEN</h2>
-        <p class="text-xs text-slate-400">Jadual bengkel intensif dan kelas bimbingan mengikut subjek</p>
-      </div>
-    </div>
-
-    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Injected by JavaScript -->
-    </div>
-  </section>
-
-  <!-- ================= 2. SENARAI GURU TUSYEN ================= -->
-  <section id="guru" class="py-8 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
-        <i data-lucide="users" class="w-6 h-6"></i>
-      </div>
-      <div>
-        <h2 class="font-orbitron text-xl md:text-2xl font-bold text-white tracking-wide">BARISAN TENAGA PENGAJAR</h2>
-        <p class="text-xs text-slate-400">Guru-guru pakar dan berpengalaman mendidik batch Metroverse</p>
-      </div>
-    </div>
-
-    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      <!-- Injected by JavaScript -->
-    </div>
-  </section>
-
-  <!-- ================= 3. SENARAI BAHAN RUJUKAN (GDRIVE) ================= -->
-  <section id="bahan" class="py-8 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+  <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-8 border-b border-slate-800 pb-4">
       <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyber-cyan">
-          <i data-lucide="folder-git-2" class="w-6 h-6"></i>
+        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+          <i data-lucide="calendar" class="w-6 h-6"></i>
         </div>
         <div>
-          <h2 class="font-orbitron text-xl md:text-2xl font-bold text-white tracking-wide">BAHAN RUJUKAN & NOTA</h2>
-          <p class="text-xs text-slate-400">Muat turun modul, soalan percubaan, dan nota ringkas di Google Drive</p>
+          <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">JADUAL KELAS TUSYEN</h2>
+          <p class="text-xs text-slate-400">Jadual pengukuhan & kelas persediaan peperiksaan SPM</p>
         </div>
       </div>
+    </div>
+    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by JS -->
+    </div>
+  </section>
 
-      <!-- Filter Subjek -->
+  <!-- ================= 2. TENAGA PENGAJAR ================= -->
+  <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
+      <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
+        <i data-lucide="award" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">BARISAN GURU & TENAGA PENGAJAR</h2>
+        <p class="text-xs text-slate-400">Pakar subjek & pembimbing kecemerlangan akademik MRSM Gerik</p>
+      </div>
+    </div>
+    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- ================= 3. BAHAN RUJUKAN & NOTA ================= -->
+  <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-slate-800 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+          <i data-lucide="folder-archive" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">BAHAN RUJUKAN & MODUL SPM</h2>
+          <p class="text-xs text-slate-400">Muat turun nota, skema soalan, dan lembaran kerja Google Drive</p>
+        </div>
+      </div>
+      <!-- Filter -->
       <div class="flex items-center gap-2">
-        <span class="text-xs text-slate-400 font-medium">Subjek:</span>
-        <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-cyan-500/40 text-cyber-cyan text-xs font-semibold rounded-lg px-3 py-2 outline-none">
+        <span class="text-xs text-slate-400 font-semibold uppercase">Pilih Subjek:</span>
+        <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs font-semibold rounded-xl px-4 py-2.5 outline-none focus:border-brand-cyan">
           <option value="SEMUA">Semua Subjek</option>
           <option value="Bahasa Melayu">Bahasa Melayu</option>
           <option value="Bahasa Inggeris">Bahasa Inggeris</option>
@@ -201,148 +228,181 @@
         </select>
       </div>
     </div>
-
-    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Injected by JavaScript -->
+    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Injected by JS -->
     </div>
   </section>
 
-  <!-- ================= 4. RAKAMAN KELAS TUSYEN ================= -->
-  <section id="rakaman" class="py-8 px-4 max-w-7xl mx-auto w-full mb-12">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
-        <i data-lucide="play-square" class="w-6 h-6"></i>
+  <!-- ================= 4. RAKAMAN KELAS ================= -->
+  <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
+    <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
+      <div class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
+        <i data-lucide="play" class="w-6 h-6"></i>
       </div>
       <div>
-        <h2 class="font-orbitron text-xl md:text-2xl font-bold text-white tracking-wide">RAKAMAN VIDEO KELAS</h2>
-        <p class="text-xs text-slate-400">Tonton semula sesi rakaman kelas tusyen & perbincangan soalan</p>
+        <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">ARKIB RAKAMAN KELAS TUSYEN</h2>
+        <p class="text-xs text-slate-400">Tonton video ulangkaji bagi sesi pengajaran yang telah dijalankan</p>
       </div>
     </div>
-
-    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Injected by JavaScript -->
+    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by JS -->
     </div>
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="mt-auto glass-nav border-t border-cyan-500/20 py-8 text-center text-xs text-slate-400">
+  <footer class="mt-auto glass-nav py-8 border-t border-cyan-500/20 text-center text-xs text-slate-400">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
-        <span class="font-orbitron text-cyber-cyan font-bold">MARESMAG METROVERSE</span>
-        <span>• MRSM Gerik, Perak</span>
+        <span class="font-orbitron text-brand-cyan font-bold text-sm">MARESMAG METROVERSE</span>
+        <span>• Maktab Rendah Sains MARA Gerik, Perak</span>
       </div>
-      <p class="font-light">Dibina khusus untuk kecemerlangan SPM Batch Metroverse.</p>
+      <p>© 2026 Batch Metroverse. Sistem Pengurusan Pembelajaran SPM.</p>
     </div>
   </footer>
 
-  <!-- ================= ADMIN CONTROL MODAL ================= -->
-  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-slate-950 border border-cyan-500/50 rounded-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+  <!-- ================= IMAGE PREVIEW MODAL ================= -->
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeImageModal()">
+    <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center">
+      <img id="modal-img-tag" src="" class="max-w-full max-h-[85vh] rounded-2xl border border-brand-cyan shadow-[0_0_40px_rgba(0,242,254,0.4)] object-contain">
+      <p class="text-xs text-slate-300 mt-2 font-rajdhani">Klik di mana-mana ruang untuk tutup</p>
+    </div>
+  </div>
+
+  <!-- ================= ADVANCED ADMIN CMS MODAL ================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-4xl w-full p-6 relative max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,242,254,0.25)]">
       
-      <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
+      <!-- Close Button -->
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
       </button>
 
-      <!-- Step 1: Login Box -->
-      <div id="admin-auth-box">
-        <div class="text-center mb-6">
-          <div class="inline-flex p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyber-cyan mb-2">
-            <i data-lucide="lock" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-orbitron text-lg font-bold text-white">Log Masuk Admin Metroverse</h3>
-          <p class="text-xs text-slate-400">Sahkan kata laluan untuk kemaskini portal</p>
+      <!-- AUTH BOX -->
+      <div id="admin-auth-box" class="py-10 text-center max-w-md mx-auto w-full">
+        <div class="inline-flex p-4 rounded-2xl bg-cyan-500/10 border border-brand-cyan/40 text-brand-cyan mb-4 shadow-[0_0_20px_rgba(0,242,254,0.3)]">
+          <i data-lucide="lock-keyhole" class="w-8 h-8"></i>
         </div>
-
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Kata Laluan Admin</label>
-            <input type="password" id="admin-pass-input" placeholder="Masukkan katalaluan..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:border-cyber-cyan outline-none transition">
-          </div>
-          <button onclick="verifyAdmin()" class="w-full py-2.5 bg-cyber-cyan text-black font-rajdhani font-bold rounded-lg hover:bg-cyan-300 transition-all text-sm tracking-wider neon-glow-btn">
-            LOG MASUK KE DASHBOARD
-          </button>
-        </div>
+        <h3 class="font-orbitron text-xl font-bold text-white mb-1">PENGURUSAN ADMIN</h3>
+        <p class="text-xs text-slate-400 mb-6">Sila masukkan kata laluan untuk menguruskan kandungan & poster</p>
+        
+        <input type="password" id="admin-pass-input" placeholder="Masukkan Kata Laluan..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-brand-cyan outline-none mb-4">
+        <button onclick="verifyAdmin()" class="w-full py-3 bg-brand-cyan text-black font-rajdhani font-bold rounded-xl hover:bg-cyan-300 transition text-sm tracking-wider">
+          LOG MASUK KE CMS
+        </button>
       </div>
 
-      <!-- Step 2: Admin Panel Form -->
-      <div id="admin-panel" class="hidden">
-        <div class="border-b border-slate-800 pb-3 mb-4 flex items-center justify-between">
-          <span class="text-xs font-orbitron text-cyber-cyan font-bold">ADMIN CONTROL PANEL</span>
+      <!-- CMS PANEL -->
+      <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="font-orbitron text-sm font-bold text-brand-cyan">METROVERSE CMS CONTROL</span>
+            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded border border-brand-cyan/30">Live Database</span>
+          </div>
           <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Log Keluar</button>
         </div>
 
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Pilih Bahagian Yang Ingin Ditambah:</label>
-            <select id="admin-category" onchange="renderAdminFields()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-cyber-cyan outline-none">
-              <option value="slider">1. Poster Slider Utama</option>
-              <option value="jadual">2. Jadual Kelas Tusyen</option>
-              <option value="guru">3. Senarai Guru Tusyen</option>
-              <option value="bahan">4. Bahan Rujukan (Link Google Drive)</option>
-              <option value="rakaman">5. Rakaman Kelas (Link Video)</option>
-            </select>
-          </div>
-
-          <div id="dynamic-admin-inputs" class="space-y-3">
-            <!-- Dynamic Fields -->
-          </div>
-
-          <button onclick="submitAdminData()" id="admin-submit-btn" class="w-full py-2.5 bg-cyber-cyan text-black font-rajdhani font-bold rounded-lg hover:bg-cyan-300 transition-all text-sm tracking-wider neon-glow-btn">
-            HANTAR & KEMASKINI SISTEM
-          </button>
+        <!-- Section Tabs -->
+        <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Poster Slider</button>
+          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual Tusyen</button>
+          <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
+          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan Drive</button>
+          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">5. Rakaman Video</button>
         </div>
+
+        <!-- Content Area (Scrollable) -->
+        <div class="flex-1 overflow-y-auto space-y-6 pr-2">
+          
+          <!-- Add Form Card -->
+          <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
+            <h4 class="font-rajdhani font-bold text-white text-base mb-3 flex items-center gap-2">
+              <i data-lucide="plus-circle" class="w-4 h-4 text-brand-cyan"></i>
+              <span id="admin-form-title">Tambah Poster Slider Baharu</span>
+            </h4>
+            <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              <!-- Injected by JS -->
+            </div>
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition flex items-center justify-center gap-2">
+              <i data-lucide="upload" class="w-4 h-4"></i> SIMPAN KE GOOGLE SHEETS
+            </button>
+          </div>
+
+          <!-- Existing Items Table / List -->
+          <div>
+            <h4 class="font-rajdhani font-bold text-slate-300 text-sm mb-3 flex items-center justify-between">
+              <span>Senarai Data Semasa:</span>
+              <span id="current-tab-count" class="text-xs text-brand-cyan font-normal">0 Item</span>
+            </h4>
+            <div id="admin-items-list" class="space-y-2">
+              <!-- Item cards with DELETE button injected by JS -->
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- ================= JAVASCRIPT ================= -->
   <script>
-    // URL Web App Google Apps Script anda telah dimasukkan:
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
     const ADMIN_PASSWORD = "maresm@gmtsadm1n";
 
-    // Fallback Data awal jika Google Sheets masih kosong
-    let localData = {
-      slider: [
-        { title: "Bengkel Pecutan Akhir SPM Metroverse", image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400" }
-      ],
-      jadual: [
-        { title: "Intensif Matematik Tambahan Kertas 2", tarikh_hari: "Isnin, 8.30 Malam", masa: "2 Jam", subjek: "Matematik Tambahan", poster_url: "" },
-        { title: "Klinik Kecemerlangan Kimia", tarikh_hari: "Rabu, 8.30 Malam", masa: "1 Jam 30 Minit", subjek: "Kimia", poster_url: "" }
-      ],
-      guru: [
-        { nama: "Cikgu Ahmad", subjek: "Matematik Tambahan", image_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300", keterangan: "Pakar Teknik Menjawab SPM" },
-        { nama: "Ustazah Fatimah", subjek: "Pendidikan Islam", image_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300", keterangan: "Jurulatih Utama Negeri" }
-      ],
-      bahan: [
-        { subjek: "Matematik Tambahan", tajuk: "Modul Soalan Percubaan SPM Negeri 2025", gdrive_url: "https://drive.google.com", tarikh: "30/08/2026" },
-        { subjek: "Kimia", tajuk: "Nota Padat Termokimia & Elektrokimia", gdrive_url: "https://drive.google.com", tarikh: "29/08/2026" }
-      ],
-      rakaman: [
-        { subjek: "Kimia", tajuk: "Rakaman Kelas Sesi 1: Asid, Bes dan Garam", video_url: "https://youtube.com", tarikh: "28/08/2026" }
-      ]
-    };
+    // Subjek List
+    const subjekList = [
+      "Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", 
+      "Matematik Tambahan", "Fizik", "Kimia", "Biologi", 
+      "Prinsip Perakaunan", "Pendidikan Islam"
+    ];
 
-    let currentSlide = 0;
-
-    // Ambil Data Terkini dari Google Sheets API
-    async function fetchData() {
-      if (API_URL.startsWith("http")) {
-        try {
-          const res = await fetch(API_URL);
-          const data = await res.json();
-          if (data && !data.error) {
-            localData = data;
-          }
-        } catch (e) {
-          console.warn("Gagal menghubungi Google Apps Script, guna data paparan sedia ada:", e);
+    // AUTO-RESOLVE GOOGLE DRIVE LINK TO DIRECT VISIBLE IMAGE
+    function formatImageUrl(url) {
+      if (!url || typeof url !== 'string') return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800";
+      url = url.trim();
+      
+      // If it is a Google Drive Link
+      if (url.includes("drive.google.com")) {
+        const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (idMatch && idMatch[1]) {
+          return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
         }
       }
-      renderUI();
+      return url;
     }
 
-    function renderUI() {
+    // Default Fallback
+    let portalData = {
+      slider: [
+        { title: "Selamat Datang Ke Portal Tusyen Metroverse", image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400", row_index: 2 }
+      ],
+      jadual: [],
+      guru: [],
+      bahan: [],
+      rakaman: []
+    };
+
+    let activeAdminTab = 'slider';
+    let currentSlideIndex = 0;
+
+    // FETCH DATA
+    async function loadData() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        if (data && !data.error) {
+          portalData = data;
+        }
+      } catch (err) {
+        console.warn("API Offline / Data Tempatan:", err);
+      }
+      renderAll();
+    }
+
+    function renderAll() {
       renderSlider();
       renderJadual();
       renderGuru();
@@ -353,94 +413,131 @@
 
     // SLIDER
     function renderSlider() {
-      if (!localData.slider || localData.slider.length === 0) return;
-      const s = localData.slider[currentSlide % localData.slider.length];
-      document.getElementById('slider-title').textContent = s.title || "Portal Metroverse";
-      document.getElementById('slider-img').src = s.image_url || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400";
+      const list = portalData.slider || [];
+      if (list.length === 0) return;
+      const s = list[currentSlideIndex % list.length];
+      
+      document.getElementById('slider-title').textContent = s.title || "Poster Metroverse";
+      document.getElementById('slider-img').src = formatImageUrl(s.image_url);
+
+      const dots = document.getElementById('slider-dots');
+      dots.innerHTML = list.map((_, i) => `
+        <span class="w-2.5 h-2.5 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-600'}"></span>
+      `).join('');
     }
-    function nextSlide() { currentSlide++; renderSlider(); }
-    function prevSlide() { currentSlide = (currentSlide === 0) ? (localData.slider.length - 1) : (currentSlide - 1); renderSlider(); }
+    function nextSlide() { currentSlideIndex++; renderSlider(); }
+    function prevSlide() { currentSlideIndex = (currentSlideIndex === 0) ? ((portalData.slider?.length || 1) - 1) : (currentSlideIndex - 1); renderSlider(); }
 
     // JADUAL
     function renderJadual() {
-      const el = document.getElementById('jadual-container');
-      el.innerHTML = (localData.jadual || []).map(j => `
-        <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+      const container = document.getElementById('jadual-container');
+      const list = portalData.jadual || [];
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada jadual dimasukkan lagi. Admin boleh tambah melalui Panel Admin.</div>`;
+        return;
+      }
+      container.innerHTML = list.map(j => `
+        <div class="pro-card p-5 rounded-2xl flex flex-col justify-between">
           <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-cyan-950/80 text-cyber-cyan border border-cyan-500/40">${j.subjek}</span>
-              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-cyber-cyan"></i> ${j.masa || ''}</span>
+            <div class="flex justify-between items-center mb-3">
+              <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-cyan-950 text-brand-cyan border border-brand-cyan/40">${j.subjek}</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i> ${j.masa || ''}</span>
             </div>
             <h3 class="font-rajdhani font-bold text-lg text-white mb-2 leading-snug">${j.title}</h3>
             <p class="text-xs text-slate-300 flex items-center gap-1.5 mb-4">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-cyber-cyan"></i> ${j.tarikh_hari}
+              <i data-lucide="calendar-check" class="w-4 h-4 text-brand-cyan"></i> ${j.tarikh_hari}
             </p>
           </div>
-          ${j.poster_url ? `<a href="${j.poster_url}" target="_blank" class="w-full py-2 text-center text-xs font-semibold rounded-lg bg-cyan-500/10 hover:bg-cyber-cyan hover:text-black text-cyber-cyan border border-cyan-500/30 transition">Lihat Poster Penuh</a>` : ''}
+          ${j.poster_url ? `
+            <button onclick="openImageModal('${formatImageUrl(j.poster_url)}')" class="w-full py-2 text-center text-xs font-semibold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition flex items-center justify-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4"></i> Papar Poster Jadual
+            </button>
+          ` : ''}
         </div>
       `).join('');
     }
 
     // GURU
     function renderGuru() {
-      const el = document.getElementById('guru-container');
-      el.innerHTML = (localData.guru || []).map(g => `
-        <div class="glass-card p-4 rounded-xl text-center flex flex-col items-center">
-          <img src="${g.image_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300'}" class="w-16 h-16 rounded-full object-cover mb-2.5 border-2 border-purple-400/40 p-0.5">
-          <h4 class="font-rajdhani font-bold text-sm text-white">${g.nama}</h4>
-          <span class="text-[10px] text-cyber-cyan font-semibold mb-1">${g.subjek}</span>
+      const container = document.getElementById('guru-container');
+      const list = portalData.guru || [];
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Senarai guru belum ditambah.</div>`;
+        return;
+      }
+      container.innerHTML = list.map(g => `
+        <div class="pro-card p-4 rounded-2xl text-center flex flex-col items-center">
+          <img src="${formatImageUrl(g.image_url)}" class="w-20 h-20 rounded-2xl object-cover mb-3 border-2 border-purple-500/40 p-0.5 shadow-lg" onerror="this.src='https://via.placeholder.com/150'">
+          <h4 class="font-rajdhani font-bold text-sm text-white leading-tight">${g.nama}</h4>
+          <span class="text-[11px] text-brand-cyan font-semibold my-1">${g.subjek}</span>
           <p class="text-[10px] text-slate-400 line-clamp-2">${g.keterangan || ''}</p>
         </div>
       `).join('');
     }
 
-    // BAHAN RUJUKAN (FILTER)
+    // BAHAN RUJUKAN
     function filterBahan() {
       const sel = document.getElementById('filter-subjek').value;
-      const data = localData.bahan || [];
-      const filtered = sel === "SEMUA" ? data : data.filter(b => b.subjek === sel);
-      const el = document.getElementById('bahan-container');
+      const list = portalData.bahan || [];
+      const filtered = sel === "SEMUA" ? list : list.filter(b => b.subjek === sel);
+      const container = document.getElementById('bahan-container');
 
       if (filtered.length === 0) {
-        el.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs">Tiada modul bahan dijumpai untuk subjek ini.</div>`;
+        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada modul bahan untuk subjek ini.</div>`;
         return;
       }
 
-      el.innerHTML = filtered.map(b => `
-        <div class="glass-card p-4 rounded-xl flex items-center justify-between gap-3">
+      container.innerHTML = filtered.map(b => `
+        <div class="pro-card p-5 rounded-2xl flex items-center justify-between gap-3">
           <div>
-            <span class="text-[10px] text-cyber-cyan font-bold tracking-wider uppercase">${b.subjek}</span>
-            <h4 class="font-rajdhani font-bold text-sm text-white">${b.tajuk}</h4>
-            <span class="text-[10px] text-slate-400">Dimuat naik: ${b.tarikh || ''}</span>
+            <span class="text-[10px] text-brand-cyan font-bold tracking-wider uppercase">${b.subjek}</span>
+            <h4 class="font-rajdhani font-bold text-base text-white leading-snug">${b.tajuk}</h4>
+            <span class="text-[10px] text-slate-400">Tarikh: ${b.tarikh || ''}</span>
           </div>
-          <a href="${b.gdrive_url}" target="_blank" class="p-3 rounded-xl bg-cyan-500/10 hover:bg-cyber-cyan hover:text-black text-cyber-cyan transition-all border border-cyan-500/30">
-            <i data-lucide="download-cloud" class="w-4 h-4"></i>
+          <a href="${b.gdrive_url}" target="_blank" class="p-3.5 rounded-2xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan transition border border-brand-cyan/30 flex-shrink-0">
+            <i data-lucide="external-link" class="w-5 h-5"></i>
           </a>
         </div>
       `).join('');
       lucide.createIcons();
     }
 
-    // RAKAMAN
+    // RAKAMAN VIDEO
     function renderRakaman() {
-      const el = document.getElementById('rakaman-container');
-      el.innerHTML = (localData.rakaman || []).map(r => `
-        <div class="glass-card p-5 rounded-xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between">
+      const container = document.getElementById('rakaman-container');
+      const list = portalData.rakaman || [];
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada video rakaman ditemui.</div>`;
+        return;
+      }
+      container.innerHTML = list.map(r => `
+        <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between">
           <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-[10px] bg-red-950/80 border border-red-500/40 text-red-400 px-2 py-0.5 rounded font-bold uppercase">${r.subjek}</span>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-[10px] bg-red-950/80 border border-red-500/40 text-red-400 px-2.5 py-0.5 rounded-lg font-bold uppercase">${r.subjek}</span>
               <span class="text-[10px] text-slate-400">${r.tarikh || ''}</span>
             </div>
-            <h4 class="font-rajdhani font-bold text-base text-white mb-4 leading-snug">${r.tajuk}</h4>
+            <h4 class="font-rajdhani font-bold text-lg text-white mb-4 leading-snug">${r.tajuk}</h4>
           </div>
-          <a href="${r.video_url}" target="_blank" class="w-full py-2.5 rounded-lg bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold flex items-center justify-center gap-2 border border-red-500/30 transition-all">
-            <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i> Tonton Rakaman
+          <a href="${r.video_url}" target="_blank" class="w-full py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold flex items-center justify-center gap-2 border border-red-500/30 transition">
+            <i data-lucide="play-circle" class="w-4 h-4"></i> Tonton Rakaman
           </a>
         </div>
       `).join('');
     }
 
-    // ================= ADMIN FUNCTIONS =================
+    // IMAGE MODAL
+    function openImageModal(url) {
+      document.getElementById('modal-img-tag').src = url;
+      document.getElementById('image-modal').classList.remove('hidden');
+      document.getElementById('image-modal').classList.add('flex');
+    }
+    function closeImageModal() {
+      document.getElementById('image-modal').classList.add('hidden');
+      document.getElementById('image-modal').classList.remove('flex');
+    }
+
+    // ================= CMS MANAGEMENT =================
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
       document.getElementById('admin-modal').classList.add('flex');
@@ -450,80 +547,117 @@
       document.getElementById('admin-modal').classList.remove('flex');
     }
     function verifyAdmin() {
-      const input = document.getElementById('admin-pass-input').value;
-      if (input === ADMIN_PASSWORD) {
+      const p = document.getElementById('admin-pass-input').value;
+      if (p === ADMIN_PASSWORD) {
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
-        renderAdminFields();
+        document.getElementById('admin-panel').classList.add('flex');
+        switchAdminTab('slider');
       } else {
-        alert("Kata laluan Admin tidak sah!");
+        alert("Kata laluan Admin Salah!");
       }
     }
     function logoutAdmin() {
       document.getElementById('admin-auth-box').classList.remove('hidden');
       document.getElementById('admin-panel').classList.add('hidden');
-      document.getElementById('admin-pass-input').value = "";
+      document.getElementById('admin-panel').classList.remove('flex');
+      document.getElementById('admin-pass-input').value = '';
     }
 
-    const subjekList = [
-      "Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", 
-      "Matematik Tambahan", "Fizik", "Kimia", "Biologi", 
-      "Prinsip Perakaunan", "Pendidikan Islam"
-    ];
+    function switchAdminTab(tab) {
+      activeAdminTab = tab;
+      document.querySelectorAll('.admin-tab-btn').forEach(b => {
+        b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300";
+      });
+      document.getElementById(`tab-btn-${tab}`).className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
+      
+      renderAdminForm();
+      renderAdminList();
+      lucide.createIcons();
+    }
 
-    function renderAdminFields() {
-      const cat = document.getElementById('admin-category').value;
-      const c = document.getElementById('dynamic-admin-inputs');
+    function renderAdminForm() {
+      const f = document.getElementById('admin-form-fields');
+      const title = document.getElementById('admin-form-title');
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
 
-      if (cat === 'slider') {
-        c.innerHTML = `
-          <input type="text" id="adm-title" placeholder="Tajuk Poster Pengumuman" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-image_url" placeholder="Direct Link Imej Poster (URL)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
+      if (activeAdminTab === 'slider') {
+        title.textContent = "Tambah Poster Slider Utama";
+        f.innerHTML = `
+          <input type="text" id="adm-title" placeholder="Tajuk Poster Pengumuman" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-image_url" placeholder="Link Gambar / Google Drive Link" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
-      } else if (cat === 'jadual') {
-        c.innerHTML = `
-          <select id="adm-subjek" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-title" placeholder="Tajuk Sesi Kelas" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu (cth: Isnin, 8.30 Malam)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-masa" placeholder="Tempoh Masa (cth: 2 Jam)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-poster_url" placeholder="Link Poster (Opsyenal)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
+      } else if (activeAdminTab === 'jadual') {
+        title.textContent = "Tambah Jadual Kelas Baharu";
+        f.innerHTML = `
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
+          <input type="text" id="adm-title" placeholder="Tajuk Sesi (cth: Bengkel Kertas 2)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Masa (cth: Isnin, 8.30 PM)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-masa" placeholder="Tempoh (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-poster_url" placeholder="Link Gambar Poster (Google Drive / Direct Link)" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
-      } else if (cat === 'guru') {
-        c.innerHTML = `
-          <input type="text" id="adm-nama" placeholder="Nama Guru" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <select id="adm-subjek" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil Guru (URL)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-keterangan" placeholder="Keterangan Ringkas Guru" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
+      } else if (activeAdminTab === 'guru') {
+        title.textContent = "Tambah Guru / Tenaga Pengajar";
+        f.innerHTML = `
+          <input type="text" id="adm-nama" placeholder="Nama Pendidik" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
+          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil (Google Drive / URL)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-keterangan" placeholder="Keterangan Ringkas (cth: Guru Cemerlang)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
-      } else if (cat === 'bahan') {
-        c.innerHTML = `
-          <select id="adm-subjek" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul / Nota" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh" placeholder="Tarikh (cth: 30/08/2026)" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
+      } else if (activeAdminTab === 'bahan') {
+        title.textContent = "Tambah Bahan Rujukan & Modul";
+        f.innerHTML = `
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul / Nota" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-gdrive_url" placeholder="Link Folder / Fail Google Drive" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-tarikh" placeholder="Tarikh (cth: 30 Ogos 2026)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
-      } else if (cat === 'rakaman') {
-        c.innerHTML = `
-          <select id="adm-subjek" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Video Rakaman" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-video_url" placeholder="Link YouTube / Google Drive Video" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh" placeholder="Tarikh Sesi" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-xs text-white">
+      } else if (activeAdminTab === 'rakaman') {
+        title.textContent = "Tambah Pautan Video Rakaman";
+        f.innerHTML = `
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Sesi Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-video_url" placeholder="Link YouTube / Google Drive Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-tarikh" placeholder="Tarikh Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       }
     }
 
-    async function submitAdminData() {
-      const cat = document.getElementById('admin-category').value;
-      const btn = document.getElementById('admin-submit-btn');
-      
-      let payload = {};
-      const inputs = document.querySelectorAll('#dynamic-admin-inputs input, #dynamic-admin-inputs select');
-      inputs.forEach(i => {
-        payload[i.id.replace('adm-', '')] = i.value;
-      });
+    function renderAdminList() {
+      const listContainer = document.getElementById('admin-items-list');
+      const items = portalData[activeAdminTab] || [];
+      document.getElementById('current-tab-count').textContent = `${items.length} Item`;
 
-      btn.textContent = "MEMPROSES & MENYIMPAN...";
+      if (items.length === 0) {
+        listContainer.innerHTML = `<div class="p-4 bg-slate-900/60 rounded-xl text-center text-xs text-slate-500">Tiada rekod data di dalam bahagian ini.</div>`;
+        return;
+      }
+
+      listContainer.innerHTML = items.map((item, idx) => `
+        <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 overflow-hidden">
+            <span class="text-xs font-mono text-brand-cyan">#${idx + 1}</span>
+            <div class="truncate">
+              <p class="text-xs font-bold text-white truncate">${item.title || item.nama || item.tajuk || 'Item'}</p>
+              <p class="text-[10px] text-slate-400 truncate">${item.subjek || item.tarikh_hari || item.image_url || ''}</p>
+            </div>
+          </div>
+          <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-3 py-1 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Padam
+          </button>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // SAVE / ADD
+    async function saveCurrentItem() {
+      const btn = document.getElementById('btn-save-item');
+      let payload = {};
+      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select');
+      inputs.forEach(i => payload[i.id.replace('adm-', '')] = i.value);
+
+      btn.textContent = "SEDANG MENYIMPAN KE GOOGLE SHEETS...";
       btn.disabled = true;
 
       try {
@@ -532,27 +666,52 @@
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'ADD',
-            sheetName: cat,
+            sheetName: activeAdminTab,
             data: payload,
             password: ADMIN_PASSWORD
           })
         });
         const result = await res.json();
-        alert(result.message || "Berjaya dikemaskini ke Google Sheets!");
-        closeAdminModal();
-        fetchData();
-      } catch (err) {
-        alert("Ralat semasa menyambung ke pangkalan data: " + err.message);
+        alert(result.message || "Berjaya disimpan!");
+        await loadData();
+        renderAdminList();
+      } catch (e) {
+        alert("Ralat semasa menyimpan: " + e.message);
       } finally {
-        btn.textContent = "HANTAR & KEMASKINI SISTEM";
+        btn.innerHTML = `<i data-lucide="upload" class="w-4 h-4"></i> SIMPAN KE GOOGLE SHEETS`;
         btn.disabled = false;
+        lucide.createIcons();
       }
     }
 
-    // Auto-Run Bila Laman Web Dibuka
+    // DELETE ITEM
+    async function deleteItem(sheetName, rowIndex) {
+      if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
+      
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'DELETE',
+            sheetName: sheetName,
+            rowIndex: rowIndex,
+            password: ADMIN_PASSWORD
+          })
+        });
+        const result = await res.json();
+        alert(result.message || "Berjaya dipadam!");
+        await loadData();
+        renderAdminList();
+      } catch (e) {
+        alert("Ralat memadam data: " + e.message);
+      }
+    }
+
+    // RUN ON START
     window.addEventListener('DOMContentLoaded', () => {
-      fetchData();
-      setInterval(nextSlide, 5000);
+      loadData();
+      setInterval(nextSlide, 6000);
     });
   </script>
 </body>
