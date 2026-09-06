@@ -95,7 +95,7 @@
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Brand & MRSM Official Logo -->
+      <!-- Logo Rasmi MRSM & Brand -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="w-11 h-11 rounded-xl overflow-hidden bg-slate-900/80 border border-cyan-400/40 flex items-center justify-center p-1 shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:border-brand-cyan transition">
           <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" 
@@ -112,7 +112,7 @@
         </div>
       </a>
 
-      <!-- Desktop Nav -->
+      <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
         <a href="#hero" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
@@ -129,15 +129,16 @@
     </div>
   </nav>
 
-  <!-- ================= HERO SLIDER (NO CROP) ================= -->
+  <!-- ================= HERO SLIDER ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
     <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
       
-      <!-- Background Ambient Glow -->
+      <!-- Background Ambient Blur -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
       </div>
 
+      <!-- Left Text Content -->
       <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
         <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
           <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
@@ -147,7 +148,7 @@
           Selamat Datang ke Portal Tusyen
         </h1>
         <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
-          Platform rasmi nota, modul, jadual bengkel intensif dan arkib rakaman kuliah Tingkatan 5 MRSM Gerik.
+          Platform rasmi nota, modul soalan, jadual bengkel intensif dan arkib rakaman kuliah Tingkatan 5 MRSM Gerik.
         </p>
 
         <div class="flex items-center gap-4">
@@ -163,6 +164,7 @@
         </div>
       </div>
 
+      <!-- Right Poster (Full No Crop) -->
       <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
         <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
           <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
@@ -200,7 +202,7 @@
     <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
   </section>
 
-  <!-- ================= 3. BAHAN RUJUKAN (PRO TECH BUTTONS) ================= -->
+  <!-- ================= 3. BAHAN RUJUKAN & MODUL ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-slate-800 pb-4">
       <div class="flex items-center gap-3">
@@ -209,7 +211,7 @@
         </div>
         <div>
           <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">BAHAN RUJUKAN & MODUL SPM</h2>
-          <p class="text-xs text-slate-400">Pilih modul subjek untuk dibuka dalam paparan interaktif</p>
+          <p class="text-xs text-slate-400">Klik butang untuk membuka modul di tab baharu dengan pantas</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -232,7 +234,7 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 4. RAKAMAN KELAS (PRO TECH BUTTONS) ================= -->
+  <!-- ================= 4. RAKAMAN KELAS ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
       <div class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
@@ -240,7 +242,7 @@
       </div>
       <div>
         <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">ARKIB RAKAMAN KELAS TUSYEN</h2>
-        <p class="text-xs text-slate-400">Tonton semula video sesi pengajaran secara langsung di portal ini</p>
+        <p class="text-xs text-slate-400">Tonton semula rakaman video penerangan guru di tab baharu</p>
       </div>
     </div>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -256,46 +258,6 @@
       <p>© 2026 Metroverse Tuition One Stop Centre | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
     </div>
   </footer>
-
-  <!-- ================= INTERACTIVE MEDIA MODAL (TAB SAMA & BUTANG TAB BARU) ================= -->
-  <div id="media-viewer-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 transition-opacity">
-    <div class="relative w-full max-w-4xl h-[85vh] flex flex-col bg-slate-950 border border-brand-cyan/40 rounded-3xl p-4 sm:p-5 shadow-[0_0_50px_rgba(0,242,254,0.25)]">
-      
-      <!-- Top Bar Controls -->
-      <div class="w-full flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
-        <div class="flex items-center gap-3 overflow-hidden pr-3">
-          <div id="media-type-badge" class="px-2.5 py-0.5 rounded-lg text-[10px] font-bold uppercase bg-cyan-950 text-brand-cyan border border-brand-cyan/30 flex-shrink-0">
-            MODUL
-          </div>
-          <h3 id="media-viewer-title" class="text-sm sm:text-base font-rajdhani font-bold text-white truncate">
-            Tajuk Paparan
-          </h3>
-        </div>
-
-        <div class="flex items-center gap-2 flex-shrink-0">
-          <!-- Butang Buka Tab Baru (Full Screen / Asal) -->
-          <a id="media-open-newtab" href="#" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold border border-brand-cyan/30 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,242,254,0.2)]">
-            <span>Buka Saiz Penuh</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          </a>
-          <!-- Butang Tutup Modal -->
-          <button onclick="closeMediaViewer()" class="p-2 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white transition">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Iframe Content Frame -->
-      <div class="w-full flex-1 rounded-2xl overflow-hidden bg-black border border-slate-900 relative">
-        <iframe id="media-viewer-iframe" src="" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-
-      <div class="text-[11px] text-slate-400 flex items-center justify-between pt-2.5 px-1">
-        <span>Tekan <b>"Buka Saiz Penuh"</b> di sudut atas untuk muat turun atau buka paparan luas.</span>
-        <button onclick="closeMediaViewer()" class="text-slate-400 hover:text-white transition underline">Tutup Paparan</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ================= IMAGE MODAL (POSTER SLIDER & JADUAL) ================= -->
   <div id="image-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg hidden items-center justify-center p-2 sm:p-6">
@@ -319,7 +281,7 @@
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
 
-      <!-- Login -->
+      <!-- Login Box -->
       <div id="admin-auth-box" class="py-10 text-center max-w-md mx-auto w-full">
         <div class="inline-flex p-4 rounded-2xl bg-cyan-500/10 border border-brand-cyan/40 text-brand-cyan mb-4">
           <i data-lucide="lock" class="w-8 h-8"></i>
@@ -394,34 +356,6 @@
           return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
         }
       }
-      return url;
-    }
-
-    function formatEmbedUrl(url) {
-      if (!url || typeof url !== 'string') return "";
-      url = url.trim();
-      
-      // Google Drive Direct Preview
-      if (url.includes("drive.google.com")) {
-        const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (idMatch && idMatch[1]) {
-          return `https://drive.google.com/file/d/${idMatch[1]}/preview`;
-        }
-      }
-
-      // YouTube Embed
-      if (url.includes("youtube.com") || url.includes("youtu.be")) {
-        let videoId = "";
-        if (url.includes("youtu.be/")) {
-          videoId = url.split("youtu.be/")[1].split("?")[0];
-        } else if (url.includes("watch?v=")) {
-          videoId = url.split("watch?v=")[1].split("&")[0];
-        } else if (url.includes("embed/")) {
-          videoId = url.split("embed/")[1].split("?")[0];
-        }
-        if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-      }
-
       return url;
     }
 
@@ -562,7 +496,7 @@
       `).join('');
     }
 
-    // ================= BAHAN RUJUKAN (PRO TECH BUTTONS) =================
+    // ================= BAHAN RUJUKAN (BUKA TAB BAHARU) =================
     function filterBahan() {
       const sel = document.getElementById('filter-subjek').value;
       const list = portalData.bahan || [];
@@ -575,28 +509,21 @@
       }
 
       container.innerHTML = filtered.map(b => {
-        const embedUrl = formatEmbedUrl(b.gdrive_url);
-        const originalUrl = b.gdrive_url;
         return `
-          <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/20">
+          <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/25 group">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] bg-cyan-950/80 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek}</span>
+                <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek}</span>
                 <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-brand-cyan"></i> ${b.tarikh || ''}</span>
               </div>
-              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1">${b.tajuk}</h4>
+              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk}</h4>
             </div>
 
-            <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-              <!-- Butang Buka dalam Tab Sama (Popup Mini) -->
-              <button onclick="openMediaViewer('${embedUrl}', '${b.tajuk.replace(/'/g, "\\'")}', '${originalUrl}', 'MODUL BAHAN')" class="flex-1 py-2.5 rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_10px_rgba(0,242,254,0.15)]">
+            <div class="pt-3 border-t border-slate-800/80">
+              <a href="${b.gdrive_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
                 <i data-lucide="file-text" class="w-4 h-4"></i>
                 <span>Buka Bahan / Modul</span>
-              </button>
-              
-              <!-- Butang Buka Terus Tab Baru -->
-              <a href="${originalUrl}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-brand-cyan border border-slate-700 transition" title="Buka Terus Tab Baharu Google Drive">
-                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
               </a>
             </div>
           </div>
@@ -605,7 +532,7 @@
       lucide.createIcons();
     }
 
-    // ================= RAKAMAN KELAS (PRO TECH BUTTONS) =================
+    // ================= RAKAMAN KELAS (BUKA TAB BAHARU) =================
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
       const list = portalData.rakaman || [];
@@ -614,28 +541,21 @@
         return;
       }
       container.innerHTML = list.map(r => {
-        const embedUrl = formatEmbedUrl(r.video_url);
-        const originalUrl = r.video_url;
         return `
-          <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4">
+          <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4 group">
             <div>
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek}</span>
                 <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-red-400"></i> ${r.tarikh || ''}</span>
               </div>
-              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug">${r.tajuk}</h4>
+              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk}</h4>
             </div>
 
-            <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-              <!-- Butang Tonton dalam Tab Sama (Popup Mini) -->
-              <button onclick="openMediaViewer('${embedUrl}', '${r.tajuk.replace(/'/g, "\\'")}', '${originalUrl}', 'RAKAMAN VIDEO')" class="flex-1 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold flex items-center justify-center gap-2 border border-red-500/30 transition shadow-[0_0_10px_rgba(239,68,68,0.15)]">
+            <div class="pt-3 border-t border-slate-800/80">
+              <a href="${r.video_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
                 <i data-lucide="play-circle" class="w-4 h-4"></i>
-                <span>Tonton Sesi Rakaman</span>
-              </button>
-
-              <!-- Butang Buka Tab Baru -->
-              <a href="${originalUrl}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-red-400 border border-slate-700 transition" title="Buka Pautan Asal Video">
-                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span>Tonton Video Rakaman</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
               </a>
             </div>
           </div>
@@ -643,35 +563,6 @@
       }).join('');
       lucide.createIcons();
     }
-
-    // ================= MEDIA VIEWER CONTROLLER (TAB SAMA & TAB BARU) =================
-    function openMediaViewer(embedUrl, title, originalUrl, badgeText) {
-      document.getElementById('media-viewer-iframe').src = embedUrl;
-      document.getElementById('media-viewer-title').textContent = title;
-      document.getElementById('media-type-badge').textContent = badgeText || "MEDIA";
-      document.getElementById('media-open-newtab').href = originalUrl;
-
-      const modal = document.getElementById('media-viewer-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      lucide.createIcons();
-    }
-
-    function closeMediaViewer() {
-      document.getElementById('media-viewer-iframe').src = "";
-      const modal = document.getElementById('media-viewer-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    // Tutup modal jika pengguna tekan kekunci Escape (ESC)
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeMediaViewer();
-        closeImageModal();
-        closeAdminModal();
-      }
-    });
 
     // IMAGE MODAL
     function openImageModal(url) {
