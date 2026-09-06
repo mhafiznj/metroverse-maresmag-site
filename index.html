@@ -81,7 +81,7 @@
       box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
     }
 
-    /* Hilangkan sebarang watermark/badge/drawer automatik Netlify */
+    /* Hilangkan sebarang watermark/badge Netlify */
     [data-netlify-deploy-id],
     .netlify-badge,
     #netlify-drawer,
@@ -134,34 +134,49 @@
     </div>
   </nav>
 
-  <!-- ================= HERO SLIDER ================= -->
+  <!-- ================= HERO SLIDER (FULL PICTURE - NO CROP) ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 h-[320px] sm:h-[420px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex items-center justify-center">
+    <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[520px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
       
-      <div id="slider-content" class="w-full h-full relative flex items-end">
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 flex flex-col justify-end p-6 sm:p-10 md:p-14">
-          <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
-            <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-            <span>POSTER & PENGUMUMAN BATCH METROVERSE</span>
-          </div>
-          <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-5xl text-white mb-2 leading-tight">
-            Selamat Datang ke Portal Rujukan Tusyen
-          </h1>
-          <p id="slider-desc" class="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl font-light">
-            Platform rasmi perkongsian nota, jadual waktu tusyen intensif SPM dan arkib rakaman kuliah MRSM Gerik.
-          </p>
-        </div>
-        <img id="slider-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400" class="w-full h-full object-cover transition-all duration-700 opacity-60 cursor-pointer" onclick="openImageModal(this.src)" alt="Slider Banner">
+      <!-- Background Ambient Blur (menjadikan gambar tidak terasa kosong di tepi) -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-25">
+        <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
       </div>
 
-      <div id="slider-dots" class="absolute bottom-4 right-6 z-20 flex items-center gap-1.5"></div>
+      <!-- Left: Text & Info Content -->
+      <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
+        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-4">
+          <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+          <span id="slider-badge">PENGUMUMAN BATCH METROVERSE</span>
+        </div>
+        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
+          Selamat Datang ke Portal Rujukan Tusyen
+        </h1>
+        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
+          Platform rasmi perkongsian nota, jadual waktu tusyen intensif SPM dan arkib rakaman kuliah MRSM Gerik.
+        </p>
 
-      <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition">
-        <i data-lucide="chevron-left" class="w-6 h-6"></i>
-      </button>
-      <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition">
-        <i data-lucide="chevron-right" class="w-6 h-6"></i>
-      </button>
+        <!-- Slider Navigation Buttons & Dots -->
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+          <div id="slider-dots" class="flex items-center gap-1.5"></div>
+        </div>
+      </div>
+
+      <!-- Right: Pure Full Image (NO CROP / OBJECT-CONTAIN) -->
+      <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
+        <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2 group">
+          <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 group-hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk lihat saiz penuh" alt="Poster Metroverse">
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -264,7 +279,6 @@
           <span id="zoom-level-text" class="text-[11px] font-mono bg-cyan-950 px-2 py-0.5 rounded text-brand-cyan border border-brand-cyan/30">100%</span>
         </div>
         
-        <!-- Action Buttons -->
         <div class="flex items-center gap-1.5">
           <button onclick="adjustImageZoom(0.15)" title="Zoom Masuk" class="p-2 rounded-lg bg-slate-900 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition">
             <i data-lucide="zoom-in" class="w-4 h-4"></i>
@@ -276,7 +290,7 @@
             <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
           </button>
           <button onclick="toggleImageFit()" id="btn-fit-mode" title="Tukar Mod Saiz Penuh / Muat Bingkai" class="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold border border-brand-cyan/30 transition">
-            Muat Skrin Penuh (Contain)
+            Muat Penuh (Contain)
           </button>
           <button onclick="closeImageModal()" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white transition ml-2">
             <i data-lucide="x" class="w-5 h-5"></i>
@@ -284,24 +298,22 @@
         </div>
       </div>
 
-      <!-- Center Image Frame -->
+      <!-- Center Frame -->
       <div id="image-frame-container" class="w-full flex-1 overflow-auto flex items-center justify-center p-2 rounded-2xl bg-black/50 border border-slate-900 my-3">
         <img id="modal-img-tag" src="" class="transition-transform duration-200 max-h-full max-w-full object-contain rounded-xl shadow-2xl" alt="Preview">
       </div>
 
-      <!-- Bottom Hint -->
       <div class="text-[11px] text-slate-400 flex items-center gap-1">
         <i data-lucide="info" class="w-3.5 h-3.5 text-brand-cyan"></i>
-        <span>Gunakan butang di atas untuk melaraskan saiz bingkai atau melihat poster beresolusi penuh tanpa terpotong.</span>
+        <span>Gunakan kawalan zoom untuk membaca teks tulisan kecil pada poster.</span>
       </div>
     </div>
   </div>
 
-  <!-- ================= IFRAME MEDIA VIEWER MODAL (GOOGLE DRIVE & VIDEO EMBED) ================= -->
+  <!-- ================= IFRAME MEDIA VIEWER MODAL ================= -->
   <div id="iframe-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg hidden items-center justify-center p-2 sm:p-6">
     <div class="relative w-full max-w-5xl h-[92vh] flex flex-col bg-slate-950 border border-brand-cyan/40 rounded-3xl p-4 shadow-[0_0_50px_rgba(0,242,254,0.3)]">
       
-      <!-- Top Bar -->
       <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
         <div class="flex items-center gap-2 truncate pr-4">
           <i data-lucide="monitor-play" class="w-5 h-5 text-brand-cyan flex-shrink-0"></i>
@@ -317,14 +329,13 @@
         </div>
       </div>
 
-      <!-- Embedded Iframe Box -->
       <div class="w-full flex-1 rounded-2xl overflow-hidden bg-black border border-slate-900 relative">
         <iframe id="media-iframe" src="" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
-  <!-- ================= CMS ADMIN MODAL ================= -->
+  <!-- ================= CMS ADMIN MODAL (WITH EDIT CAPABILITIES) ================= -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-4xl w-full p-6 relative max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,242,254,0.25)]">
       
@@ -358,7 +369,7 @@
         </div>
 
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
-          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Poster Slider</button>
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Tetapan Slider & Poster</button>
           <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual Tusyen</button>
           <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
           <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan Drive</button>
@@ -367,22 +378,29 @@
 
         <div class="flex-1 overflow-y-auto space-y-6 pr-2">
           
-          <!-- Add Form Card -->
+          <!-- Add / Edit Form Card -->
           <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
-            <h4 class="font-rajdhani font-bold text-white text-base mb-3 flex items-center gap-2">
-              <i data-lucide="plus-circle" class="w-4 h-4 text-brand-cyan"></i>
-              <span id="admin-form-title">Tambah Poster Slider Baharu</span>
-            </h4>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-rajdhani font-bold text-white text-base flex items-center gap-2">
+                <i id="form-icon" data-lucide="plus-circle" class="w-4 h-4 text-brand-cyan"></i>
+                <span id="admin-form-title">Tambah Slider Baharu</span>
+              </h4>
+              <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden text-xs text-amber-400 hover:underline">Batal Kemaskini</button>
+            </div>
+            
+            <input type="hidden" id="editing-row-index" value="">
+
             <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"></div>
-            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition flex items-center justify-center gap-2">
+            
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,242,254,0.3)]">
               <i data-lucide="upload" class="w-4 h-4"></i> SIMPAN KE GOOGLE SHEETS
             </button>
           </div>
 
-          <!-- List Card -->
+          <!-- Existing Items List -->
           <div>
             <h4 class="font-rajdhani font-bold text-slate-300 text-sm mb-3 flex items-center justify-between">
-              <span>Senarai Data Semasa:</span>
+              <span>Senarai Kandungan Semasa:</span>
               <span id="current-tab-count" class="text-xs text-brand-cyan font-normal">0 Item</span>
             </h4>
             <div id="admin-items-list" class="space-y-2"></div>
@@ -406,7 +424,7 @@
       "Prinsip Perakaunan", "Pendidikan Islam"
     ];
 
-    // CONVERT GDRIVE LINKS FOR IMAGES
+    // CONVERT GDRIVE LINKS TO DIRECT IMAGES
     function formatImageUrl(url) {
       if (!url || typeof url !== 'string') return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800";
       url = url.trim();
@@ -424,7 +442,6 @@
       if (!url || typeof url !== 'string') return "";
       url = url.trim();
       
-      // Google Drive file
       if (url.includes("drive.google.com")) {
         const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
         if (idMatch && idMatch[1]) {
@@ -432,7 +449,6 @@
         }
       }
       
-      // YouTube
       if (url.includes("youtube.com") || url.includes("youtu.be")) {
         let videoId = "";
         if (url.includes("youtu.be/")) {
@@ -449,7 +465,13 @@
 
     let portalData = {
       slider: [
-        { title: "Selamat Datang Ke Portal Tusyen Metroverse", image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400", row_index: 2 }
+        { 
+          title: "Selamat Datang Ke Portal Tusyen Metroverse", 
+          badge: "BATCH METROVERSE SPM 2026",
+          deskripsi: "Platform rasmi perkongsian nota, jadual waktu tusyen intensif SPM dan arkib rakaman kuliah MRSM Gerik.",
+          image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400", 
+          row_index: 2 
+        }
       ],
       jadual: [],
       guru: [],
@@ -460,7 +482,7 @@
     let activeAdminTab = 'slider';
     let currentSlideIndex = 0;
 
-    // ZOOM & FRAME CONTROLS STATE
+    // Zoom and Fit State
     let currentZoom = 1;
     let isContainMode = true;
 
@@ -472,7 +494,7 @@
           portalData = data;
         }
       } catch (err) {
-        console.warn("Menggunakan data cache:", err);
+        console.warn("Menggunakan data sedia ada:", err);
       }
       renderAll();
     }
@@ -493,11 +515,16 @@
       const s = list[currentSlideIndex % list.length];
       
       document.getElementById('slider-title').textContent = s.title || "Poster Metroverse";
-      document.getElementById('slider-img').src = formatImageUrl(s.image_url);
+      document.getElementById('slider-badge').textContent = s.badge || "PENGUMUMAN METROVERSE";
+      document.getElementById('slider-desc').textContent = s.deskripsi || "Portal rujukan rasmi pelajar, guru dan ibubapa MRSM Gerik.";
+      
+      const imgUrl = formatImageUrl(s.image_url);
+      document.getElementById('slider-img').src = imgUrl;
+      document.getElementById('slider-bg-blur').src = imgUrl;
 
       const dots = document.getElementById('slider-dots');
       dots.innerHTML = list.map((_, i) => `
-        <span class="w-2.5 h-2.5 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-600'}"></span>
+        <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
       `).join('');
     }
     function nextSlide() { currentSlideIndex++; renderSlider(); }
@@ -524,8 +551,11 @@
             </p>
           </div>
           ${j.poster_url ? `
+            <div class="h-40 w-full rounded-xl overflow-hidden bg-black/50 border border-slate-800 mb-3 p-1">
+              <img src="${formatImageUrl(j.poster_url)}" class="w-full h-full object-contain cursor-pointer hover:scale-105 transition" onclick="openImageModal('${formatImageUrl(j.poster_url)}')" title="Klik saiz penuh">
+            </div>
             <button onclick="openImageModal('${formatImageUrl(j.poster_url)}')" class="w-full py-2 text-center text-xs font-semibold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition flex items-center justify-center gap-1.5">
-              <i data-lucide="image" class="w-4 h-4"></i> Papar & Sesuaikan Poster
+              <i data-lucide="maximize-2" class="w-4 h-4"></i> Papar Penuh Poster Jadual
             </button>
           ` : ''}
         </div>
@@ -542,7 +572,9 @@
       }
       container.innerHTML = list.map(g => `
         <div class="pro-card p-4 rounded-2xl text-center flex flex-col items-center">
-          <img src="${formatImageUrl(g.image_url)}" onclick="openImageModal(this.src)" class="w-20 h-20 rounded-2xl object-cover mb-3 border-2 border-purple-500/40 p-0.5 shadow-lg cursor-pointer" title="Klik untuk besarkan gambar" onerror="this.src='https://via.placeholder.com/150'">
+          <div class="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 border-2 border-purple-500/40 mb-3 p-1 flex items-center justify-center">
+            <img src="${formatImageUrl(g.image_url)}" onclick="openImageModal(this.src)" class="w-full h-full object-contain cursor-pointer" title="Klik untuk besarkan" onerror="this.src='https://via.placeholder.com/150'">
+          </div>
           <h4 class="font-rajdhani font-bold text-sm text-white leading-tight">${g.nama}</h4>
           <span class="text-[11px] text-brand-cyan font-semibold my-1">${g.subjek}</span>
           <p class="text-[10px] text-slate-400 line-clamp-2">${g.keterangan || ''}</p>
@@ -550,7 +582,7 @@
       `).join('');
     }
 
-    // BAHAN RUJUKAN (DENGAN EMBED IFRAME PREVIEW)
+    // BAHAN RUJUKAN
     function filterBahan() {
       const sel = document.getElementById('filter-subjek').value;
       const list = portalData.bahan || [];
@@ -582,7 +614,7 @@
       lucide.createIcons();
     }
 
-    // RAKAMAN VIDEO (DENGAN EMBED IFRAME PLAYER)
+    // RAKAMAN
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
       const list = portalData.rakaman || [];
@@ -606,7 +638,7 @@
       `).join('');
     }
 
-    // ================= IMAGE VIEWER & FRAME CONTROLS =================
+    // IMAGE VIEWER CONTROLS
     function openImageModal(url) {
       const img = document.getElementById('modal-img-tag');
       img.src = url;
@@ -637,17 +669,17 @@
       const btn = document.getElementById('btn-fit-mode');
       if (isContainMode) {
         img.className = "transition-transform duration-200 max-h-full max-w-full object-contain rounded-xl shadow-2xl";
-        btn.textContent = "Muat Skrin Penuh (Contain)";
+        btn.textContent = "Muat Penuh (Contain)";
       } else {
         img.className = "transition-transform duration-200 w-full h-full object-cover rounded-xl shadow-2xl";
         btn.textContent = "Penuhi Bingkai (Cover)";
       }
     }
 
-    // ================= IFRAME MEDIA VIEWER (EMBED) =================
+    // IFRAME VIEWER
     function openIframePreview(embedUrl, title, originalUrl) {
       document.getElementById('media-iframe').src = embedUrl;
-      document.getElementById('iframe-modal-title').textContent = title || "Pratonton Dokumen / Video";
+      document.getElementById('iframe-modal-title').textContent = title || "Pratonton Media";
       document.getElementById('iframe-external-link').href = originalUrl || embedUrl;
       document.getElementById('iframe-modal').classList.remove('hidden');
       document.getElementById('iframe-modal').classList.add('flex');
@@ -659,7 +691,7 @@
       document.getElementById('iframe-modal').classList.remove('flex');
     }
 
-    // ================= CMS MANAGEMENT =================
+    // ================= CMS MANAGEMENT (WITH EDITING) =================
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
       document.getElementById('admin-modal').classList.add('flex');
@@ -688,6 +720,7 @@
 
     function switchAdminTab(tab) {
       activeAdminTab = tab;
+      cancelEditMode();
       document.querySelectorAll('.admin-tab-btn').forEach(b => {
         b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300";
       });
@@ -704,10 +737,12 @@
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
 
       if (activeAdminTab === 'slider') {
-        title.textContent = "Tambah Poster Slider Utama";
+        title.textContent = "Tetapan & Tambah Slider Baharu";
         f.innerHTML = `
-          <input type="text" id="adm-title" placeholder="Tajuk Poster Pengumuman" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-image_url" placeholder="Link Gambar / Google Drive Link" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-badge" placeholder="Badge Kecil (cth: PENGUMUMAN KHAS)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-title" placeholder="Tajuk Utama Slider" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-image_url" placeholder="Link Gambar Poster (Google Drive / Link)" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <textarea id="adm-deskripsi" placeholder="Teks Deskripsi / Keterangan Slider" rows="2" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
         `;
       } else if (activeAdminTab === 'jadual') {
         title.textContent = "Tambah Jadual Kelas Baharu";
@@ -716,10 +751,10 @@
           <input type="text" id="adm-title" placeholder="Tajuk Sesi (cth: Bengkel Kertas 2)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
           <input type="text" id="adm-tarikh_hari" placeholder="Hari & Masa (cth: Isnin, 8.30 PM)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
           <input type="text" id="adm-masa" placeholder="Tempoh (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-poster_url" placeholder="Link Gambar Poster (Google Drive / Direct Link)" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-poster_url" placeholder="Link Gambar Poster (Google Drive / URL)" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       } else if (activeAdminTab === 'guru') {
-        title.textContent = "Tambah Guru / Tenaga Pengajar";
+        title.textContent = "Tambah Tenaga Pengajar";
         f.innerHTML = `
           <input type="text" id="adm-nama" placeholder="Nama Pendidik" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
@@ -761,25 +796,62 @@
             <span class="text-xs font-mono text-brand-cyan">#${idx + 1}</span>
             <div class="truncate">
               <p class="text-xs font-bold text-white truncate">${item.title || item.nama || item.tajuk || 'Item'}</p>
-              <p class="text-[10px] text-slate-400 truncate">${item.subjek || item.tarikh_hari || item.image_url || ''}</p>
+              <p class="text-[10px] text-slate-400 truncate">${item.badge || item.subjek || item.tarikh_hari || item.deskripsi || item.image_url || ''}</p>
             </div>
           </div>
-          <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-3 py-1 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Padam
-          </button>
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <button onclick="editItem(${idx})" class="px-2.5 py-1 bg-cyan-500/10 hover:bg-brand-cyan text-brand-cyan hover:text-black rounded-lg text-xs font-bold transition flex items-center gap-1">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Edit
+            </button>
+            <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2.5 py-1 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Padam
+            </button>
+          </div>
         </div>
       `).join('');
       lucide.createIcons();
     }
 
-    // SAVE
+    // EDIT ITEM
+    function editItem(index) {
+      const item = portalData[activeAdminTab][index];
+      if (!item) return;
+
+      document.getElementById('editing-row-index').value = item.row_index;
+      document.getElementById('admin-form-title').textContent = `Kemaskini Data #${index + 1}`;
+      document.getElementById('btn-cancel-edit').classList.remove('hidden');
+      document.getElementById('btn-save-item').innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> KEMASKINI ITEM INI`;
+
+      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
+      inputs.forEach(input => {
+        const key = input.id.replace('adm-', '');
+        if (item[key] !== undefined) {
+          input.value = item[key];
+        }
+      });
+      lucide.createIcons();
+      document.querySelector('#admin-panel > div.flex-1').scrollTop = 0;
+    }
+
+    function cancelEditMode() {
+      document.getElementById('editing-row-index').value = "";
+      document.getElementById('btn-cancel-edit').classList.add('hidden');
+      document.getElementById('btn-save-item').innerHTML = `<i data-lucide="upload" class="w-4 h-4"></i> SIMPAN KE GOOGLE SHEETS`;
+      renderAdminForm();
+      lucide.createIcons();
+    }
+
+    // SAVE / UPDATE
     async function saveCurrentItem() {
       const btn = document.getElementById('btn-save-item');
+      const editRow = document.getElementById('editing-row-index').value;
+      const isUpdating = !!editRow;
+
       let payload = {};
-      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select');
+      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
       inputs.forEach(i => payload[i.id.replace('adm-', '')] = i.value);
 
-      btn.textContent = "SEDANG MENYIMPAN KE GOOGLE SHEETS...";
+      btn.textContent = isUpdating ? "SEDANG MENGEMASKINI..." : "SEDANG MENYIMPAN KE GOOGLE SHEETS...";
       btn.disabled = true;
 
       try {
@@ -787,18 +859,20 @@
           method: 'POST',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
-            action: 'ADD',
+            action: isUpdating ? 'UPDATE' : 'ADD',
             sheetName: activeAdminTab,
             data: payload,
+            rowIndex: isUpdating ? Number(editRow) : null,
             password: ADMIN_PASSWORD
           })
         });
         const result = await res.json();
-        alert(result.message || "Berjaya disimpan!");
+        alert(result.message || "Berjaya!");
+        cancelEditMode();
         await loadData();
         renderAdminList();
       } catch (e) {
-        alert("Ralat semasa menyimpan: " + e.message);
+        alert("Ralat semasa memproses: " + e.message);
       } finally {
         btn.innerHTML = `<i data-lucide="upload" class="w-4 h-4"></i> SIMPAN KE GOOGLE SHEETS`;
         btn.disabled = false;
@@ -833,7 +907,7 @@
     // RUN ON START
     window.addEventListener('DOMContentLoaded', () => {
       loadData();
-      setInterval(nextSlide, 6000);
+      setInterval(nextSlide, 7000);
     });
   </script>
 </body>
