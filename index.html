@@ -68,6 +68,17 @@
       transform: translateY(-3px);
       box-shadow: 0 12px 30px -10px rgba(0, 242, 254, 0.25);
     }
+    .countdown-card {
+      background: rgba(13, 20, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 242, 254, 0.18);
+      transition: all 0.25s ease;
+    }
+    .countdown-card:hover {
+      border-color: rgba(0, 242, 254, 0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -6px rgba(0, 242, 254, 0.25);
+    }
     .neon-btn {
       background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.2));
       border: 1px solid #00F2FE;
@@ -95,7 +106,7 @@
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Logo Rasmi MRSM & Brand -->
+      <!-- Logo & Brand -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="w-11 h-11 rounded-xl overflow-hidden bg-slate-900/80 border border-cyan-400/40 flex items-center justify-center p-1 shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:border-brand-cyan transition">
           <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" 
@@ -112,16 +123,17 @@
         </div>
       </a>
 
-      <!-- Desktop Navigation -->
+      <!-- Navigation Links -->
       <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
         <a href="#hero" class="hover:text-brand-cyan transition">Utama</a>
+        <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
         <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
         <a href="#guru" class="hover:text-brand-cyan transition">Tenaga Pengajar</a>
         <a href="#bahan" class="hover:text-brand-cyan transition">Bahan & Modul</a>
         <a href="#rakaman" class="hover:text-brand-cyan transition">Video Rakaman</a>
       </div>
 
-      <!-- Admin Button -->
+      <!-- Admin Panel Button -->
       <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold tracking-wider text-brand-cyan flex items-center gap-2 transition-all">
         <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
         <span>PANEL ADMIN</span>
@@ -133,12 +145,10 @@
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
     <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
       
-      <!-- Background Ambient Blur -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
       </div>
 
-      <!-- Left Text Content -->
       <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
         <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
           <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
@@ -164,7 +174,6 @@
         </div>
       </div>
 
-      <!-- Right Poster (Full No Crop) -->
       <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
         <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
           <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
@@ -172,6 +181,29 @@
       </div>
 
     </div>
+  </section>
+
+  <!-- ================= COUNTDOWN SIJIL PELAJARAN MALAYSIA ================= -->
+  <section id="countdown-spm" class="py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-slate-800 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+          <i data-lucide="hourglass" class="w-6 h-6 animate-pulse"></i>
+        </div>
+        <div>
+          <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white tracking-wide">
+            COUNTDOWN SIJIL PELAJARAN MALAYSIA
+          </h2>
+          <p class="text-xs text-slate-400">Detik kiraan hari persediaan peperiksaan SPM mengikut kertas subjek</p>
+        </div>
+      </div>
+      <span class="text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30 self-start sm:self-auto">
+        Kiraan Auto Mengikut Tarikh
+      </span>
+    </div>
+
+    <!-- Container Grid Box Subjek (Sama Reka Bentuk Gambar Contoh) -->
+    <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
   <!-- ================= 1. JADUAL KELAS TUSYEN ================= -->
@@ -228,6 +260,7 @@
           <option value="Biologi">Biologi</option>
           <option value="Prinsip Perakaunan">Prinsip Perakaunan</option>
           <option value="Pendidikan Islam">Pendidikan Islam</option>
+          <option value="Pendidikan Moral">Pendidikan Moral</option>
         </select>
       </div>
     </div>
@@ -259,7 +292,7 @@
     </div>
   </footer>
 
-  <!-- ================= IMAGE MODAL (POSTER SLIDER & JADUAL) ================= -->
+  <!-- ================= IMAGE MODAL ================= -->
   <div id="image-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg hidden items-center justify-center p-2 sm:p-6">
     <div class="relative w-full max-w-5xl h-[92vh] flex flex-col items-center justify-between bg-slate-950 border border-brand-cyan/40 rounded-3xl p-4 shadow-[0_0_50px_rgba(0,242,254,0.3)]">
       <div class="w-full flex items-center justify-between border-b border-slate-800 pb-3">
@@ -300,8 +333,10 @@
           <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Log Keluar</button>
         </div>
 
+        <!-- Tab Selection (Termasuk Countdown Baru) -->
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
-          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Tetapan Slider & Poster</button>
+          <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">1. Slider & Poster</button>
           <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual Tusyen</button>
           <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
           <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan Drive</button>
@@ -309,9 +344,10 @@
         </div>
 
         <div class="flex-1 overflow-y-auto space-y-6 pr-2">
+          <!-- Form Tambah / Edit -->
           <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Slider</h4>
+              <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Countdown Subjek</h4>
               <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden text-xs text-amber-400 hover:underline">Batal Edit</button>
             </div>
             <input type="hidden" id="editing-row-index" value="">
@@ -321,6 +357,7 @@
             </button>
           </div>
 
+          <!-- Existing List -->
           <div>
             <h4 class="font-rajdhani font-bold text-slate-300 text-sm mb-3 flex items-center justify-between">
               <span>Senarai Data Semasa:</span>
@@ -342,7 +379,7 @@
     const subjekList = [
       "Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", 
       "Matematik Tambahan", "Fizik", "Kimia", "Biologi", 
-      "Prinsip Perakaunan", "Pendidikan Islam"
+      "Prinsip Perakaunan", "Pendidikan Islam", "Pendidikan Moral"
     ];
 
     function formatImageUrl(url) {
@@ -359,7 +396,16 @@
       return url;
     }
 
+    // Default Seed Data sekiranya Google Sheets masih kosong
     let portalData = {
+      countdown: [
+        { subjek: "Bahasa Melayu", tarikh_teks: "Isnin, 23 November 2026", tarikh_iso: "2026-11-23", row_index: 2 },
+        { subjek: "Bahasa Inggeris", tarikh_teks: "Selasa, 24 November 2026", tarikh_iso: "2026-11-24", row_index: 3 },
+        { subjek: "Pendidikan Islam", tarikh_teks: "Rabu, 25 November 2026", tarikh_iso: "2026-11-25", row_index: 4 },
+        { subjek: "Pendidikan Moral", tarikh_teks: "Rabu, 25 November 2026", tarikh_iso: "2026-11-25", row_index: 5 },
+        { subjek: "Matematik", tarikh_teks: "Khamis, 26 November 2026", tarikh_iso: "2026-11-26", row_index: 6 },
+        { subjek: "Sejarah", tarikh_teks: "Isnin, 30 November 2026", tarikh_iso: "2026-11-30", row_index: 7 }
+      ],
       slider: [
         { 
           title: "Selamat Datang Ke Portal Tusyen Metroverse", 
@@ -375,7 +421,7 @@
       rakaman: []
     };
 
-    let activeAdminTab = 'slider';
+    let activeAdminTab = 'countdown';
     let currentSlideIndex = 0;
     let sliderTimer = null;
 
@@ -384,6 +430,7 @@
         const res = await fetch(API_URL);
         const data = await res.json();
         if (data && !data.error) {
+          if (data.countdown && data.countdown.length > 0) portalData.countdown = data.countdown;
           if (data.slider && data.slider.length > 0) portalData.slider = data.slider;
           if (data.jadual) portalData.jadual = data.jadual;
           if (data.guru) portalData.guru = data.guru;
@@ -391,12 +438,13 @@
           if (data.rakaman) portalData.rakaman = data.rakaman;
         }
       } catch (err) {
-        console.warn("Memuatkan data tempatan sementara:", err);
+        console.warn("Memuatkan data simpanan sementara:", err);
       }
       renderAll();
     }
 
     function renderAll() {
+      renderCountdown();
       renderSlider();
       renderJadual();
       renderGuru();
@@ -405,7 +453,72 @@
       lucide.createIcons();
     }
 
-    // SLIDER ENGINE
+    // ================= COUNTDOWN ENGINE =================
+    function calculateDaysLeft(isoDate) {
+      if (!isoDate) return 0;
+      const target = new Date(isoDate);
+      const today = new Date();
+      // Set to midnight for accurate day comparison
+      target.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      const diffTime = target.getTime() - today.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    function renderCountdown() {
+      const container = document.getElementById('countdown-container');
+      const list = portalData.countdown || [];
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs">Tiada jadual peperiksaan subjek dimasukkan lagi.</div>`;
+        return;
+      }
+
+      // Susun mengikut tarikh paling hampir
+      const sortedList = [...list].sort((a, b) => new Date(a.tarikh_iso) - new Date(b.tarikh_iso));
+
+      container.innerHTML = sortedList.map(c => {
+        const days = calculateDaysLeft(c.tarikh_iso);
+        let daysText = `${days} hari lagi`;
+        let badgeColor = "text-sky-400";
+
+        if (days === 0) {
+          daysText = "HARI INI!";
+          badgeColor = "text-emerald-400 font-bold animate-pulse";
+        } else if (days < 0) {
+          daysText = "Tamat";
+          badgeColor = "text-slate-500";
+        }
+
+        return `
+          <div class="countdown-card p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <!-- Header Subjek Bersama Ikon Kalendar -->
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
+                <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">
+                  ${c.subjek}
+                </h3>
+              </div>
+              <!-- Tarikh Peperiksaan Tulisan Biasa -->
+              <p class="text-xs text-slate-400 font-medium pl-6 mb-4">
+                ${c.tarikh_teks || c.tarikh_iso}
+              </p>
+            </div>
+            <!-- Baki Hari (Biru Terang Sebijik Macam Gambar Rujukan) -->
+            <div class="pl-6">
+              <span class="text-lg sm:text-xl font-bold font-rajdhani ${badgeColor}">
+                ${daysText}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    // ================= SLIDER ENGINE =================
     function renderSlider() {
       const list = portalData.slider || [];
       if (list.length === 0) return;
@@ -444,7 +557,7 @@
       sliderTimer = setInterval(nextSlide, 7000);
     }
 
-    // JADUAL
+    // ================= JADUAL TUSYEN =================
     function renderJadual() {
       const container = document.getElementById('jadual-container');
       const list = portalData.jadual || [];
@@ -476,7 +589,7 @@
       `).join('');
     }
 
-    // GURU
+    // ================= TENAGA PENGAJAR =================
     function renderGuru() {
       const container = document.getElementById('guru-container');
       const list = portalData.guru || [];
@@ -496,7 +609,7 @@
       `).join('');
     }
 
-    // ================= BAHAN RUJUKAN (BUKA TAB BAHARU) =================
+    // ================= BAHAN RUJUKAN =================
     function filterBahan() {
       const sel = document.getElementById('filter-subjek').value;
       const list = portalData.bahan || [];
@@ -508,31 +621,28 @@
         return;
       }
 
-      container.innerHTML = filtered.map(b => {
-        return `
-          <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/25 group">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek}</span>
-                <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-brand-cyan"></i> ${b.tarikh || ''}</span>
-              </div>
-              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk}</h4>
+      container.innerHTML = filtered.map(b => `
+        <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/25 group">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek}</span>
+              <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-brand-cyan"></i> ${b.tarikh || ''}</span>
             </div>
-
-            <div class="pt-3 border-t border-slate-800/80">
-              <a href="${b.gdrive_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
-                <i data-lucide="file-text" class="w-4 h-4"></i>
-                <span>Buka Bahan / Modul</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
-              </a>
-            </div>
+            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk}</h4>
           </div>
-        `;
-      }).join('');
+          <div class="pt-3 border-t border-slate-800/80">
+            <a href="${b.gdrive_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+              <span>Buka Bahan / Modul</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
       lucide.createIcons();
     }
 
-    // ================= RAKAMAN KELAS (BUKA TAB BAHARU) =================
+    // ================= RAKAMAN KELAS =================
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
       const list = portalData.rakaman || [];
@@ -540,31 +650,28 @@
         container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada video rakaman ditemui.</div>`;
         return;
       }
-      container.innerHTML = list.map(r => {
-        return `
-          <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4 group">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek}</span>
-                <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-red-400"></i> ${r.tarikh || ''}</span>
-              </div>
-              <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk}</h4>
+      container.innerHTML = list.map(r => `
+        <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4 group">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek}</span>
+              <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-red-400"></i> ${r.tarikh || ''}</span>
             </div>
-
-            <div class="pt-3 border-t border-slate-800/80">
-              <a href="${r.video_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
-                <i data-lucide="play-circle" class="w-4 h-4"></i>
-                <span>Tonton Video Rakaman</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
-              </a>
-            </div>
+            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk}</h4>
           </div>
-        `;
-      }).join('');
+          <div class="pt-3 border-t border-slate-800/80">
+            <a href="${r.video_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              <span>Tonton Video Rakaman</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
       lucide.createIcons();
     }
 
-    // IMAGE MODAL
+    // ================= MODALS & ADMIN CMS =================
     function openImageModal(url) {
       document.getElementById('modal-img-tag').src = url;
       document.getElementById('image-modal').classList.remove('hidden');
@@ -575,7 +682,6 @@
       document.getElementById('image-modal').classList.remove('flex');
     }
 
-    // ADMIN CMS
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
       document.getElementById('admin-modal').classList.add('flex');
@@ -590,7 +696,7 @@
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('flex');
-        switchAdminTab('slider');
+        switchAdminTab('countdown');
       } else {
         alert("Kata laluan Admin Salah!");
       }
@@ -619,7 +725,23 @@
       const title = document.getElementById('admin-form-title');
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
 
-      if (activeAdminTab === 'slider') {
+      if (activeAdminTab === 'countdown') {
+        title.textContent = "Tambah Subjek Countdown SPM";
+        f.innerHTML = `
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Nama Subjek</label>
+            <select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Tarikh Peperiksaan Sebenar (Auto Kira)</label>
+            <input type="date" id="adm-tarikh_iso" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          </div>
+          <div class="col-span-full">
+            <label class="block text-[11px] text-slate-400 mb-1">Teks Paparan Tarikh (Contoh: Isnin, 23 November 2026)</label>
+            <input type="text" id="adm-tarikh_teks" placeholder="cth: Isnin, 23 November 2026" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          </div>
+        `;
+      } else if (activeAdminTab === 'slider') {
         title.textContent = "Tetapan & Tambah Slider Baharu";
         f.innerHTML = `
           <input type="text" id="adm-badge" placeholder="Badge Kategori (cth: PENGUMUMAN KHAS)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -678,8 +800,8 @@
           <div class="flex items-center gap-3 overflow-hidden">
             <span class="text-xs font-mono text-brand-cyan">#${idx + 1}</span>
             <div class="truncate">
-              <p class="text-xs font-bold text-white truncate">${item.title || item.nama || item.tajuk || 'Item'}</p>
-              <p class="text-[10px] text-slate-400 truncate">${item.badge || item.subjek || item.tarikh_hari || item.deskripsi || ''}</p>
+              <p class="text-xs font-bold text-white truncate">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</p>
+              <p class="text-[10px] text-slate-400 truncate">${item.tarikh_teks || item.tarikh_iso || item.badge || item.masa || item.deskripsi || ''}</p>
             </div>
           </div>
           <div class="flex items-center gap-1.5 flex-shrink-0">
@@ -707,7 +829,19 @@
       const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
       inputs.forEach(input => {
         const key = input.id.replace('adm-', '').toLowerCase();
-        if (item[key] !== undefined) input.value = item[key];
+        if (item[key] !== undefined) {
+          if (input.type === 'date' && item[key]) {
+            // Pastikan format yyyy-MM-dd
+            const d = new Date(item[key]);
+            if (!isNaN(d.getTime())) {
+              input.value = d.toISOString().split('T')[0];
+            } else {
+              input.value = item[key];
+            }
+          } else {
+            input.value = item[key];
+          }
+        }
       });
       document.querySelector('#admin-panel > div.flex-1').scrollTop = 0;
     }
