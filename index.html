@@ -488,27 +488,40 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= COUNTDOWN ENGINE =================
-    function calculateDaysLeft(isoDate) {
-      if (!isoDate) return 0;
-      // Menangani format tarikh Google Sheets sama ada yyyy-mm-dd atau format tarikh lain
-      const cleanDate = String(isoDate).split('T')[0];
-      const target = new Date(cleanDate);
-      if (isNaN(target.getTime())) return 0;
-      
-      const today = new Date();
-      target.setHours(0, 0, 0, 0);
-      today.setHours(0, 0, 0, 0);
-      const diffTime = target.getTime() - today.getTime();
-      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // ================= COUNTDOWN ENGINE (KEBAL RALAT) =================
+    function calculateDaysLeft(rawDate) {
+      if (!rawDate) return 0;
+      try {
+        let dateStr = String(rawDate).trim().split('T')[0];
+        
+        // Sokongan format DD/MM/YYYY jika ada
+        if (dateStr.includes('/')) {
+          const p = dateStr.split('/');
+          if (p.length === 3) dateStr = `${p[2]}-${p[1]}-${p[0]}`;
+        }
+
+        const target = new Date(dateStr);
+        if (isNaN(target.getTime())) return 0;
+
+        const today = new Date();
+        target.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        const diffTime = target.getTime() - today.getTime();
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      } catch (err) {
+        return 0;
+      }
     }
 
     function renderCountdown() {
       const container = document.getElementById('countdown-container');
       if (!container) return;
+
       const list = portalData.countdown || [];
 
-      if (list.length === 0) {
+      // Jika tiada data
+      if (!Array.isArray(list) || list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="hourglass" class="w-7 h-7 text-sky-400 mb-3 opacity-60"></i>
@@ -518,10 +531,16 @@
         return;
       }
 
-      const sortedList = [...list].sort((a, b) => new Date(String(a.tarikh_iso).split('T')[0]) - new Date(String(b.tarikh_iso).split('T')[0]));
+      let html = "";
+      for (let i = 0; i < list.length; i++) {
+        const c = list[i];
+        if (!c) continue;
 
-      container.innerHTML = sortedList.map(c => {
-        const days = calculateDaysLeft(c.tarikh_iso);
+        const namaSubjek = c.subjek || c.nama || "Subjek SPM";
+        const tarikhPaparan = c.tarikh_teks || c.tarikh_iso || "-";
+        const tarikhKira = c.tarikh_iso || c.tarikh || c.tarikh_teks;
+        const days = calculateDaysLeft(tarikhKira);
+
         let daysText = `${days} hari lagi`;
         let badgeColor = "text-sky-400";
 
@@ -533,17 +552,17 @@
           badgeColor = "text-slate-500";
         }
 
-        return `
+        html += `
           <div class="countdown-card p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
                 <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">
-                  ${c.subjek || "Subjek"}
+                  ${namaSubjek}
                 </h3>
               </div>
               <p class="text-xs text-slate-400 font-medium pl-6 mb-4">
-                ${c.tarikh_teks || c.tarikh_iso || ""}
+                ${tarikhPaparan}
               </p>
             </div>
             <div class="pl-6">
@@ -553,7 +572,9 @@
             </div>
           </div>
         `;
-      }).join('');
+      }
+
+      container.innerHTML = html;
     }
 
     // ================= SLIDER ENGINE =================
