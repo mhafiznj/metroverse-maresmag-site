@@ -111,8 +111,8 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= GLOBAL PRELOADER ================= -->
-  <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-500">
+  <!-- ================= SATU SAHAJA LOADING UTAMA (GLOBAL PRELOADER) ================= -->
+  <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
     <div class="relative flex items-center justify-center mb-5">
       <div class="w-20 h-20 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_25px_rgba(0,242,254,0.4)]"></div>
       <div class="absolute w-11 h-11 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
@@ -121,9 +121,9 @@
     </div>
     <div class="flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">SILA TUNGGU SEBENTAR...</span>
+      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">MEMUATKAN PORTAL...</span>
     </div>
-    <p class="text-[11px] text-slate-400 mt-1">Memuatkan Maklumat Terkini</p>
+    <p class="text-[11px] text-slate-400 mt-1 font-rajdhani">Portal Tusyen MRSM Gerik</p>
   </div>
 
   <!-- ================= NAVBAR ================= -->
@@ -164,7 +164,7 @@
 
   <!-- ================= HERO SLIDER SECTION ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div id="slider-main-box" class="hidden relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex-col md:flex-row items-center justify-between">
+    <div id="slider-main-box" class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
       </div>
@@ -174,8 +174,8 @@
           <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
           <span id="slider-badge">PENGUMUMAN</span>
         </div>
-        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">Selamat Datang</h1>
-        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6"></p>
+        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">MARESMAG METROVERSE</h1>
+        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">Portal Rasmi Akademik Tingkatan 5 MRSM Gerik.</p>
 
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
@@ -195,11 +195,6 @@
           <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
         </div>
       </div>
-    </div>
-
-    <div id="slider-loading-box" class="p-12 sm:p-20 rounded-3xl border border-cyan-500/20 bg-slate-950/70 text-center flex flex-col items-center justify-center min-h-[360px]">
-      <div class="w-12 h-12 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast mb-4"></div>
-      <p class="font-rajdhani font-bold text-sm text-slate-300 tracking-wider uppercase">Memuatkan Poster...</p>
     </div>
   </section>
 
@@ -222,12 +217,8 @@
       </span>
     </div>
 
-    <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="col-span-full py-12 flex flex-col items-center justify-center">
-        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN MAKLUMAT...</span>
-      </div>
-    </div>
+    <!-- Container Kad Countdown SPM (Tanpa Spinner) -->
+    <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
   <!-- ================= 1. JADUAL KELAS TUSYEN ================= -->
@@ -241,12 +232,7 @@
         <p class="text-xs text-slate-400">Jadual pengukuhan & bengkel persediaan SPM</p>
       </div>
     </div>
-    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-12 flex flex-col items-center justify-center">
-        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN JADUAL...</span>
-      </div>
-    </div>
+    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
   <!-- ================= 2. TENAGA PENGAJAR ================= -->
@@ -260,12 +246,7 @@
         <p class="text-xs text-slate-400">Pakar subjek & pembimbing akademik MRSM Gerik</p>
       </div>
     </div>
-    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-      <div class="col-span-full py-12 flex flex-col items-center justify-center">
-        <i data-lucide="loader-2" class="w-8 h-8 text-purple-400 spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN MAKLUMAT GURU...</span>
-      </div>
-    </div>
+    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
   </section>
 
   <!-- ================= 3. BAHAN RUJUKAN & MODUL ================= -->
@@ -298,12 +279,7 @@
         </select>
       </div>
     </div>
-    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="col-span-full py-12 flex flex-col items-center justify-center">
-        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN BAHAN...</span>
-      </div>
-    </div>
+    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
   <!-- ================= 4. RAKAMAN KELAS ================= -->
@@ -317,12 +293,7 @@
         <p class="text-xs text-slate-400">Tonton semula rakaman video penerangan guru di tab baharu</p>
       </div>
     </div>
-    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-12 flex flex-col items-center justify-center">
-        <i data-lucide="loader-2" class="w-8 h-8 text-red-400 spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN VIDEO...</span>
-      </div>
-    </div>
+    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
   <!-- ================= FOOTER ================= -->
@@ -332,7 +303,7 @@
         <span class="font-orbitron text-brand-cyan font-bold text-sm">MARESMAG METROVERSE</span>
         <span>• Maktab Rendah Sains MARA Gerik, Perak</span>
       </div>
-      <p>© 2026 Metroverse E-Learning Sites | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
+      <p>© 2026 Metroverse Tuition One Stop Centre | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
     </div>
   </footer>
 
@@ -453,16 +424,15 @@
       const preloader = document.getElementById('global-preloader');
       if (preloader) {
         preloader.classList.add('opacity-0');
-        setTimeout(() => { preloader.style.display = 'none'; }, 400);
+        setTimeout(() => { preloader.style.display = 'none'; }, 300);
       }
     }
 
-    // LOAD DATA DENGAN ANTI-CACHE PARAMETER
+    // LOAD DATA SEKALI SAHAJA DENGAN ANTI-CACHE
     async function loadData() {
-      const emergencyTimer = setTimeout(hidePreloader, 1500);
+      const emergencyTimer = setTimeout(hidePreloader, 1000);
 
       try {
-        // Tambah ?t= untuk memaksa browser ambil data terbaharu dari Apps Script
         const res = await fetch(`${API_URL}?t=${new Date().getTime()}`);
         const data = await res.json();
         
@@ -475,7 +445,7 @@
           portalData.rakaman = Array.isArray(data.rakaman) ? data.rakaman : [];
         }
       } catch (err) {
-        console.warn("Makluman pangkalan data:", err);
+        console.warn("Makluman data:", err);
       } finally {
         clearTimeout(emergencyTimer);
         hidePreloader();
@@ -525,10 +495,8 @@
 
       if (!Array.isArray(list) || list.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="hourglass" class="w-7 h-7 text-sky-400 mb-3 opacity-60"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Kemasukan Subjek SPM...</span>
-            <span class="text-[10px] text-slate-500 mt-1">Sila tambah subjek di Panel Admin</span>
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            Tiada jadual subjek SPM dimasukkan lagi.
           </div>`;
         return;
       }
@@ -582,29 +550,24 @@
     // ================= SLIDER ENGINE =================
     function renderSlider() {
       const list = portalData.slider || [];
-      const mainBox = document.getElementById('slider-main-box');
-      const loadingBox = document.getElementById('slider-loading-box');
-
-      if (!mainBox || !loadingBox) return;
-
-      if (list.length === 0) {
-        mainBox.classList.add('hidden');
-        mainBox.classList.remove('flex');
-        loadingBox.classList.remove('hidden');
-        return;
-      }
-
-      loadingBox.classList.add('hidden');
-      mainBox.classList.remove('hidden');
-      mainBox.classList.add('flex');
-      
-      const s = list[currentSlideIndex % list.length];
       const titleEl = document.getElementById('slider-title');
       const badgeEl = document.getElementById('slider-badge');
       const descEl = document.getElementById('slider-desc');
       const imgEl = document.getElementById('slider-img');
       const bgBlurEl = document.getElementById('slider-bg-blur');
+      const dots = document.getElementById('slider-dots');
 
+      if (list.length === 0) {
+        if (titleEl) titleEl.textContent = "MARESMAG METROVERSE";
+        if (badgeEl) badgeEl.textContent = "PORTAL TUSYEN SPM";
+        if (descEl) descEl.textContent = "Pusat Rujukan Akademik Tingkatan 5 MRSM Gerik.";
+        if (imgEl) imgEl.src = "https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG";
+        if (bgBlurEl) bgBlurEl.src = "";
+        if (dots) dots.innerHTML = "";
+        return;
+      }
+      
+      const s = list[currentSlideIndex % list.length];
       if (titleEl) titleEl.textContent = s.title || "Poster Metroverse";
       if (badgeEl) badgeEl.textContent = s.badge || "HEBAHAN RASMI";
       if (descEl) descEl.textContent = s.deskripsi || "";
@@ -613,7 +576,6 @@
       if (imgEl) imgEl.src = imgUrl;
       if (bgBlurEl) bgBlurEl.src = imgUrl;
 
-      const dots = document.getElementById('slider-dots');
       if (dots) {
         dots.innerHTML = list.map((_, i) => `
           <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
@@ -647,9 +609,8 @@
       const list = portalData.jadual || [];
       if (list.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="calendar" class="w-7 h-7 text-brand-cyan mb-3 opacity-60"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Jadual Kelas...</span>
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            Tiada jadual kelas tusyen dimasukkan lagi.
           </div>`;
         return;
       }
@@ -684,9 +645,8 @@
       const list = portalData.guru || [];
       if (list.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="award" class="w-7 h-7 text-purple-400 mb-3 opacity-60"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Profil Guru...</span>
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            Senarai guru belum ditambah.
           </div>`;
         return;
       }
@@ -714,9 +674,8 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="folder-archive" class="w-7 h-7 text-brand-cyan mb-3 opacity-60"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Modul Bahan...</span>
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            Tiada modul bahan untuk subjek ini.
           </div>`;
         return;
       }
@@ -748,9 +707,8 @@
       const list = portalData.rakaman || [];
       if (list.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="play" class="w-7 h-7 text-red-400 mb-3 opacity-60"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Pautan Rakaman...</span>
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            Tiada rekod rakaman kelas ditemui.
           </div>`;
         return;
       }
@@ -1038,7 +996,7 @@
 
         const result = await res.json();
         if (result.success) {
-          // KEMASKINI TEMPATAN SERTA-MERTA (OPTIMISTIC UPDATE)
+          // Optimistic local update
           if (isUpdating) {
             const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(editRow));
             if (idx !== -1) {
@@ -1054,7 +1012,6 @@
           cancelEditMode();
           alert(result.message || "Berjaya!");
 
-          // Segarkan semula dengan data pelayan
           await loadData();
         } else {
           alert("Ralat: " + (result.message || "Gagal memproses data!"));
@@ -1074,7 +1031,6 @@
     async function deleteItem(sheetName, rowIndex) {
       if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
 
-      // Padam dari memori tempatan serta-merta
       portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
       renderAll();
       renderAdminList();
