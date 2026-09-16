@@ -14,7 +14,7 @@
   
   <!-- Fonts: Orbitron, Rajdhani & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script>
@@ -90,13 +90,12 @@
       box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
     }
 
-    /* Animasi Putaran Berterusan */
     @keyframes spinPulse {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
     .spin-fast {
-      animation: spinPulse 1s linear infinite;
+      animation: spinPulse 0.9s linear infinite;
     }
 
     [data-netlify-deploy-id], .netlify-badge, #netlify-drawer, iframe[src*="netlify"] {
@@ -112,28 +111,25 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= GLOBAL CYBER PRELOADER ================= -->
+  <!-- ================= GLOBAL PRELOADER ================= -->
   <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-500">
-    <div class="relative flex items-center justify-center mb-6">
-      <!-- Glow Outer Ring -->
-      <div class="w-24 h-24 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_30px_rgba(0,242,254,0.4)]"></div>
-      <!-- Logo MRSM Center -->
-      <div class="absolute w-12 h-12 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse">
+    <div class="relative flex items-center justify-center mb-5">
+      <div class="w-20 h-20 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_25px_rgba(0,242,254,0.4)]"></div>
+      <div class="absolute w-11 h-11 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse" alt="MRSM">
       </div>
     </div>
     <div class="flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">LOADING METROVERSE...</span>
+      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">SILA TUNGGU SEBENTAR...</span>
     </div>
-    <p class="text-[10px] text-slate-500 font-mono mt-1">MEMUATKAN DATA TERKINI</p>
+    <p class="text-[11px] text-slate-400 mt-1">Memuatkan Maklumat Terkini</p>
   </div>
 
   <!-- ================= NAVBAR ================= -->
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Logo & Brand -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="w-11 h-11 rounded-xl overflow-hidden bg-slate-900/80 border border-cyan-400/40 flex items-center justify-center p-1 shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:border-brand-cyan transition">
           <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" 
@@ -150,7 +146,6 @@
         </div>
       </a>
 
-      <!-- Navigation Links -->
       <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
         <a href="#hero" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
@@ -160,7 +155,6 @@
         <a href="#rakaman" class="hover:text-brand-cyan transition">Video Rakaman</a>
       </div>
 
-      <!-- Admin Panel Button -->
       <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold tracking-wider text-brand-cyan flex items-center gap-2 transition-all">
         <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
         <span>PANEL ADMIN</span>
@@ -172,7 +166,6 @@
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
     <!-- Active Slider Container -->
     <div id="slider-main-box" class="hidden relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex-col md:flex-row items-center justify-between">
-      
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
       </div>
@@ -205,13 +198,10 @@
       </div>
     </div>
 
-    <!-- Loading State Slider (Ikon Berputar Cyber) -->
+    <!-- Loading State Slider -->
     <div id="slider-loading-box" class="p-12 sm:p-20 rounded-3xl border border-cyan-500/20 bg-slate-950/70 text-center flex flex-col items-center justify-center min-h-[360px]">
-      <div class="relative mb-4">
-        <div class="w-12 h-12 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast"></div>
-      </div>
-      <p class="font-rajdhani font-bold text-sm text-slate-300 tracking-wider uppercase">Memuatkan Poster Hebahan...</p>
-      <span class="text-[10px] text-slate-500 mt-1 font-mono">Sedang menyelaraskan paparan</span>
+      <div class="w-12 h-12 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast mb-4"></div>
+      <p class="font-rajdhani font-bold text-sm text-slate-300 tracking-wider uppercase">Memuatkan Poster...</p>
     </div>
   </section>
 
@@ -235,10 +225,9 @@
     </div>
 
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Loading Placeholder -->
       <div class="col-span-full py-12 flex flex-col items-center justify-center">
         <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMPROSES DETIK SPM...</span>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN MAKLUMAT...</span>
       </div>
     </div>
   </section>
@@ -257,7 +246,7 @@
     <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="col-span-full py-12 flex flex-col items-center justify-center">
         <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN JADUAL WAKTU...</span>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN JADUAL...</span>
       </div>
     </div>
   </section>
@@ -276,7 +265,7 @@
     <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
       <div class="col-span-full py-12 flex flex-col items-center justify-center">
         <i data-lucide="loader-2" class="w-8 h-8 text-purple-400 spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN PROFIL GURU...</span>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN MAKLUMAT GURU...</span>
       </div>
     </div>
   </section>
@@ -314,7 +303,7 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <div class="col-span-full py-12 flex flex-col items-center justify-center">
         <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MENYEDIAKAN MODUL NOTA...</span>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN BAHAN...</span>
       </div>
     </div>
   </section>
@@ -333,7 +322,7 @@
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="col-span-full py-12 flex flex-col items-center justify-center">
         <i data-lucide="loader-2" class="w-8 h-8 text-red-400 spin-fast mb-2"></i>
-        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN ARKIB VIDEO...</span>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN VIDEO...</span>
       </div>
     </div>
   </section>
@@ -452,7 +441,6 @@
       return url;
     }
 
-    // SEMUA DATA ASAL KOSONG (100% BEBAS DUMMY)
     let portalData = {
       countdown: [],
       slider: [],
@@ -481,7 +469,6 @@
       } catch (err) {
         console.warn("Gagal memuatkan data dari Google Sheets:", err);
       } finally {
-        // Hilangkan Global Cyber Preloader sebaik sahaja data selesai diproses
         const preloader = document.getElementById('global-preloader');
         if (preloader) {
           preloader.classList.add('opacity-0');
@@ -517,12 +504,11 @@
       const list = portalData.countdown || [];
 
       if (list.length === 0) {
-        // Paparkan animasi spinning jika belum ada data dimasukkan
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="loader-2" class="w-7 h-7 text-sky-400 spin-fast mb-3"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Kemasukan Jadual SPM...</span>
-            <span class="text-[10px] text-slate-600 mt-0.5">Sila klik Panel Admin untuk tambah subjek</span>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Kemasukan Subjek SPM...</span>
+            <span class="text-[10px] text-slate-500 mt-1">Sila tambah subjek di Panel Admin</span>
           </div>`;
         return;
       }
@@ -625,7 +611,7 @@
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Jadual Kelas Ditambah...</span>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Jadual Kelas...</span>
           </div>`;
         return;
       }
@@ -661,7 +647,7 @@
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="loader-2" class="w-7 h-7 text-purple-400 spin-fast mb-3"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Profil Guru Dimasukkan...</span>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Profil Guru...</span>
           </div>`;
         return;
       }
@@ -688,7 +674,7 @@
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Muat Naik Modul & Bahan...</span>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Modul Bahan...</span>
           </div>`;
         return;
       }
@@ -722,7 +708,7 @@
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
             <i data-lucide="loader-2" class="w-7 h-7 text-red-400 spin-fast mb-3"></i>
-            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Pautan Rakaman Video...</span>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Pautan Rakaman...</span>
           </div>`;
         return;
       }
@@ -898,10 +884,22 @@
       const item = portalData[activeAdminTab][index];
       if (!item) return;
 
-      document.getElementById('editing-row-index').value = item.row_index;
-      document.getElementById('admin-form-title').textContent = `Kemaskini Data #${index + 1}`;
-      document.getElementById('btn-cancel-edit').classList.remove('hidden');
-      document.getElementById('btn-save-text').textContent = `KEMASKINI ITEM INI`;
+      const editInput = document.getElementById('editing-row-index');
+      if (editInput) editInput.value = item.row_index;
+
+      const formTitle = document.getElementById('admin-form-title');
+      if (formTitle) formTitle.textContent = `Kemaskini Data #${index + 1}`;
+
+      const btnCancel = document.getElementById('btn-cancel-edit');
+      if (btnCancel) btnCancel.classList.remove('hidden');
+
+      const btnSaveText = document.getElementById('btn-save-text');
+      if (btnSaveText) {
+        btnSaveText.textContent = "KEMASKINI ITEM INI";
+      } else {
+        const btnSave = document.getElementById('btn-save-item');
+        if (btnSave) btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">KEMASKINI ITEM INI</span>`;
+      }
 
       const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
       inputs.forEach(input => {
@@ -919,20 +917,34 @@
           }
         }
       });
-      document.querySelector('#admin-panel > div.flex-1').scrollTop = 0;
+
+      lucide.createIcons();
+      const adminContainer = document.querySelector('#admin-panel > div.flex-1');
+      if (adminContainer) adminContainer.scrollTop = 0;
     }
 
     function cancelEditMode() {
-      document.getElementById('editing-row-index').value = "";
-      document.getElementById('btn-cancel-edit').classList.add('hidden');
-      document.getElementById('btn-save-text').textContent = `SIMPAN KE GOOGLE SHEETS`;
+      const editInput = document.getElementById('editing-row-index');
+      if (editInput) editInput.value = "";
+
+      const btnCancel = document.getElementById('btn-cancel-edit');
+      if (btnCancel) btnCancel.classList.add('hidden');
+
+      const btnSaveText = document.getElementById('btn-save-text');
+      if (btnSaveText) {
+        btnSaveText.textContent = "SIMPAN KE GOOGLE SHEETS";
+      } else {
+        const btnSave = document.getElementById('btn-save-item');
+        if (btnSave) btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>`;
+      }
+
       renderAdminForm();
+      lucide.createIcons();
     }
 
     async function saveCurrentItem() {
       const btn = document.getElementById('btn-save-item');
-      const btnText = document.getElementById('btn-save-text');
-      const editRow = document.getElementById('editing-row-index').value;
+      const editRow = document.getElementById('editing-row-index') ? document.getElementById('editing-row-index').value : "";
       const isUpdating = (editRow !== "" && editRow !== null && !isNaN(Number(editRow)));
 
       let payload = {};
@@ -942,7 +954,6 @@
         payload[fieldName] = i.value;
       });
 
-      // Animasi Loading Semasa Menyimpan
       btn.disabled = true;
       btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 spin-fast"></i> <span>SEDANG MEMPROSES...</span>`;
       lucide.createIcons();
@@ -975,14 +986,15 @@
         alert("Ralat sambungan: " + e.message);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS"}</span>`;
+        const finalLabel = isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS";
+        btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${finalLabel}</span>`;
         lucide.createIcons();
       }
     }
 
     async function deleteItem(sheetName, rowIndex) {
       if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
-      
+
       const listContainer = document.getElementById('admin-items-list');
       listContainer.innerHTML = `
         <div class="py-8 flex flex-col items-center justify-center">
