@@ -111,19 +111,18 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= SATU SAHAJA LOADING UTAMA (GLOBAL PRELOADER) ================= -->
+  <!-- ================= SATU SAHAJA LOADING AWAL ================= -->
   <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
     <div class="relative flex items-center justify-center mb-5">
-      <div class="w-20 h-20 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_25px_rgba(0,242,254,0.4)]"></div>
-      <div class="absolute w-11 h-11 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
+      <div class="w-16 h-16 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_20px_rgba(0,242,254,0.4)]"></div>
+      <div class="absolute w-9 h-9 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
         <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse" alt="MRSM">
       </div>
     </div>
     <div class="flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">MEMUATKAN PORTAL...</span>
+      <span class="font-orbitron text-xs font-bold text-white tracking-widest">MEMUATKAN PORTAL...</span>
     </div>
-    <p class="text-[11px] text-slate-400 mt-1 font-rajdhani">Portal Tusyen MRSM Gerik</p>
   </div>
 
   <!-- ================= NAVBAR ================= -->
@@ -162,40 +161,9 @@
     </div>
   </nav>
 
-  <!-- ================= HERO SLIDER SECTION ================= -->
+  <!-- ================= HERO SLIDER SECTION (100% KOSONG SEHINGGA ADMIN ISI) ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div id="slider-main-box" class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
-      <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
-      </div>
-
-      <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
-        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
-          <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-          <span id="slider-badge">PENGUMUMAN</span>
-        </div>
-        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">MARESMAG METROVERSE</h1>
-        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">Portal Rasmi Akademik Tingkatan 5 MRSM Gerik.</p>
-
-        <div class="flex items-center gap-4">
-          <div class="flex items-center gap-2">
-            <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-              <i data-lucide="chevron-left" class="w-5 h-5"></i>
-            </button>
-            <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-              <i data-lucide="chevron-right" class="w-5 h-5"></i>
-            </button>
-          </div>
-          <div id="slider-dots" class="flex items-center gap-1.5"></div>
-        </div>
-      </div>
-
-      <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
-        <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
-          <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
-        </div>
-      </div>
-    </div>
+    <div id="slider-wrapper"></div>
   </section>
 
   <!-- ================= COUNTDOWN SIJIL PELAJARAN MALAYSIA ================= -->
@@ -217,7 +185,7 @@
       </span>
     </div>
 
-    <!-- Container Kad Countdown SPM (Tanpa Spinner) -->
+    <!-- Grid Countdown (Tanpa Spinner) -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
@@ -407,6 +375,7 @@
       return url;
     }
 
+    // SEMUA KATEGORI BERMULA KOSONG TULEN
     let portalData = {
       countdown: [],
       slider: [],
@@ -428,7 +397,6 @@
       }
     }
 
-    // LOAD DATA SEKALI SAHAJA DENGAN ANTI-CACHE
     async function loadData() {
       const emergencyTimer = setTimeout(hidePreloader, 1000);
 
@@ -455,12 +423,12 @@
     }
 
     function renderAll() {
-      try { renderCountdown(); } catch (e) { console.error("Error Countdown:", e); }
-      try { renderSlider(); } catch (e) { console.error("Error Slider:", e); }
-      try { renderJadual(); } catch (e) { console.error("Error Jadual:", e); }
-      try { renderGuru(); } catch (e) { console.error("Error Guru:", e); }
-      try { filterBahan(); } catch (e) { console.error("Error Bahan:", e); }
-      try { renderRakaman(); } catch (e) { console.error("Error Rakaman:", e); }
+      try { renderCountdown(); } catch (e) {}
+      try { renderSlider(); } catch (e) {}
+      try { renderJadual(); } catch (e) {}
+      try { renderGuru(); } catch (e) {}
+      try { filterBahan(); } catch (e) {}
+      try { renderRakaman(); } catch (e) {}
       if (window.lucide) lucide.createIcons();
     }
 
@@ -496,7 +464,7 @@
       if (!Array.isArray(list) || list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada jadual subjek SPM dimasukkan lagi.
+            Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.
           </div>`;
         return;
       }
@@ -547,40 +515,63 @@
       container.innerHTML = html;
     }
 
-    // ================= SLIDER ENGINE =================
+    // ================= SLIDER ENGINE (100% TIADA DUMMY) =================
     function renderSlider() {
       const list = portalData.slider || [];
-      const titleEl = document.getElementById('slider-title');
-      const badgeEl = document.getElementById('slider-badge');
-      const descEl = document.getElementById('slider-desc');
-      const imgEl = document.getElementById('slider-img');
-      const bgBlurEl = document.getElementById('slider-bg-blur');
-      const dots = document.getElementById('slider-dots');
+      const wrapper = document.getElementById('slider-wrapper');
+      if (!wrapper) return;
 
+      // KOSONGKAN SEPENUHNYA JIKA TIADA DATA DALAM SHEETS
       if (list.length === 0) {
-        if (titleEl) titleEl.textContent = "MARESMAG METROVERSE";
-        if (badgeEl) badgeEl.textContent = "PORTAL TUSYEN SPM";
-        if (descEl) descEl.textContent = "Pusat Rujukan Akademik Tingkatan 5 MRSM Gerik.";
-        if (imgEl) imgEl.src = "https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG";
-        if (bgBlurEl) bgBlurEl.src = "";
-        if (dots) dots.innerHTML = "";
+        wrapper.innerHTML = "";
         return;
       }
-      
-      const s = list[currentSlideIndex % list.length];
-      if (titleEl) titleEl.textContent = s.title || "Poster Metroverse";
-      if (badgeEl) badgeEl.textContent = s.badge || "HEBAHAN RASMI";
-      if (descEl) descEl.textContent = s.deskripsi || "";
-      
-      const imgUrl = formatImageUrl(s.image_url);
-      if (imgEl) imgEl.src = imgUrl;
-      if (bgBlurEl) bgBlurEl.src = imgUrl;
 
-      if (dots) {
-        dots.innerHTML = list.map((_, i) => `
-          <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
-        `).join('');
-      }
+      const s = list[currentSlideIndex % list.length];
+      const imgUrl = formatImageUrl(s.image_url);
+
+      wrapper.innerHTML = `
+        <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
+          <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+            <img src="${imgUrl}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
+          </div>
+
+          <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
+            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
+              <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+              <span>${s.badge || 'PENGUMUMAN'}</span>
+            </div>
+            <h1 class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
+              ${s.title || ''}
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
+              ${s.deskripsi || ''}
+            </p>
+
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                  <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                  <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+              </div>
+              <div class="flex items-center gap-1.5">
+                ${list.map((_, i) => `
+                  <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
+            <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
+              <img src="${imgUrl}" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function nextSlide() {
@@ -588,6 +579,7 @@
       if (list.length <= 1) return;
       currentSlideIndex = (currentSlideIndex + 1) % list.length;
       renderSlider();
+      if (window.lucide) lucide.createIcons();
     }
 
     function prevSlide() {
@@ -595,6 +587,7 @@
       if (list.length <= 1) return;
       currentSlideIndex = (currentSlideIndex === 0) ? (list.length - 1) : (currentSlideIndex - 1);
       renderSlider();
+      if (window.lucide) lucide.createIcons();
     }
 
     function restartSliderTimer() {
@@ -610,7 +603,7 @@
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada jadual kelas tusyen dimasukkan lagi.
+            Tiada jadual kelas tusyen dimasukkan lagi di Google Sheets.
           </div>`;
         return;
       }
@@ -646,7 +639,7 @@
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Senarai guru belum ditambah.
+            Senarai guru belum ditambah di Google Sheets.
           </div>`;
         return;
       }
@@ -675,7 +668,7 @@
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada modul bahan untuk subjek ini.
+            Tiada modul bahan untuk subjek ini di Google Sheets.
           </div>`;
         return;
       }
@@ -708,7 +701,7 @@
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada rekod rakaman kelas ditemui.
+            Tiada rekod rakaman kelas di Google Sheets.
           </div>`;
         return;
       }
@@ -996,7 +989,7 @@
 
         const result = await res.json();
         if (result.success) {
-          // Optimistic local update
+          // Optimistic local update terus tunjuk di admin dan portal
           if (isUpdating) {
             const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(editRow));
             if (idx !== -1) {
