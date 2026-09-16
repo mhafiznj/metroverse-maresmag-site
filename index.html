@@ -202,7 +202,6 @@
       </span>
     </div>
 
-    <!-- Container Grid Box Subjek (Sama Reka Bentuk Gambar Contoh) -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
@@ -333,7 +332,7 @@
           <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Log Keluar</button>
         </div>
 
-        <!-- Tab Selection (Termasuk Countdown Baru) -->
+        <!-- Tab Selection -->
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
           <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
           <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">1. Slider & Poster</button>
@@ -347,7 +346,7 @@
           <!-- Form Tambah / Edit -->
           <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Countdown Subjek</h4>
+              <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Subjek Countdown SPM</h4>
               <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden text-xs text-amber-400 hover:underline">Batal Edit</button>
             </div>
             <input type="hidden" id="editing-row-index" value="">
@@ -396,25 +395,10 @@
       return url;
     }
 
-    // Default Seed Data sekiranya Google Sheets masih kosong
+    // SEMUA TAB BERMULA BERSIH (KOSONG []) - 100% DISINKRONISASI DENGAN GOOGLE SHEETS
     let portalData = {
-      countdown: [
-        { subjek: "Bahasa Melayu", tarikh_teks: "Isnin, 23 November 2026", tarikh_iso: "2026-11-23", row_index: 2 },
-        { subjek: "Bahasa Inggeris", tarikh_teks: "Selasa, 24 November 2026", tarikh_iso: "2026-11-24", row_index: 3 },
-        { subjek: "Pendidikan Islam", tarikh_teks: "Rabu, 25 November 2026", tarikh_iso: "2026-11-25", row_index: 4 },
-        { subjek: "Pendidikan Moral", tarikh_teks: "Rabu, 25 November 2026", tarikh_iso: "2026-11-25", row_index: 5 },
-        { subjek: "Matematik", tarikh_teks: "Khamis, 26 November 2026", tarikh_iso: "2026-11-26", row_index: 6 },
-        { subjek: "Sejarah", tarikh_teks: "Isnin, 30 November 2026", tarikh_iso: "2026-11-30", row_index: 7 }
-      ],
-      slider: [
-        { 
-          title: "Selamat Datang Ke Portal Tusyen Metroverse", 
-          badge: "BATCH METROVERSE SPM 2026",
-          deskripsi: "Pusat rujukan akademik rasmi modul soalan, nota padat dan rakaman kelas tusyen MRSM Gerik.",
-          image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400", 
-          row_index: 2 
-        }
-      ],
+      countdown: [],
+      slider: [],
       jadual: [],
       guru: [],
       bahan: [],
@@ -430,15 +414,15 @@
         const res = await fetch(API_URL);
         const data = await res.json();
         if (data && !data.error) {
-          if (data.countdown && data.countdown.length > 0) portalData.countdown = data.countdown;
-          if (data.slider && data.slider.length > 0) portalData.slider = data.slider;
-          if (data.jadual) portalData.jadual = data.jadual;
-          if (data.guru) portalData.guru = data.guru;
-          if (data.bahan) portalData.bahan = data.bahan;
-          if (data.rakaman) portalData.rakaman = data.rakaman;
+          portalData.countdown = data.countdown || [];
+          portalData.slider = data.slider || [];
+          portalData.jadual = data.jadual || [];
+          portalData.guru = data.guru || [];
+          portalData.bahan = data.bahan || [];
+          portalData.rakaman = data.rakaman || [];
         }
       } catch (err) {
-        console.warn("Memuatkan data simpanan sementara:", err);
+        console.warn("Gagal memuatkan data dari Google Sheets:", err);
       }
       renderAll();
     }
@@ -458,12 +442,10 @@
       if (!isoDate) return 0;
       const target = new Date(isoDate);
       const today = new Date();
-      // Set to midnight for accurate day comparison
       target.setHours(0, 0, 0, 0);
       today.setHours(0, 0, 0, 0);
       const diffTime = target.getTime() - today.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays;
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
 
     function renderCountdown() {
@@ -471,11 +453,13 @@
       const list = portalData.countdown || [];
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs">Tiada jadual peperiksaan subjek dimasukkan lagi.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">
+            Tiada jadual subjek SPM dimasukkan lagi. Sila klik <b>PANEL ADMIN</b> di atas untuk tambah subjek.
+          </div>`;
         return;
       }
 
-      // Susun mengikut tarikh paling hampir
       const sortedList = [...list].sort((a, b) => new Date(a.tarikh_iso) - new Date(b.tarikh_iso));
 
       container.innerHTML = sortedList.map(c => {
@@ -494,19 +478,16 @@
         return `
           <div class="countdown-card p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
             <div>
-              <!-- Header Subjek Bersama Ikon Kalendar -->
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
                 <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">
                   ${c.subjek}
                 </h3>
               </div>
-              <!-- Tarikh Peperiksaan Tulisan Biasa -->
               <p class="text-xs text-slate-400 font-medium pl-6 mb-4">
                 ${c.tarikh_teks || c.tarikh_iso}
               </p>
             </div>
-            <!-- Baki Hari (Biru Terang Sebijik Macam Gambar Rujukan) -->
             <div class="pl-6">
               <span class="text-lg sm:text-xl font-bold font-rajdhani ${badgeColor}">
                 ${daysText}
@@ -521,7 +502,15 @@
     // ================= SLIDER ENGINE =================
     function renderSlider() {
       const list = portalData.slider || [];
-      if (list.length === 0) return;
+      if (list.length === 0) {
+        document.getElementById('slider-title').textContent = "MARESMAG METROVERSE";
+        document.getElementById('slider-badge').textContent = "PORTAL SPM MRSM GERIK";
+        document.getElementById('slider-desc').textContent = "Selamat datang ke portal tusyen rasmi. Sila masukkan poster hebahan di Panel Admin.";
+        document.getElementById('slider-img').src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400";
+        document.getElementById('slider-bg-blur').src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400";
+        document.getElementById('slider-dots').innerHTML = "";
+        return;
+      }
       
       const s = list[currentSlideIndex % list.length];
       document.getElementById('slider-title').textContent = s.title || "Poster Metroverse";
@@ -562,7 +551,7 @@
       const container = document.getElementById('jadual-container');
       const list = portalData.jadual || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada jadual dimasukkan lagi.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual tusyen dimasukkan lagi.</div>`;
         return;
       }
       container.innerHTML = list.map(j => `
@@ -594,7 +583,7 @@
       const container = document.getElementById('guru-container');
       const list = portalData.guru || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Senarai guru belum ditambah.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Senarai guru belum ditambah.</div>`;
         return;
       }
       container.innerHTML = list.map(g => `
@@ -617,7 +606,7 @@
       const container = document.getElementById('bahan-container');
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada modul bahan untuk subjek ini.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan untuk subjek ini.</div>`;
         return;
       }
 
@@ -647,7 +636,7 @@
       const container = document.getElementById('rakaman-container');
       const list = portalData.rakaman || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-500 text-xs">Tiada video rakaman ditemui.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada video rakaman ditemui.</div>`;
         return;
       }
       container.innerHTML = list.map(r => `
@@ -831,7 +820,6 @@
         const key = input.id.replace('adm-', '').toLowerCase();
         if (item[key] !== undefined) {
           if (input.type === 'date' && item[key]) {
-            // Pastikan format yyyy-MM-dd
             const d = new Date(item[key]);
             if (!isNaN(d.getTime())) {
               input.value = d.toISOString().split('T')[0];
