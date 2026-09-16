@@ -14,7 +14,7 @@
   
   <!-- Fonts: Orbitron, Rajdhani & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script>
@@ -89,6 +89,16 @@
       color: #02040a;
       box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
     }
+
+    /* Animasi Putaran Berterusan */
+    @keyframes spinPulse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .spin-fast {
+      animation: spinPulse 1s linear infinite;
+    }
+
     [data-netlify-deploy-id], .netlify-badge, #netlify-drawer, iframe[src*="netlify"] {
       display: none !important;
       visibility: hidden !important;
@@ -101,6 +111,23 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
+
+  <!-- ================= GLOBAL CYBER PRELOADER ================= -->
+  <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-6">
+      <!-- Glow Outer Ring -->
+      <div class="w-24 h-24 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_30px_rgba(0,242,254,0.4)]"></div>
+      <!-- Logo MRSM Center -->
+      <div class="absolute w-12 h-12 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse">
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+      <span class="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest">MEMUATKAN METROVERSE...</span>
+    </div>
+    <p class="text-[10px] text-slate-500 font-mono mt-1">SINKRONISASI PANGKALAN DATA LIVE</p>
+  </div>
 
   <!-- ================= NAVBAR ================= -->
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
@@ -178,19 +205,13 @@
       </div>
     </div>
 
-    <!-- Empty State Slider (Bila Tiada Data) -->
-    <div id="slider-empty-box" class="p-8 sm:p-12 rounded-3xl border border-dashed border-cyan-500/30 bg-slate-950/60 text-center flex flex-col items-center justify-center">
-      <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-brand-cyan mb-4 shadow-[0_0_20px_rgba(0,242,254,0.2)]">
-        <i data-lucide="image" class="w-7 h-7"></i>
+    <!-- Loading State Slider (Ikon Berputar Cyber) -->
+    <div id="slider-loading-box" class="p-12 sm:p-20 rounded-3xl border border-cyan-500/20 bg-slate-950/70 text-center flex flex-col items-center justify-center min-h-[360px]">
+      <div class="relative mb-4">
+        <div class="w-12 h-12 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast"></div>
       </div>
-      <h3 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-2">TIADA POSTER HEBAHAN SEMASA</h3>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-md mb-6">
-        Sila log masuk ke <b>Panel Admin</b> di sudut atas untuk memuat naik poster slider, tajuk hebahan dan deskripsi anda.
-      </p>
-      <button onclick="openAdminModal(); switchAdminTab('slider');" class="neon-btn px-5 py-2.5 rounded-xl text-xs font-rajdhani font-bold text-brand-cyan flex items-center gap-2">
-        <i data-lucide="plus-circle" class="w-4 h-4"></i>
-        <span>TAMBAH POSTER SLIDER PERTAMA</span>
-      </button>
+      <p class="font-rajdhani font-bold text-sm text-slate-300 tracking-wider uppercase">Memuatkan Poster Hebahan...</p>
+      <span class="text-[10px] text-slate-500 mt-1 font-mono">Sedang menyelaraskan paparan</span>
     </div>
   </section>
 
@@ -213,7 +234,13 @@
       </span>
     </div>
 
-    <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Loading Placeholder -->
+      <div class="col-span-full py-12 flex flex-col items-center justify-center">
+        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMPROSES DETIK SPM...</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= 1. JADUAL KELAS TUSYEN ================= -->
@@ -227,7 +254,12 @@
         <p class="text-xs text-slate-400">Jadual pengukuhan & bengkel persediaan SPM</p>
       </div>
     </div>
-    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="col-span-full py-12 flex flex-col items-center justify-center">
+        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN JADUAL WAKTU...</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= 2. TENAGA PENGAJAR ================= -->
@@ -241,7 +273,12 @@
         <p class="text-xs text-slate-400">Pakar subjek & pembimbing akademik MRSM Gerik</p>
       </div>
     </div>
-    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
+    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <div class="col-span-full py-12 flex flex-col items-center justify-center">
+        <i data-lucide="loader-2" class="w-8 h-8 text-purple-400 spin-fast mb-2"></i>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN PROFIL GURU...</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= 3. BAHAN RUJUKAN & MODUL ================= -->
@@ -274,7 +311,12 @@
         </select>
       </div>
     </div>
-    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full py-12 flex flex-col items-center justify-center">
+        <i data-lucide="loader-2" class="w-8 h-8 text-brand-cyan spin-fast mb-2"></i>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MENYEDIAKAN MODUL NOTA...</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= 4. RAKAMAN KELAS ================= -->
@@ -288,7 +330,12 @@
         <p class="text-xs text-slate-400">Tonton semula rakaman video penerangan guru di tab baharu</p>
       </div>
     </div>
-    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="col-span-full py-12 flex flex-col items-center justify-center">
+        <i data-lucide="loader-2" class="w-8 h-8 text-red-400 spin-fast mb-2"></i>
+        <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider">MEMUATKAN ARKIB VIDEO...</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= FOOTER ================= -->
@@ -362,8 +409,9 @@
             </div>
             <input type="hidden" id="editing-row-index" value="">
             <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"></div>
-            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition">
-              SIMPAN KE GOOGLE SHEETS
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition flex items-center justify-center gap-2">
+              <i data-lucide="save" class="w-4 h-4"></i>
+              <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>
             </button>
           </div>
 
@@ -393,9 +441,7 @@
     ];
 
     function formatImageUrl(url) {
-      if (!url || typeof url !== 'string' || url.trim() === '') {
-        return "";
-      }
+      if (!url || typeof url !== 'string' || url.trim() === '') return "";
       url = url.trim();
       if (url.includes("drive.google.com")) {
         const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
@@ -406,7 +452,7 @@
       return url;
     }
 
-    // SEMUA TAB 100% KOSONG DAN BERSIH DARI DUMMY DATA
+    // SEMUA DATA ASAL KOSONG (100% BEBAS DUMMY)
     let portalData = {
       countdown: [],
       slider: [],
@@ -434,6 +480,13 @@
         }
       } catch (err) {
         console.warn("Gagal memuatkan data dari Google Sheets:", err);
+      } finally {
+        // Hilangkan Global Cyber Preloader sebaik sahaja data selesai diproses
+        const preloader = document.getElementById('global-preloader');
+        if (preloader) {
+          preloader.classList.add('opacity-0');
+          setTimeout(() => preloader.style.display = 'none', 500);
+        }
       }
       renderAll();
     }
@@ -464,9 +517,12 @@
       const list = portalData.countdown || [];
 
       if (list.length === 0) {
+        // Paparkan animasi spinning jika belum ada data dimasukkan
         container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">
-            Tiada jadual subjek SPM dimasukkan lagi. Sila klik <b>PANEL ADMIN</b> di atas untuk tambah subjek.
+          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            <i data-lucide="loader-2" class="w-7 h-7 text-sky-400 spin-fast mb-3"></i>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Kemasukan Jadual SPM...</span>
+            <span class="text-[10px] text-slate-600 mt-0.5">Sila klik Panel Admin untuk tambah subjek</span>
           </div>`;
         return;
       }
@@ -510,22 +566,20 @@
       lucide.createIcons();
     }
 
-    // ================= SLIDER ENGINE (BEBAS DUMMY) =================
+    // ================= SLIDER ENGINE =================
     function renderSlider() {
       const list = portalData.slider || [];
       const mainBox = document.getElementById('slider-main-box');
-      const emptyBox = document.getElementById('slider-empty-box');
+      const loadingBox = document.getElementById('slider-loading-box');
 
-      // Jika kosong, sembunyikan kotak gambar dan paparkan empty state bersih
       if (list.length === 0) {
         mainBox.classList.add('hidden');
         mainBox.classList.remove('flex');
-        emptyBox.classList.remove('hidden');
+        loadingBox.classList.remove('hidden');
         return;
       }
 
-      // Jika ada data sebenar dari Admin
-      emptyBox.classList.add('hidden');
+      loadingBox.classList.add('hidden');
       mainBox.classList.remove('hidden');
       mainBox.classList.add('flex');
       
@@ -568,7 +622,11 @@
       const container = document.getElementById('jadual-container');
       const list = portalData.jadual || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual tusyen dimasukkan lagi.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Jadual Kelas Ditambah...</span>
+          </div>`;
         return;
       }
       container.innerHTML = list.map(j => `
@@ -600,7 +658,11 @@
       const container = document.getElementById('guru-container');
       const list = portalData.guru || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Senarai guru belum ditambah.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            <i data-lucide="loader-2" class="w-7 h-7 text-purple-400 spin-fast mb-3"></i>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Profil Guru Dimasukkan...</span>
+          </div>`;
         return;
       }
       container.innerHTML = list.map(g => `
@@ -623,7 +685,11 @@
       const container = document.getElementById('bahan-container');
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan untuk subjek ini.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Muat Naik Modul & Bahan...</span>
+          </div>`;
         return;
       }
 
@@ -653,7 +719,11 @@
       const container = document.getElementById('rakaman-container');
       const list = portalData.rakaman || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada video rakaman ditemui.</div>`;
+        container.innerHTML = `
+          <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
+            <i data-lucide="loader-2" class="w-7 h-7 text-red-400 spin-fast mb-3"></i>
+            <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Pautan Rakaman Video...</span>
+          </div>`;
         return;
       }
       container.innerHTML = list.map(r => `
@@ -831,7 +901,7 @@
       document.getElementById('editing-row-index').value = item.row_index;
       document.getElementById('admin-form-title').textContent = `Kemaskini Data #${index + 1}`;
       document.getElementById('btn-cancel-edit').classList.remove('hidden');
-      document.getElementById('btn-save-item').textContent = `KEMASKINI ITEM INI`;
+      document.getElementById('btn-save-text').textContent = `KEMASKINI ITEM INI`;
 
       const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
       inputs.forEach(input => {
@@ -855,12 +925,13 @@
     function cancelEditMode() {
       document.getElementById('editing-row-index').value = "";
       document.getElementById('btn-cancel-edit').classList.add('hidden');
-      document.getElementById('btn-save-item').textContent = `SIMPAN KE GOOGLE SHEETS`;
+      document.getElementById('btn-save-text').textContent = `SIMPAN KE GOOGLE SHEETS`;
       renderAdminForm();
     }
 
     async function saveCurrentItem() {
       const btn = document.getElementById('btn-save-item');
+      const btnText = document.getElementById('btn-save-text');
       const editRow = document.getElementById('editing-row-index').value;
       const isUpdating = (editRow !== "" && editRow !== null && !isNaN(Number(editRow)));
 
@@ -871,8 +942,10 @@
         payload[fieldName] = i.value;
       });
 
-      btn.textContent = "SEDANG MEMPROSES...";
+      // Animasi Loading Semasa Menyimpan
       btn.disabled = true;
+      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 spin-fast"></i> <span>SEDANG MEMPROSES...</span>`;
+      lucide.createIcons();
 
       try {
         const requestBody = {
@@ -901,14 +974,23 @@
       } catch (e) {
         alert("Ralat sambungan: " + e.message);
       } finally {
-        btn.textContent = isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS";
         btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS"}</span>`;
+        lucide.createIcons();
       }
     }
 
     async function deleteItem(sheetName, rowIndex) {
       if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
       
+      const listContainer = document.getElementById('admin-items-list');
+      listContainer.innerHTML = `
+        <div class="py-8 flex flex-col items-center justify-center">
+          <i data-lucide="loader-2" class="w-6 h-6 text-red-400 spin-fast mb-2"></i>
+          <span class="text-xs text-slate-400 font-rajdhani">SEDANG MEMADAM DATA DARI DATABASE...</span>
+        </div>`;
+      lucide.createIcons();
+
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
