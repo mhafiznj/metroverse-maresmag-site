@@ -14,7 +14,7 @@
   
   <!-- Fonts: Orbitron, Rajdhani & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script>
@@ -141,9 +141,10 @@
     </div>
   </nav>
 
-  <!-- ================= HERO SLIDER ================= -->
+  <!-- ================= HERO SLIDER SECTION ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
+    <!-- Active Slider Container -->
+    <div id="slider-main-box" class="hidden relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex-col md:flex-row items-center justify-between">
       
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
@@ -152,14 +153,10 @@
       <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
         <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
           <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-          <span id="slider-badge">PENGUMUMAN BATCH METROVERSE</span>
+          <span id="slider-badge"></span>
         </div>
-        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
-          Selamat Datang ke Portal Tusyen
-        </h1>
-        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
-          Platform rasmi nota, modul soalan, jadual bengkel intensif dan arkib rakaman kuliah Tingkatan 5 MRSM Gerik.
-        </p>
+        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight"></h1>
+        <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6"></p>
 
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
@@ -179,7 +176,21 @@
           <img id="slider-img" src="" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
         </div>
       </div>
+    </div>
 
+    <!-- Empty State Slider (Bila Tiada Data) -->
+    <div id="slider-empty-box" class="p-8 sm:p-12 rounded-3xl border border-dashed border-cyan-500/30 bg-slate-950/60 text-center flex flex-col items-center justify-center">
+      <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-brand-cyan mb-4 shadow-[0_0_20px_rgba(0,242,254,0.2)]">
+        <i data-lucide="image" class="w-7 h-7"></i>
+      </div>
+      <h3 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-2">TIADA POSTER HEBAHAN SEMASA</h3>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-md mb-6">
+        Sila log masuk ke <b>Panel Admin</b> di sudut atas untuk memuat naik poster slider, tajuk hebahan dan deskripsi anda.
+      </p>
+      <button onclick="openAdminModal(); switchAdminTab('slider');" class="neon-btn px-5 py-2.5 rounded-xl text-xs font-rajdhani font-bold text-brand-cyan flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>TAMBAH POSTER SLIDER PERTAMA</span>
+      </button>
     </div>
   </section>
 
@@ -383,7 +394,7 @@
 
     function formatImageUrl(url) {
       if (!url || typeof url !== 'string' || url.trim() === '') {
-        return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800";
+        return "";
       }
       url = url.trim();
       if (url.includes("drive.google.com")) {
@@ -395,7 +406,7 @@
       return url;
     }
 
-    // SEMUA TAB BERMULA BERSIH (KOSONG []) - 100% DISINKRONISASI DENGAN GOOGLE SHEETS
+    // SEMUA TAB 100% KOSONG DAN BERSIH DARI DUMMY DATA
     let portalData = {
       countdown: [],
       slider: [],
@@ -499,23 +510,29 @@
       lucide.createIcons();
     }
 
-    // ================= SLIDER ENGINE =================
+    // ================= SLIDER ENGINE (BEBAS DUMMY) =================
     function renderSlider() {
       const list = portalData.slider || [];
+      const mainBox = document.getElementById('slider-main-box');
+      const emptyBox = document.getElementById('slider-empty-box');
+
+      // Jika kosong, sembunyikan kotak gambar dan paparkan empty state bersih
       if (list.length === 0) {
-        document.getElementById('slider-title').textContent = "MARESMAG METROVERSE";
-        document.getElementById('slider-badge').textContent = "PORTAL SPM MRSM GERIK";
-        document.getElementById('slider-desc').textContent = "Selamat datang ke portal tusyen rasmi. Sila masukkan poster hebahan di Panel Admin.";
-        document.getElementById('slider-img').src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400";
-        document.getElementById('slider-bg-blur').src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400";
-        document.getElementById('slider-dots').innerHTML = "";
+        mainBox.classList.add('hidden');
+        mainBox.classList.remove('flex');
+        emptyBox.classList.remove('hidden');
         return;
       }
+
+      // Jika ada data sebenar dari Admin
+      emptyBox.classList.add('hidden');
+      mainBox.classList.remove('hidden');
+      mainBox.classList.add('flex');
       
       const s = list[currentSlideIndex % list.length];
       document.getElementById('slider-title').textContent = s.title || "Poster Metroverse";
-      document.getElementById('slider-badge').textContent = s.badge || "PENGUMUMAN KHAS";
-      document.getElementById('slider-desc').textContent = s.deskripsi || "Portal rasmi rujukan pelajar dan guru Tingkatan 5.";
+      document.getElementById('slider-badge').textContent = s.badge || "HEBAHAN RASMI";
+      document.getElementById('slider-desc').textContent = s.deskripsi || "";
       
       const imgUrl = formatImageUrl(s.image_url);
       document.getElementById('slider-img').src = imgUrl;
@@ -662,6 +679,7 @@
 
     // ================= MODALS & ADMIN CMS =================
     function openImageModal(url) {
+      if (!url) return;
       document.getElementById('modal-img-tag').src = url;
       document.getElementById('image-modal').classList.remove('hidden');
       document.getElementById('image-modal').classList.add('flex');
