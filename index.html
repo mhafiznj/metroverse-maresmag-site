@@ -164,7 +164,6 @@
 
   <!-- ================= HERO SLIDER SECTION ================= -->
   <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <!-- Active Slider Container -->
     <div id="slider-main-box" class="hidden relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex-col md:flex-row items-center justify-between">
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
@@ -198,7 +197,6 @@
       </div>
     </div>
 
-    <!-- Loading State Slider -->
     <div id="slider-loading-box" class="p-12 sm:p-20 rounded-3xl border border-cyan-500/20 bg-slate-950/70 text-center flex flex-col items-center justify-center min-h-[360px]">
       <div class="w-12 h-12 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast mb-4"></div>
       <p class="font-rajdhani font-bold text-sm text-slate-300 tracking-wider uppercase">Memuatkan Poster...</p>
@@ -379,7 +377,6 @@
           <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Log Keluar</button>
         </div>
 
-        <!-- Tab Selection -->
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
           <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
           <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">1. Slider & Poster</button>
@@ -390,7 +387,6 @@
         </div>
 
         <div class="flex-1 overflow-y-auto space-y-6 pr-2">
-          <!-- Form Tambah / Edit -->
           <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
             <div class="flex items-center justify-between mb-3">
               <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Subjek Countdown SPM</h4>
@@ -404,7 +400,6 @@
             </button>
           </div>
 
-          <!-- Existing List -->
           <div>
             <h4 class="font-rajdhani font-bold text-slate-300 text-sm mb-3 flex items-center justify-between">
               <span>Senarai Data Semasa:</span>
@@ -454,7 +449,20 @@
     let currentSlideIndex = 0;
     let sliderTimer = null;
 
+    function hidePreloader() {
+      const preloader = document.getElementById('global-preloader');
+      if (preloader) {
+        preloader.classList.add('opacity-0');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 400);
+      }
+    }
+
     async function loadData() {
+      // Pemasa kecemasan: Preloader WAJIB hilang paling lewat dalam 1.5 saat
+      const emergencyTimer = setTimeout(hidePreloader, 1500);
+
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
@@ -467,24 +475,21 @@
           portalData.rakaman = Array.isArray(data.rakaman) ? data.rakaman : [];
         }
       } catch (err) {
-        console.warn("Gagal memuatkan data dari Google Sheets:", err);
+        console.warn("Makluman pangkalan data:", err);
       } finally {
-        const preloader = document.getElementById('global-preloader');
-        if (preloader) {
-          preloader.classList.add('opacity-0');
-          setTimeout(() => preloader.style.display = 'none', 400);
-        }
+        clearTimeout(emergencyTimer);
+        hidePreloader();
+        renderAll();
       }
-      renderAll();
     }
 
     function renderAll() {
-      try { renderCountdown(); } catch (e) { console.error("Countdown render error:", e); }
-      try { renderSlider(); } catch (e) { console.error("Slider render error:", e); }
-      try { renderJadual(); } catch (e) { console.error("Jadual render error:", e); }
-      try { renderGuru(); } catch (e) { console.error("Guru render error:", e); }
-      try { filterBahan(); } catch (e) { console.error("Bahan render error:", e); }
-      try { renderRakaman(); } catch (e) { console.error("Rakaman render error:", e); }
+      try { renderCountdown(); } catch (e) { console.error(e); }
+      try { renderSlider(); } catch (e) { console.error(e); }
+      try { renderJadual(); } catch (e) { console.error(e); }
+      try { renderGuru(); } catch (e) { console.error(e); }
+      try { filterBahan(); } catch (e) { console.error(e); }
+      try { renderRakaman(); } catch (e) { console.error(e); }
       if (window.lucide) lucide.createIcons();
     }
 
@@ -493,13 +498,10 @@
       if (!rawDate) return 0;
       try {
         let dateStr = String(rawDate).trim().split('T')[0];
-        
-        // Sokongan format DD/MM/YYYY jika ada
         if (dateStr.includes('/')) {
           const p = dateStr.split('/');
           if (p.length === 3) dateStr = `${p[2]}-${p[1]}-${p[0]}`;
         }
-
         const target = new Date(dateStr);
         if (isNaN(target.getTime())) return 0;
 
@@ -520,7 +522,6 @@
 
       const list = portalData.countdown || [];
 
-      // Jika tiada data
       if (!Array.isArray(list) || list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
