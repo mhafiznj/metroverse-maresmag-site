@@ -167,15 +167,15 @@
     <!-- Active Slider Container -->
     <div id="slider-main-box" class="hidden relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex-col md:flex-row items-center justify-between">
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125">
+        <img id="slider-bg-blur" src="" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
       </div>
 
       <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
         <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
           <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-          <span id="slider-badge"></span>
+          <span id="slider-badge">PENGUMUMAN</span>
         </div>
-        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight"></h1>
+        <h1 id="slider-title" class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">Selamat Datang</h1>
         <p id="slider-desc" class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6"></p>
 
         <div class="flex items-center gap-4">
@@ -459,12 +459,12 @@
         const res = await fetch(API_URL);
         const data = await res.json();
         if (data && !data.error) {
-          portalData.countdown = data.countdown || [];
-          portalData.slider = data.slider || [];
-          portalData.jadual = data.jadual || [];
-          portalData.guru = data.guru || [];
-          portalData.bahan = data.bahan || [];
-          portalData.rakaman = data.rakaman || [];
+          portalData.countdown = Array.isArray(data.countdown) ? data.countdown : [];
+          portalData.slider = Array.isArray(data.slider) ? data.slider : [];
+          portalData.jadual = Array.isArray(data.jadual) ? data.jadual : [];
+          portalData.guru = Array.isArray(data.guru) ? data.guru : [];
+          portalData.bahan = Array.isArray(data.bahan) ? data.bahan : [];
+          portalData.rakaman = Array.isArray(data.rakaman) ? data.rakaman : [];
         }
       } catch (err) {
         console.warn("Gagal memuatkan data dari Google Sheets:", err);
@@ -472,26 +472,30 @@
         const preloader = document.getElementById('global-preloader');
         if (preloader) {
           preloader.classList.add('opacity-0');
-          setTimeout(() => preloader.style.display = 'none', 500);
+          setTimeout(() => preloader.style.display = 'none', 400);
         }
       }
       renderAll();
     }
 
     function renderAll() {
-      renderCountdown();
-      renderSlider();
-      renderJadual();
-      renderGuru();
-      filterBahan();
-      renderRakaman();
-      lucide.createIcons();
+      try { renderCountdown(); } catch (e) { console.error("Countdown render error:", e); }
+      try { renderSlider(); } catch (e) { console.error("Slider render error:", e); }
+      try { renderJadual(); } catch (e) { console.error("Jadual render error:", e); }
+      try { renderGuru(); } catch (e) { console.error("Guru render error:", e); }
+      try { filterBahan(); } catch (e) { console.error("Bahan render error:", e); }
+      try { renderRakaman(); } catch (e) { console.error("Rakaman render error:", e); }
+      if (window.lucide) lucide.createIcons();
     }
 
     // ================= COUNTDOWN ENGINE =================
     function calculateDaysLeft(isoDate) {
       if (!isoDate) return 0;
-      const target = new Date(isoDate);
+      // Menangani format tarikh Google Sheets sama ada yyyy-mm-dd atau format tarikh lain
+      const cleanDate = String(isoDate).split('T')[0];
+      const target = new Date(cleanDate);
+      if (isNaN(target.getTime())) return 0;
+      
       const today = new Date();
       target.setHours(0, 0, 0, 0);
       today.setHours(0, 0, 0, 0);
@@ -501,19 +505,20 @@
 
     function renderCountdown() {
       const container = document.getElementById('countdown-container');
+      if (!container) return;
       const list = portalData.countdown || [];
 
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="loader-2" class="w-7 h-7 text-sky-400 spin-fast mb-3"></i>
+            <i data-lucide="hourglass" class="w-7 h-7 text-sky-400 mb-3 opacity-60"></i>
             <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Kemasukan Subjek SPM...</span>
             <span class="text-[10px] text-slate-500 mt-1">Sila tambah subjek di Panel Admin</span>
           </div>`;
         return;
       }
 
-      const sortedList = [...list].sort((a, b) => new Date(a.tarikh_iso) - new Date(b.tarikh_iso));
+      const sortedList = [...list].sort((a, b) => new Date(String(a.tarikh_iso).split('T')[0]) - new Date(String(b.tarikh_iso).split('T')[0]));
 
       container.innerHTML = sortedList.map(c => {
         const days = calculateDaysLeft(c.tarikh_iso);
@@ -534,11 +539,11 @@
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
                 <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">
-                  ${c.subjek}
+                  ${c.subjek || "Subjek"}
                 </h3>
               </div>
               <p class="text-xs text-slate-400 font-medium pl-6 mb-4">
-                ${c.tarikh_teks || c.tarikh_iso}
+                ${c.tarikh_teks || c.tarikh_iso || ""}
               </p>
             </div>
             <div class="pl-6">
@@ -549,7 +554,6 @@
           </div>
         `;
       }).join('');
-      lucide.createIcons();
     }
 
     // ================= SLIDER ENGINE =================
@@ -557,6 +561,8 @@
       const list = portalData.slider || [];
       const mainBox = document.getElementById('slider-main-box');
       const loadingBox = document.getElementById('slider-loading-box');
+
+      if (!mainBox || !loadingBox) return;
 
       if (list.length === 0) {
         mainBox.classList.add('hidden');
@@ -570,18 +576,26 @@
       mainBox.classList.add('flex');
       
       const s = list[currentSlideIndex % list.length];
-      document.getElementById('slider-title').textContent = s.title || "Poster Metroverse";
-      document.getElementById('slider-badge').textContent = s.badge || "HEBAHAN RASMI";
-      document.getElementById('slider-desc').textContent = s.deskripsi || "";
+      const titleEl = document.getElementById('slider-title');
+      const badgeEl = document.getElementById('slider-badge');
+      const descEl = document.getElementById('slider-desc');
+      const imgEl = document.getElementById('slider-img');
+      const bgBlurEl = document.getElementById('slider-bg-blur');
+
+      if (titleEl) titleEl.textContent = s.title || "Poster Metroverse";
+      if (badgeEl) badgeEl.textContent = s.badge || "HEBAHAN RASMI";
+      if (descEl) descEl.textContent = s.deskripsi || "";
       
       const imgUrl = formatImageUrl(s.image_url);
-      document.getElementById('slider-img').src = imgUrl;
-      document.getElementById('slider-bg-blur').src = imgUrl;
+      if (imgEl) imgEl.src = imgUrl;
+      if (bgBlurEl) bgBlurEl.src = imgUrl;
 
       const dots = document.getElementById('slider-dots');
-      dots.innerHTML = list.map((_, i) => `
-        <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
-      `).join('');
+      if (dots) {
+        dots.innerHTML = list.map((_, i) => `
+          <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
+        `).join('');
+      }
     }
 
     function nextSlide() {
@@ -606,11 +620,12 @@
     // ================= JADUAL TUSYEN =================
     function renderJadual() {
       const container = document.getElementById('jadual-container');
+      if (!container) return;
       const list = portalData.jadual || [];
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
+            <i data-lucide="calendar" class="w-7 h-7 text-brand-cyan mb-3 opacity-60"></i>
             <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Jadual Kelas...</span>
           </div>`;
         return;
@@ -619,12 +634,12 @@
         <div class="pro-card p-5 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-center mb-3">
-              <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-cyan-950 text-brand-cyan border border-brand-cyan/40">${j.subjek}</span>
+              <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-cyan-950 text-brand-cyan border border-brand-cyan/40">${j.subjek || "TUSYEN"}</span>
               <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i> ${j.masa || ''}</span>
             </div>
-            <h3 class="font-rajdhani font-bold text-lg text-white mb-2 leading-snug">${j.title}</h3>
+            <h3 class="font-rajdhani font-bold text-lg text-white mb-2 leading-snug">${j.title || ''}</h3>
             <p class="text-xs text-slate-300 flex items-center gap-1.5 mb-4">
-              <i data-lucide="calendar-check" class="w-4 h-4 text-brand-cyan"></i> ${j.tarikh_hari}
+              <i data-lucide="calendar-check" class="w-4 h-4 text-brand-cyan"></i> ${j.tarikh_hari || ''}
             </p>
           </div>
           ${j.poster_url ? `
@@ -642,11 +657,12 @@
     // ================= TENAGA PENGAJAR =================
     function renderGuru() {
       const container = document.getElementById('guru-container');
+      if (!container) return;
       const list = portalData.guru || [];
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="loader-2" class="w-7 h-7 text-purple-400 spin-fast mb-3"></i>
+            <i data-lucide="award" class="w-7 h-7 text-purple-400 mb-3 opacity-60"></i>
             <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Profil Guru...</span>
           </div>`;
         return;
@@ -656,8 +672,8 @@
           <div class="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 border-2 border-purple-500/40 mb-3 p-1 flex items-center justify-center">
             <img src="${formatImageUrl(g.image_url)}" onclick="openImageModal(this.src)" class="w-full h-full object-contain cursor-pointer" onerror="this.src='https://via.placeholder.com/150'">
           </div>
-          <h4 class="font-rajdhani font-bold text-sm text-white">${g.nama}</h4>
-          <span class="text-[11px] text-brand-cyan font-semibold my-1">${g.subjek}</span>
+          <h4 class="font-rajdhani font-bold text-sm text-white">${g.nama || ''}</h4>
+          <span class="text-[11px] text-brand-cyan font-semibold my-1">${g.subjek || ''}</span>
           <p class="text-[10px] text-slate-400 line-clamp-2">${g.keterangan || ''}</p>
         </div>
       `).join('');
@@ -665,15 +681,18 @@
 
     // ================= BAHAN RUJUKAN =================
     function filterBahan() {
-      const sel = document.getElementById('filter-subjek').value;
+      const filterEl = document.getElementById('filter-subjek');
+      const sel = filterEl ? filterEl.value : "SEMUA";
       const list = portalData.bahan || [];
       const filtered = sel === "SEMUA" ? list : list.filter(b => b.subjek === sel);
       const container = document.getElementById('bahan-container');
 
+      if (!container) return;
+
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="loader-2" class="w-7 h-7 text-brand-cyan spin-fast mb-3"></i>
+            <i data-lucide="folder-archive" class="w-7 h-7 text-brand-cyan mb-3 opacity-60"></i>
             <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Modul Bahan...</span>
           </div>`;
         return;
@@ -683,13 +702,13 @@
         <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/25 group">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek}</span>
+              <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek || 'MODUL'}</span>
               <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-brand-cyan"></i> ${b.tarikh || ''}</span>
             </div>
-            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk}</h4>
+            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk || ''}</h4>
           </div>
           <div class="pt-3 border-t border-slate-800/80">
-            <a href="${b.gdrive_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
+            <a href="${b.gdrive_url || '#'}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
               <i data-lucide="file-text" class="w-4 h-4"></i>
               <span>Buka Bahan / Modul</span>
               <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
@@ -697,17 +716,17 @@
           </div>
         </div>
       `).join('');
-      lucide.createIcons();
     }
 
     // ================= RAKAMAN KELAS =================
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
+      if (!container) return;
       const list = portalData.rakaman || [];
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-10 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            <i data-lucide="loader-2" class="w-7 h-7 text-red-400 spin-fast mb-3"></i>
+            <i data-lucide="play" class="w-7 h-7 text-red-400 mb-3 opacity-60"></i>
             <span class="text-xs text-slate-400 font-rajdhani font-semibold tracking-wider uppercase">Menunggu Pautan Rakaman...</span>
           </div>`;
         return;
@@ -716,13 +735,13 @@
         <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4 group">
           <div>
             <div class="flex justify-between items-center mb-2">
-              <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek}</span>
+              <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek || 'RAKAMAN'}</span>
               <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-red-400"></i> ${r.tarikh || ''}</span>
             </div>
-            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk}</h4>
+            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk || ''}</h4>
           </div>
           <div class="pt-3 border-t border-slate-800/80">
-            <a href="${r.video_url}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
+            <a href="${r.video_url || '#'}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
               <i data-lucide="play-circle" class="w-4 h-4"></i>
               <span>Tonton Video Rakaman</span>
               <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
@@ -730,45 +749,67 @@
           </div>
         </div>
       `).join('');
-      lucide.createIcons();
     }
 
     // ================= MODALS & ADMIN CMS =================
     function openImageModal(url) {
       if (!url) return;
-      document.getElementById('modal-img-tag').src = url;
-      document.getElementById('image-modal').classList.remove('hidden');
-      document.getElementById('image-modal').classList.add('flex');
+      const modalImg = document.getElementById('modal-img-tag');
+      const imgModal = document.getElementById('image-modal');
+      if (modalImg) modalImg.src = url;
+      if (imgModal) {
+        imgModal.classList.remove('hidden');
+        imgModal.classList.add('flex');
+      }
     }
     function closeImageModal() {
-      document.getElementById('image-modal').classList.add('hidden');
-      document.getElementById('image-modal').classList.remove('flex');
+      const imgModal = document.getElementById('image-modal');
+      if (imgModal) {
+        imgModal.classList.add('hidden');
+        imgModal.classList.remove('flex');
+      }
     }
 
     function openAdminModal() {
-      document.getElementById('admin-modal').classList.remove('hidden');
-      document.getElementById('admin-modal').classList.add('flex');
+      const modal = document.getElementById('admin-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
     }
     function closeAdminModal() {
-      document.getElementById('admin-modal').classList.add('hidden');
-      document.getElementById('admin-modal').classList.remove('flex');
+      const modal = document.getElementById('admin-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
     }
     function verifyAdmin() {
-      const p = document.getElementById('admin-pass-input').value;
+      const passInput = document.getElementById('admin-pass-input');
+      const p = passInput ? passInput.value : '';
       if (p === ADMIN_PASSWORD) {
-        document.getElementById('admin-auth-box').classList.add('hidden');
-        document.getElementById('admin-panel').classList.remove('hidden');
-        document.getElementById('admin-panel').classList.add('flex');
+        const authBox = document.getElementById('admin-auth-box');
+        const panel = document.getElementById('admin-panel');
+        if (authBox) authBox.classList.add('hidden');
+        if (panel) {
+          panel.classList.remove('hidden');
+          panel.classList.add('flex');
+        }
         switchAdminTab('countdown');
       } else {
         alert("Kata laluan Admin Salah!");
       }
     }
     function logoutAdmin() {
-      document.getElementById('admin-auth-box').classList.remove('hidden');
-      document.getElementById('admin-panel').classList.add('hidden');
-      document.getElementById('admin-panel').classList.remove('flex');
-      document.getElementById('admin-pass-input').value = '';
+      const authBox = document.getElementById('admin-auth-box');
+      const panel = document.getElementById('admin-panel');
+      const passInput = document.getElementById('admin-pass-input');
+      if (authBox) authBox.classList.remove('hidden');
+      if (panel) {
+        panel.classList.add('hidden');
+        panel.classList.remove('flex');
+      }
+      if (passInput) passInput.value = '';
     }
 
     function switchAdminTab(tab) {
@@ -777,19 +818,21 @@
       document.querySelectorAll('.admin-tab-btn').forEach(b => {
         b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300";
       });
-      document.getElementById(`tab-btn-${tab}`).className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      if (activeBtn) activeBtn.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
       renderAdminForm();
       renderAdminList();
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     function renderAdminForm() {
       const f = document.getElementById('admin-form-fields');
       const title = document.getElementById('admin-form-title');
+      if (!f) return;
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
 
       if (activeAdminTab === 'countdown') {
-        title.textContent = "Tambah Subjek Countdown SPM";
+        if (title) title.textContent = "Tambah Subjek Countdown SPM";
         f.innerHTML = `
           <div>
             <label class="block text-[11px] text-slate-400 mb-1">Nama Subjek</label>
@@ -805,7 +848,7 @@
           </div>
         `;
       } else if (activeAdminTab === 'slider') {
-        title.textContent = "Tetapan & Tambah Slider Baharu";
+        if (title) title.textContent = "Tetapan & Tambah Slider Baharu";
         f.innerHTML = `
           <input type="text" id="adm-badge" placeholder="Badge Kategori (cth: PENGUMUMAN KHAS)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <input type="text" id="adm-title" placeholder="Tajuk Utama Slider" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -813,7 +856,7 @@
           <textarea id="adm-deskripsi" placeholder="Teks Deskripsi / Keterangan Slider" rows="2" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
         `;
       } else if (activeAdminTab === 'jadual') {
-        title.textContent = "Tambah Jadual Kelas";
+        if (title) title.textContent = "Tambah Jadual Kelas";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
           <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -822,7 +865,7 @@
           <input type="text" id="adm-poster_url" placeholder="Link Gambar Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'guru') {
-        title.textContent = "Tambah Tenaga Pengajar";
+        if (title) title.textContent = "Tambah Tenaga Pengajar";
         f.innerHTML = `
           <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
@@ -830,7 +873,7 @@
           <input type="text" id="adm-keterangan" placeholder="Keterangan Ringkas" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'bahan') {
-        title.textContent = "Tambah Bahan Rujukan & Modul";
+        if (title) title.textContent = "Tambah Bahan Rujukan & Modul";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
           <input type="text" id="adm-tajuk" placeholder="Tajuk Modul / Nota" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -838,7 +881,7 @@
           <input type="text" id="adm-tarikh" placeholder="Tarikh (cth: 30 Ogos 2026)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'rakaman') {
-        title.textContent = "Tambah Rakaman Video";
+        if (title) title.textContent = "Tambah Rakaman Video";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
           <input type="text" id="adm-tajuk" placeholder="Tajuk Sesi Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -850,8 +893,11 @@
 
     function renderAdminList() {
       const listContainer = document.getElementById('admin-items-list');
+      const countEl = document.getElementById('current-tab-count');
+      if (!listContainer) return;
+
       const items = portalData[activeAdminTab] || [];
-      document.getElementById('current-tab-count').textContent = `${items.length} Item`;
+      if (countEl) countEl.textContent = `${items.length} Item`;
 
       if (items.length === 0) {
         listContainer.innerHTML = `<div class="p-4 bg-slate-900/60 rounded-xl text-center text-xs text-slate-500">Tiada rekod data di dalam bahagian ini.</div>`;
@@ -877,11 +923,12 @@
           </div>
         </div>
       `).join('');
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     function editItem(index) {
-      const item = portalData[activeAdminTab][index];
+      const items = portalData[activeAdminTab] || [];
+      const item = items[index];
       if (!item) return;
 
       const editInput = document.getElementById('editing-row-index');
@@ -893,12 +940,9 @@
       const btnCancel = document.getElementById('btn-cancel-edit');
       if (btnCancel) btnCancel.classList.remove('hidden');
 
-      const btnSaveText = document.getElementById('btn-save-text');
-      if (btnSaveText) {
-        btnSaveText.textContent = "KEMASKINI ITEM INI";
-      } else {
-        const btnSave = document.getElementById('btn-save-item');
-        if (btnSave) btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">KEMASKINI ITEM INI</span>`;
+      const btnSave = document.getElementById('btn-save-item');
+      if (btnSave) {
+        btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">KEMASKINI ITEM INI</span>`;
       }
 
       const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
@@ -906,19 +950,14 @@
         const key = input.id.replace('adm-', '').toLowerCase();
         if (item[key] !== undefined) {
           if (input.type === 'date' && item[key]) {
-            const d = new Date(item[key]);
-            if (!isNaN(d.getTime())) {
-              input.value = d.toISOString().split('T')[0];
-            } else {
-              input.value = item[key];
-            }
+            input.value = String(item[key]).split('T')[0];
           } else {
             input.value = item[key];
           }
         }
       });
 
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
       const adminContainer = document.querySelector('#admin-panel > div.flex-1');
       if (adminContainer) adminContainer.scrollTop = 0;
     }
@@ -930,21 +969,19 @@
       const btnCancel = document.getElementById('btn-cancel-edit');
       if (btnCancel) btnCancel.classList.add('hidden');
 
-      const btnSaveText = document.getElementById('btn-save-text');
-      if (btnSaveText) {
-        btnSaveText.textContent = "SIMPAN KE GOOGLE SHEETS";
-      } else {
-        const btnSave = document.getElementById('btn-save-item');
-        if (btnSave) btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>`;
+      const btnSave = document.getElementById('btn-save-item');
+      if (btnSave) {
+        btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>`;
       }
 
       renderAdminForm();
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     async function saveCurrentItem() {
       const btn = document.getElementById('btn-save-item');
-      const editRow = document.getElementById('editing-row-index') ? document.getElementById('editing-row-index').value : "";
+      const editRowEl = document.getElementById('editing-row-index');
+      const editRow = editRowEl ? editRowEl.value : "";
       const isUpdating = (editRow !== "" && editRow !== null && !isNaN(Number(editRow)));
 
       let payload = {};
@@ -954,9 +991,11 @@
         payload[fieldName] = i.value;
       });
 
-      btn.disabled = true;
-      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 spin-fast"></i> <span>SEDANG MEMPROSES...</span>`;
-      lucide.createIcons();
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 spin-fast"></i> <span>SEDANG MEMPROSES...</span>`;
+      }
+      if (window.lucide) lucide.createIcons();
 
       try {
         const requestBody = {
@@ -985,10 +1024,12 @@
       } catch (e) {
         alert("Ralat sambungan: " + e.message);
       } finally {
-        btn.disabled = false;
-        const finalLabel = isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS";
-        btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${finalLabel}</span>`;
-        lucide.createIcons();
+        if (btn) {
+          btn.disabled = false;
+          const finalLabel = isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS";
+          btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${finalLabel}</span>`;
+        }
+        if (window.lucide) lucide.createIcons();
       }
     }
 
@@ -996,12 +1037,14 @@
       if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
 
       const listContainer = document.getElementById('admin-items-list');
-      listContainer.innerHTML = `
-        <div class="py-8 flex flex-col items-center justify-center">
-          <i data-lucide="loader-2" class="w-6 h-6 text-red-400 spin-fast mb-2"></i>
-          <span class="text-xs text-slate-400 font-rajdhani">SEDANG MEMADAM DATA DARI DATABASE...</span>
-        </div>`;
-      lucide.createIcons();
+      if (listContainer) {
+        listContainer.innerHTML = `
+          <div class="py-8 flex flex-col items-center justify-center">
+            <i data-lucide="loader-2" class="w-6 h-6 text-red-400 spin-fast mb-2"></i>
+            <span class="text-xs text-slate-400 font-rajdhani">SEDANG MEMADAM DATA DARI DATABASE...</span>
+          </div>`;
+      }
+      if (window.lucide) lucide.createIcons();
 
       try {
         const res = await fetch(API_URL, {
