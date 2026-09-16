@@ -332,7 +332,7 @@
         <span class="font-orbitron text-brand-cyan font-bold text-sm">MARESMAG METROVERSE</span>
         <span>• Maktab Rendah Sains MARA Gerik, Perak</span>
       </div>
-      <p>© 2026 Metroverse Tuition One Stop Centre | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
+      <p>© 2026 Metroverse E-Learning Sites | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
     </div>
   </footer>
 
@@ -453,19 +453,19 @@
       const preloader = document.getElementById('global-preloader');
       if (preloader) {
         preloader.classList.add('opacity-0');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 400);
+        setTimeout(() => { preloader.style.display = 'none'; }, 400);
       }
     }
 
+    // LOAD DATA DENGAN ANTI-CACHE PARAMETER
     async function loadData() {
-      // Pemasa kecemasan: Preloader WAJIB hilang paling lewat dalam 1.5 saat
       const emergencyTimer = setTimeout(hidePreloader, 1500);
 
       try {
-        const res = await fetch(API_URL);
+        // Tambah ?t= untuk memaksa browser ambil data terbaharu dari Apps Script
+        const res = await fetch(`${API_URL}?t=${new Date().getTime()}`);
         const data = await res.json();
+        
         if (data && !data.error) {
           portalData.countdown = Array.isArray(data.countdown) ? data.countdown : [];
           portalData.slider = Array.isArray(data.slider) ? data.slider : [];
@@ -480,20 +480,21 @@
         clearTimeout(emergencyTimer);
         hidePreloader();
         renderAll();
+        renderAdminList();
       }
     }
 
     function renderAll() {
-      try { renderCountdown(); } catch (e) { console.error(e); }
-      try { renderSlider(); } catch (e) { console.error(e); }
-      try { renderJadual(); } catch (e) { console.error(e); }
-      try { renderGuru(); } catch (e) { console.error(e); }
-      try { filterBahan(); } catch (e) { console.error(e); }
-      try { renderRakaman(); } catch (e) { console.error(e); }
+      try { renderCountdown(); } catch (e) { console.error("Error Countdown:", e); }
+      try { renderSlider(); } catch (e) { console.error("Error Slider:", e); }
+      try { renderJadual(); } catch (e) { console.error("Error Jadual:", e); }
+      try { renderGuru(); } catch (e) { console.error("Error Guru:", e); }
+      try { filterBahan(); } catch (e) { console.error("Error Bahan:", e); }
+      try { renderRakaman(); } catch (e) { console.error("Error Rakaman:", e); }
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= COUNTDOWN ENGINE (KEBAL RALAT) =================
+    // ================= COUNTDOWN ENGINE =================
     function calculateDaysLeft(rawDate) {
       if (!rawDate) return 0;
       try {
@@ -797,6 +798,7 @@
       if (modal) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
+        renderAdminList();
       }
     }
     function closeAdminModal() {
@@ -1036,10 +1038,24 @@
 
         const result = await res.json();
         if (result.success) {
-          alert(result.message || "Berjaya!");
-          cancelEditMode();
-          await loadData();
+          // KEMASKINI TEMPATAN SERTA-MERTA (OPTIMISTIC UPDATE)
+          if (isUpdating) {
+            const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(editRow));
+            if (idx !== -1) {
+              portalData[activeAdminTab][idx] = { ...portalData[activeAdminTab][idx], ...payload };
+            }
+          } else {
+            const newRowIdx = portalData[activeAdminTab].length + 2;
+            portalData[activeAdminTab].push({ ...payload, row_index: newRowIdx });
+          }
+
+          renderAll();
           renderAdminList();
+          cancelEditMode();
+          alert(result.message || "Berjaya!");
+
+          // Segarkan semula dengan data pelayan
+          await loadData();
         } else {
           alert("Ralat: " + (result.message || "Gagal memproses data!"));
         }
@@ -1058,15 +1074,10 @@
     async function deleteItem(sheetName, rowIndex) {
       if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
 
-      const listContainer = document.getElementById('admin-items-list');
-      if (listContainer) {
-        listContainer.innerHTML = `
-          <div class="py-8 flex flex-col items-center justify-center">
-            <i data-lucide="loader-2" class="w-6 h-6 text-red-400 spin-fast mb-2"></i>
-            <span class="text-xs text-slate-400 font-rajdhani">SEDANG MEMADAM DATA DARI DATABASE...</span>
-          </div>`;
-      }
-      if (window.lucide) lucide.createIcons();
+      // Padam dari memori tempatan serta-merta
+      portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
+      renderAll();
+      renderAdminList();
 
       try {
         const res = await fetch(API_URL, {
@@ -1083,12 +1094,13 @@
         if (result.success) {
           alert("Berjaya dipadam!");
           await loadData();
-          renderAdminList();
         } else {
           alert("Ralat: " + result.message);
+          await loadData();
         }
       } catch (e) {
         alert("Ralat memadam data: " + e.message);
+        await loadData();
       }
     }
 
