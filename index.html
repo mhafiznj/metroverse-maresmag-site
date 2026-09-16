@@ -146,7 +146,7 @@
       </a>
 
       <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
-        <a href="#hero" class="hover:text-brand-cyan transition">Utama</a>
+        <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
         <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
         <a href="#guru" class="hover:text-brand-cyan transition">Tenaga Pengajar</a>
@@ -161,10 +161,8 @@
     </div>
   </nav>
 
-  <!-- ================= HERO SLIDER SECTION (100% KOSONG SEHINGGA ADMIN ISI) ================= -->
-  <section id="hero" class="py-6 px-4 max-w-7xl mx-auto w-full">
-    <div id="slider-wrapper"></div>
-  </section>
+  <!-- ================= SEKSYEN UTAMA (KOSONG JIKA TIADA DATA SHEETS) ================= -->
+  <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
   <!-- ================= COUNTDOWN SIJIL PELAJARAN MALAYSIA ================= -->
   <section id="countdown-spm" class="py-10 px-4 max-w-7xl mx-auto w-full">
@@ -185,7 +183,7 @@
       </span>
     </div>
 
-    <!-- Grid Countdown (Tanpa Spinner) -->
+    <!-- Grid Countdown -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
@@ -375,7 +373,7 @@
       return url;
     }
 
-    // SEMUA KATEGORI BERMULA KOSONG TULEN
+    // SEMUA TAB KOSONG 100% TIADA DUMMY
     let portalData = {
       countdown: [],
       slider: [],
@@ -397,8 +395,9 @@
       }
     }
 
+    // TARIK DATA DENGAN ANTI-CACHE
     async function loadData() {
-      const emergencyTimer = setTimeout(hidePreloader, 1000);
+      const emergencyTimer = setTimeout(hidePreloader, 800);
 
       try {
         const res = await fetch(`${API_URL}?t=${new Date().getTime()}`);
@@ -515,59 +514,64 @@
       container.innerHTML = html;
     }
 
-    // ================= SLIDER ENGINE (100% TIADA DUMMY) =================
+    // ================= SLIDER ENGINE (100% KOSONG JIKA TIADA DATA DI SHEETS) =================
     function renderSlider() {
       const list = portalData.slider || [];
-      const wrapper = document.getElementById('slider-wrapper');
+      const wrapper = document.getElementById('utama');
       if (!wrapper) return;
 
-      // KOSONGKAN SEPENUHNYA JIKA TIADA DATA DALAM SHEETS
+      // KOSONGKAN MUTLAK JIKA TIADA DATA DALAM TAB SLIDER
       if (list.length === 0) {
         wrapper.innerHTML = "";
+        wrapper.style.display = "none";
         return;
       }
 
+      // JIKA ADA DATA DARI SHEETS, PAPARKAN SLIDER SEBENAR
+      wrapper.style.display = "block";
       const s = list[currentSlideIndex % list.length];
       const imgUrl = formatImageUrl(s.image_url);
 
       wrapper.innerHTML = `
-        <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
-          <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-            <img src="${imgUrl}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
-          </div>
-
-          <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
-            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
-              <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-              <span>${s.badge || 'PENGUMUMAN'}</span>
+        <div class="py-6 px-4">
+          <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+              <img src="${imgUrl}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
             </div>
-            <h1 class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
-              ${s.title || ''}
-            </h1>
-            <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
-              ${s.deskripsi || ''}
-            </p>
 
-            <div class="flex items-center gap-4">
-              <div class="flex items-center gap-2">
-                <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                  <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                </button>
-                <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                  <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                </button>
+            <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
+              <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
+                <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+                <span>${s.badge || 'PENGUMUMAN'}</span>
               </div>
-              <div class="flex items-center gap-1.5">
-                ${list.map((_, i) => `
-                  <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
-                `).join('')}
+              <h1 class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
+                ${s.title || ''}
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
+                ${s.deskripsi || ''}
+              </p>
+
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                  </button>
+                  <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  ${list.map((_, i) => `
+                    <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
+                  `).join('')}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
-            <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
-              <img src="${imgUrl}" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
+            <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
+              <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
+                <img src="${imgUrl}" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
+              </div>
             </div>
           </div>
         </div>
