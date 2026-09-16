@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARESMAG METROVERSE | Portal Tusyen MRSM Gerik</title>
-  
-  <!-- Favicon Logo Rasmi MRSM -->
+  <title>MARESMAG METROVERSE | MRSM Gerik</title>
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG">
-  
-  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Fonts: Orbitron, Rajdhani & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-
   <script>
     tailwind.config = {
       theme: {
@@ -41,15 +34,13 @@
       }
     }
   </script>
-
   <style>
     body {
       background-color: #02040a;
       color: #e2e8f0;
       background-image: 
         radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(127, 0, 255, 0.12) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+        radial-gradient(at 100% 100%, rgba(127, 0, 255, 0.12) 0px, transparent 50%);
       background-attachment: fixed;
     }
     .glass-nav {
@@ -61,287 +52,154 @@
       background: rgba(10, 20, 42, 0.65);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(0, 242, 254, 0.18);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
     }
     .pro-card:hover {
       border-color: rgba(0, 242, 254, 0.6);
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px -10px rgba(0, 242, 254, 0.25);
     }
     .countdown-card {
       background: rgba(13, 20, 38, 0.85);
-      backdrop-filter: blur(12px);
       border: 1px solid rgba(0, 242, 254, 0.18);
       transition: all 0.25s ease;
     }
     .countdown-card:hover {
       border-color: rgba(0, 242, 254, 0.55);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px -6px rgba(0, 242, 254, 0.25);
     }
     .neon-btn {
       background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.2));
       border: 1px solid #00F2FE;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
     }
-    .neon-btn:hover {
-      background: #00F2FE;
-      color: #02040a;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
-    }
-
-    @keyframes spinPulse {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .spin-fast {
-      animation: spinPulse 0.9s linear infinite;
-    }
-
-    [data-netlify-deploy-id], .netlify-badge, #netlify-drawer, iframe[src*="netlify"] {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #02040a; }
-    ::-webkit-scrollbar-thumb { background: #00F2FE; border-radius: 3px; }
+    .neon-btn:hover { background: #00F2FE; color: #02040a; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= SATU SAHAJA LOADING AWAL ================= -->
-  <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
-    <div class="relative flex items-center justify-center mb-5">
-      <div class="w-16 h-16 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_20px_rgba(0,242,254,0.4)]"></div>
-      <div class="absolute w-9 h-9 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse" alt="MRSM">
-      </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-      <span class="font-orbitron text-xs font-bold text-white tracking-widest">MEMUATKAN PORTAL...</span>
-    </div>
-  </div>
-
-  <!-- ================= NAVBAR ================= -->
+  <!-- NAVBAR -->
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 rounded-xl overflow-hidden bg-slate-900/80 border border-cyan-400/40 flex items-center justify-center p-1 shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:border-brand-cyan transition">
-          <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" 
-               alt="Logo MRSM" 
-               referrerpolicy="no-referrer" 
-               class="w-full h-full object-contain filter drop-shadow">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-400/40 p-1 flex items-center justify-center">
+          <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" alt="MRSM" class="w-full h-full object-contain">
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-orbitron font-black text-lg tracking-wider text-white">MARESMAG</span>
-            <span class="text-[11px] font-orbitron font-bold px-2 py-0.5 rounded bg-cyan-950/80 border border-brand-cyan text-brand-cyan shadow-[0_0_10px_rgba(0,242,254,0.3)]">METROVERSE</span>
-          </div>
-          <p class="text-[10px] text-slate-400 tracking-widest font-rajdhani font-semibold uppercase">Pusat Rujukan Tingkatan 5 • MRSM Gerik</p>
+          <span class="font-orbitron font-black text-lg text-white">MARESMAG <span class="text-brand-cyan text-xs px-2 py-0.5 rounded bg-cyan-950 border border-brand-cyan">METROVERSE</span></span>
+          <p class="text-[10px] text-slate-400 uppercase font-rajdhani">MRSM Gerik, Perak</p>
         </div>
       </a>
-
-      <div class="hidden lg:flex items-center space-x-7 text-xs font-rajdhani font-bold tracking-wider uppercase text-slate-300">
-        <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
-        <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
-        <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
-        <a href="#guru" class="hover:text-brand-cyan transition">Tenaga Pengajar</a>
-        <a href="#bahan" class="hover:text-brand-cyan transition">Bahan & Modul</a>
-        <a href="#rakaman" class="hover:text-brand-cyan transition">Video Rakaman</a>
+      <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
+        <a href="#utama" class="hover:text-brand-cyan">Utama</a>
+        <a href="#countdown-spm" class="hover:text-brand-cyan">Countdown SPM</a>
+        <a href="#jadual" class="hover:text-brand-cyan">Jadual</a>
+        <a href="#guru" class="hover:text-brand-cyan">Guru</a>
+        <a href="#bahan" class="hover:text-brand-cyan">Bahan</a>
+        <a href="#rakaman" class="hover:text-brand-cyan">Rakaman</a>
       </div>
-
-      <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold tracking-wider text-brand-cyan flex items-center gap-2 transition-all">
+      <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold text-brand-cyan flex items-center gap-2">
         <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
         <span>PANEL ADMIN</span>
       </button>
     </div>
   </nav>
 
-  <!-- ================= SEKSYEN UTAMA (KOSONG JIKA TIADA DATA SHEETS) ================= -->
+  <!-- SEKSYEN UTAMA (#utama - KOSONG TULEN) -->
   <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
-  <!-- ================= COUNTDOWN SIJIL PELAJARAN MALAYSIA ================= -->
+  <!-- COUNTDOWN SPM -->
   <section id="countdown-spm" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-slate-800 pb-4">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
-        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
           <i data-lucide="hourglass" class="w-6 h-6 animate-pulse"></i>
         </div>
         <div>
-          <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white tracking-wide">
-            COUNTDOWN SIJIL PELAJARAN MALAYSIA
-          </h2>
-          <p class="text-xs text-slate-400">Detik kiraan hari persediaan peperiksaan SPM mengikut kertas subjek</p>
+          <h2 class="font-orbitron text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA</h2>
+          <p class="text-xs text-slate-400">Detik peperiksaan mengikut subjek</p>
         </div>
       </div>
-      <span class="text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30 self-start sm:self-auto">
-        Kiraan Auto Mengikut Tarikh
-      </span>
     </div>
-
-    <!-- Grid Countdown -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- ================= 1. JADUAL KELAS TUSYEN ================= -->
+  <!-- JADUAL -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
-      <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
-        <i data-lucide="calendar" class="w-6 h-6"></i>
-      </div>
-      <div>
-        <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">JADUAL KELAS TUSYEN</h2>
-        <p class="text-xs text-slate-400">Jadual pengukuhan & bengkel persediaan SPM</p>
-      </div>
-    </div>
+    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
     <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- ================= 2. TENAGA PENGAJAR ================= -->
+  <!-- GURU -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
-      <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
-        <i data-lucide="award" class="w-6 h-6"></i>
-      </div>
-      <div>
-        <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">BARISAN GURU & TENAGA PENGAJAR</h2>
-        <p class="text-xs text-slate-400">Pakar subjek & pembimbing akademik MRSM Gerik</p>
-      </div>
-    </div>
+    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
     <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
   </section>
 
-  <!-- ================= 3. BAHAN RUJUKAN & MODUL ================= -->
+  <!-- BAHAN -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-slate-800 pb-4">
-      <div class="flex items-center gap-3">
-        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
-          <i data-lucide="folder-archive" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">BAHAN RUJUKAN & MODUL SPM</h2>
-          <p class="text-xs text-slate-400">Klik butang untuk membuka modul di tab baharu dengan pantas</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="text-xs text-slate-400 font-semibold uppercase">Subjek:</span>
-        <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs font-semibold rounded-xl px-4 py-2 outline-none">
-          <option value="SEMUA">Semua Subjek</option>
-          <option value="Bahasa Melayu">Bahasa Melayu</option>
-          <option value="Bahasa Inggeris">Bahasa Inggeris</option>
-          <option value="Sejarah">Sejarah</option>
-          <option value="Matematik">Matematik</option>
-          <option value="Matematik Tambahan">Matematik Tambahan</option>
-          <option value="Fizik">Fizik</option>
-          <option value="Kimia">Kimia</option>
-          <option value="Biologi">Biologi</option>
-          <option value="Prinsip Perakaunan">Prinsip Perakaunan</option>
-          <option value="Pendidikan Islam">Pendidikan Islam</option>
-          <option value="Pendidikan Moral">Pendidikan Moral</option>
-        </select>
-      </div>
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+      <h2 class="font-orbitron text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
+      <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs rounded-xl px-3 py-1.5 outline-none">
+        <option value="SEMUA">Semua Subjek</option>
+        <option value="Bahasa Melayu">Bahasa Melayu</option>
+        <option value="Bahasa Inggeris">Bahasa Inggeris</option>
+        <option value="Sejarah">Sejarah</option>
+        <option value="Matematik">Matematik</option>
+        <option value="Matematik Tambahan">Matematik Tambahan</option>
+        <option value="Fizik">Fizik</option>
+        <option value="Kimia">Kimia</option>
+        <option value="Biologi">Biologi</option>
+        <option value="Prinsip Perakaunan">Prinsip Perakaunan</option>
+        <option value="Pendidikan Islam">Pendidikan Islam</option>
+        <option value="Pendidikan Moral">Pendidikan Moral</option>
+      </select>
     </div>
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 4. RAKAMAN KELAS ================= -->
+  <!-- RAKAMAN -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
-    <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
-      <div class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
-        <i data-lucide="play" class="w-6 h-6"></i>
-      </div>
-      <div>
-        <h2 class="font-orbitron text-xl sm:text-2xl font-extrabold text-white">ARKIB RAKAMAN KELAS TUSYEN</h2>
-        <p class="text-xs text-slate-400">Tonton semula rakaman video penerangan guru di tab baharu</p>
-      </div>
-    </div>
+    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="mt-auto glass-nav py-8 border-t border-cyan-500/20 text-center text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="font-orbitron text-brand-cyan font-bold text-sm">MARESMAG METROVERSE</span>
-        <span>• Maktab Rendah Sains MARA Gerik, Perak</span>
-      </div>
-      <p>© 2026 Metroverse Tuition One Stop Centre | by <a href="https://www.mhafiznj.com" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline font-semibold">www.mhafiznj.com</a></p>
-    </div>
+  <footer class="mt-auto glass-nav py-6 text-center text-xs text-slate-500">
+    © 2026 MARESMAG METROVERSE | MRSM Gerik
   </footer>
 
-  <!-- ================= IMAGE MODAL ================= -->
-  <div id="image-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg hidden items-center justify-center p-2 sm:p-6">
-    <div class="relative w-full max-w-5xl h-[92vh] flex flex-col items-center justify-between bg-slate-950 border border-brand-cyan/40 rounded-3xl p-4 shadow-[0_0_50px_rgba(0,242,254,0.3)]">
-      <div class="w-full flex items-center justify-between border-b border-slate-800 pb-3">
-        <span class="text-xs font-orbitron font-bold text-brand-cyan">PRATONTON GAMBAR PENUH</span>
-        <button onclick="closeImageModal()" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-      <div class="w-full flex-1 overflow-auto flex items-center justify-center p-2 bg-black/50 rounded-2xl my-3">
-        <img id="modal-img-tag" src="" class="max-h-full max-w-full object-contain rounded-xl shadow-2xl" alt="Preview">
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= ADMIN CMS MODAL ================= -->
-  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-4xl w-full p-6 relative max-h-[90vh] flex flex-col">
-      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-6 h-6"></i>
-      </button>
-
+  <!-- ADMIN MODAL -->
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-6 relative max-h-[90vh] flex flex-col">
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+      
       <!-- Login Box -->
-      <div id="admin-auth-box" class="py-10 text-center max-w-md mx-auto w-full">
-        <div class="inline-flex p-4 rounded-2xl bg-cyan-500/10 border border-brand-cyan/40 text-brand-cyan mb-4">
-          <i data-lucide="lock" class="w-8 h-8"></i>
-        </div>
-        <h3 class="font-orbitron text-xl font-bold text-white mb-2">PENGURUSAN ADMIN</h3>
-        <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white mb-4 outline-none focus:border-brand-cyan">
-        <button onclick="verifyAdmin()" class="w-full py-3 bg-brand-cyan text-black font-rajdhani font-bold rounded-xl hover:bg-cyan-300 transition text-sm">
-          LOG MASUK KE DASHBOARD
-        </button>
+      <div id="admin-auth-box" class="py-10 text-center max-w-sm mx-auto w-full">
+        <h3 class="font-orbitron text-lg font-bold text-white mb-4">PANEL ADMIN</h3>
+        <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white mb-3 outline-none">
+        <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs">LOG MASUK</button>
       </div>
 
-      <!-- Dashboard Panel -->
+      <!-- Panel -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
-          <span class="font-orbitron text-sm font-bold text-brand-cyan">PANEL KAWALAN CMS METROVERSE</span>
-          <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Log Keluar</button>
-        </div>
-
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
           <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
           <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">1. Slider & Poster</button>
-          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual Tusyen</button>
+          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual</button>
           <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
-          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan Drive</button>
-          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">5. Rakaman Video</button>
+          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan</button>
+          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">5. Rakaman</button>
         </div>
 
-        <div class="flex-1 overflow-y-auto space-y-6 pr-2">
-          <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="font-rajdhani font-bold text-white text-base" id="admin-form-title">Tambah Subjek Countdown SPM</h4>
-              <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden text-xs text-amber-400 hover:underline">Batal Edit</button>
-            </div>
+        <div class="flex-1 overflow-y-auto space-y-4 pr-1">
+          <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-4">
+            <h4 class="font-rajdhani font-bold text-white text-sm mb-3" id="admin-form-title">Tambah Data</h4>
             <input type="hidden" id="editing-row-index" value="">
-            <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"></div>
-            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-rajdhani font-bold text-xs tracking-wider rounded-xl hover:bg-cyan-300 transition flex items-center justify-center gap-2">
-              <i data-lucide="save" class="w-4 h-4"></i>
-              <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>
-            </button>
+            <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"></div>
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2 bg-brand-cyan text-black font-bold text-xs rounded-xl">SIMPAN KE GOOGLE SHEETS</button>
+            <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden w-full mt-2 text-xs text-amber-400 hover:underline">Batal Edit</button>
           </div>
 
           <div>
-            <h4 class="font-rajdhani font-bold text-slate-300 text-sm mb-3 flex items-center justify-between">
-              <span>Senarai Data Semasa:</span>
-              <span id="current-tab-count" class="text-xs text-brand-cyan">0 Item</span>
-            </h4>
+            <h4 class="text-xs font-bold text-slate-400 mb-2">Senarai Data Semasa:</h4>
             <div id="admin-items-list" class="space-y-2"></div>
           </div>
         </div>
@@ -350,59 +208,30 @@
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
     const ADMIN_PASSWORD = "maresm@gmtsadm1n";
 
-    const subjekList = [
-      "Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", 
-      "Matematik Tambahan", "Fizik", "Kimia", "Biologi", 
-      "Prinsip Perakaunan", "Pendidikan Islam", "Pendidikan Moral"
-    ];
+    const subjekList = ["Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", "Matematik Tambahan", "Fizik", "Kimia", "Biologi", "Prinsip Perakaunan", "Pendidikan Islam", "Pendidikan Moral"];
 
     function formatImageUrl(url) {
-      if (!url || typeof url !== 'string' || url.trim() === '') return "";
+      if (!url || typeof url !== 'string') return "";
       url = url.trim();
       if (url.includes("drive.google.com")) {
-        const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (idMatch && idMatch[1]) {
-          return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
-        }
+        const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (m && m[1]) return `https://lh3.googleusercontent.com/d/${m[1]}`;
       }
       return url;
     }
 
-    // SEMUA TAB KOSONG 100% TIADA DUMMY
-    let portalData = {
-      countdown: [],
-      slider: [],
-      jadual: [],
-      guru: [],
-      bahan: [],
-      rakaman: []
-    };
-
+    let portalData = { countdown: [], slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
     let activeAdminTab = 'countdown';
     let currentSlideIndex = 0;
-    let sliderTimer = null;
 
-    function hidePreloader() {
-      const preloader = document.getElementById('global-preloader');
-      if (preloader) {
-        preloader.classList.add('opacity-0');
-        setTimeout(() => { preloader.style.display = 'none'; }, 300);
-      }
-    }
-
-    // TARIK DATA DENGAN ANTI-CACHE
     async function loadData() {
-      const emergencyTimer = setTimeout(hidePreloader, 800);
-
       try {
-        const res = await fetch(`${API_URL}?t=${new Date().getTime()}`);
+        const res = await fetch(`${API_URL}?t=${Date.now()}`);
         const data = await res.json();
-        
         if (data && !data.error) {
           portalData.countdown = Array.isArray(data.countdown) ? data.countdown : [];
           portalData.slider = Array.isArray(data.slider) ? data.slider : [];
@@ -412,166 +241,50 @@
           portalData.rakaman = Array.isArray(data.rakaman) ? data.rakaman : [];
         }
       } catch (err) {
-        console.warn("Makluman data:", err);
+        console.warn(err);
       } finally {
-        clearTimeout(emergencyTimer);
-        hidePreloader();
+        const pre = document.getElementById('global-preloader');
+        if (pre) pre.style.display = 'none';
         renderAll();
-        renderAdminList();
       }
     }
 
     function renderAll() {
-      try { renderCountdown(); } catch (e) {}
-      try { renderSlider(); } catch (e) {}
-      try { renderJadual(); } catch (e) {}
-      try { renderGuru(); } catch (e) {}
-      try { filterBahan(); } catch (e) {}
-      try { renderRakaman(); } catch (e) {}
+      renderSlider();
+      renderCountdown();
+      renderJadual();
+      renderGuru();
+      filterBahan();
+      renderRakaman();
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= COUNTDOWN ENGINE =================
-    function calculateDaysLeft(rawDate) {
-      if (!rawDate) return 0;
-      try {
-        let dateStr = String(rawDate).trim().split('T')[0];
-        if (dateStr.includes('/')) {
-          const p = dateStr.split('/');
-          if (p.length === 3) dateStr = `${p[2]}-${p[1]}-${p[0]}`;
-        }
-        const target = new Date(dateStr);
-        if (isNaN(target.getTime())) return 0;
-
-        const today = new Date();
-        target.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
-
-        const diffTime = target.getTime() - today.getTime();
-        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      } catch (err) {
-        return 0;
-      }
-    }
-
-    function renderCountdown() {
-      const container = document.getElementById('countdown-container');
-      if (!container) return;
-
-      const list = portalData.countdown || [];
-
-      if (!Array.isArray(list) || list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.
-          </div>`;
-        return;
-      }
-
-      let html = "";
-      for (let i = 0; i < list.length; i++) {
-        const c = list[i];
-        if (!c) continue;
-
-        const namaSubjek = c.subjek || c.nama || "Subjek SPM";
-        const tarikhPaparan = c.tarikh_teks || c.tarikh_iso || "-";
-        const tarikhKira = c.tarikh_iso || c.tarikh || c.tarikh_teks;
-        const days = calculateDaysLeft(tarikhKira);
-
-        let daysText = `${days} hari lagi`;
-        let badgeColor = "text-sky-400";
-
-        if (days === 0) {
-          daysText = "HARI INI!";
-          badgeColor = "text-emerald-400 font-bold animate-pulse";
-        } else if (days < 0) {
-          daysText = "Tamat";
-          badgeColor = "text-slate-500";
-        }
-
-        html += `
-          <div class="countdown-card p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-2 mb-2">
-                <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
-                <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">
-                  ${namaSubjek}
-                </h3>
-              </div>
-              <p class="text-xs text-slate-400 font-medium pl-6 mb-4">
-                ${tarikhPaparan}
-              </p>
-            </div>
-            <div class="pl-6">
-              <span class="text-lg sm:text-xl font-bold font-rajdhani ${badgeColor}">
-                ${daysText}
-              </span>
-            </div>
-          </div>
-        `;
-      }
-
-      container.innerHTML = html;
-    }
-
-    // ================= SLIDER ENGINE (100% KOSONG JIKA TIADA DATA DI SHEETS) =================
+    // 100% TIADA DUMMY PADA SLIDER
     function renderSlider() {
+      const el = document.getElementById('utama');
+      if (!el) return;
       const list = portalData.slider || [];
-      const wrapper = document.getElementById('utama');
-      if (!wrapper) return;
-
-      // KOSONGKAN MUTLAK JIKA TIADA DATA DALAM TAB SLIDER
       if (list.length === 0) {
-        wrapper.innerHTML = "";
-        wrapper.style.display = "none";
+        el.innerHTML = "";
+        el.style.display = "none";
         return;
       }
-
-      // JIKA ADA DATA DARI SHEETS, PAPARKAN SLIDER SEBENAR
-      wrapper.style.display = "block";
+      el.style.display = "block";
       const s = list[currentSlideIndex % list.length];
-      const imgUrl = formatImageUrl(s.image_url);
-
-      wrapper.innerHTML = `
+      el.innerHTML = `
         <div class="py-6 px-4">
-          <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
-            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-              <img src="${imgUrl}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
-            </div>
-
-            <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
-              <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
-                <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-                <span>${s.badge || 'PENGUMUMAN'}</span>
-              </div>
-              <h1 class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">
-                ${s.title || ''}
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
-                ${s.deskripsi || ''}
-              </p>
-
-              <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                  <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                  </button>
-                  <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                  </button>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  ${list.map((_, i) => `
-                    <span class="h-2 rounded-full transition-all ${i === (currentSlideIndex % list.length) ? 'bg-brand-cyan w-6' : 'bg-slate-700 w-2'}"></span>
-                  `).join('')}
-                </div>
+          <div class="pro-card rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[350px]">
+            <div class="w-full md:w-1/2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-950 border border-brand-cyan text-brand-cyan mb-2 inline-block">${s.badge || 'PENGUMUMAN'}</span>
+              <h1 class="font-orbitron font-extrabold text-2xl md:text-3xl text-white mb-2">${s.title || ''}</h1>
+              <p class="text-xs text-slate-300 font-light mb-4">${s.deskripsi || ''}</p>
+              <div class="flex items-center gap-2">
+                <button onclick="prevSlide()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 hover:border-brand-cyan text-brand-cyan"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                <button onclick="nextSlide()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 hover:border-brand-cyan text-brand-cyan"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
               </div>
             </div>
-
-            <div class="relative z-10 w-full md:w-1/2 h-[260px] sm:h-[340px] md:h-full p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
-              <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2">
-                <img src="${imgUrl}" class="w-full h-full object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" onclick="openImageModal(this.src)" title="Klik untuk paparan penuh" alt="Poster Slider">
-              </div>
+            <div class="w-full md:w-1/2 h-64 bg-black/40 rounded-2xl flex items-center justify-center p-2 border border-slate-800">
+              <img src="${formatImageUrl(s.image_url)}" class="max-h-full max-w-full object-contain cursor-pointer" onclick="window.open(this.src, '_blank')">
             </div>
           </div>
         </div>
@@ -579,488 +292,283 @@
     }
 
     function nextSlide() {
-      const list = portalData.slider || [];
-      if (list.length <= 1) return;
-      currentSlideIndex = (currentSlideIndex + 1) % list.length;
+      if (portalData.slider.length <= 1) return;
+      currentSlideIndex = (currentSlideIndex + 1) % portalData.slider.length;
       renderSlider();
       if (window.lucide) lucide.createIcons();
     }
-
     function prevSlide() {
-      const list = portalData.slider || [];
-      if (list.length <= 1) return;
-      currentSlideIndex = (currentSlideIndex === 0) ? (list.length - 1) : (currentSlideIndex - 1);
+      if (portalData.slider.length <= 1) return;
+      currentSlideIndex = (currentSlideIndex === 0) ? (portalData.slider.length - 1) : (currentSlideIndex - 1);
       renderSlider();
       if (window.lucide) lucide.createIcons();
     }
 
-    function restartSliderTimer() {
-      if (sliderTimer) clearInterval(sliderTimer);
-      sliderTimer = setInterval(nextSlide, 7000);
+    function calculateDaysLeft(rawDate) {
+      if (!rawDate) return 0;
+      let d = String(rawDate).trim().split('T')[0];
+      if (d.includes('/')) { const p = d.split('/'); if (p.length === 3) d = `${p[2]}-${p[1]}-${p[0]}`; }
+      const target = new Date(d);
+      if (isNaN(target.getTime())) return 0;
+      const today = new Date();
+      target.setHours(0,0,0,0); today.setHours(0,0,0,0);
+      return Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
     }
 
-    // ================= JADUAL TUSYEN =================
+    function renderCountdown() {
+      const container = document.getElementById('countdown-container');
+      if (!container) return;
+      const list = portalData.countdown || [];
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.</div>`;
+        return;
+      }
+      container.innerHTML = list.map(c => {
+        const days = calculateDaysLeft(c.tarikh_iso || c.tarikh_teks);
+        let text = days === 0 ? "HARI INI!" : (days < 0 ? "Tamat" : `${days} hari lagi`);
+        let color = days === 0 ? "text-emerald-400 font-bold animate-pulse" : (days < 0 ? "text-slate-500" : "text-sky-400");
+        return `
+          <div class="countdown-card p-4 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
+                <h3 class="font-rajdhani font-bold text-base text-white">${c.subjek || ''}</h3>
+              </div>
+              <p class="text-xs text-slate-400 pl-6 mb-3">${c.tarikh_teks || c.tarikh_iso || ''}</p>
+            </div>
+            <div class="pl-6"><span class="text-lg font-bold font-rajdhani ${color}">${text}</span></div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function renderJadual() {
       const container = document.getElementById('jadual-container');
       if (!container) return;
       const list = portalData.jadual || [];
       if (list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada jadual kelas tusyen dimasukkan lagi di Google Sheets.
-          </div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual kelas tusyen.</div>`;
         return;
       }
       container.innerHTML = list.map(j => `
-        <div class="pro-card p-5 rounded-2xl flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-cyan-950 text-brand-cyan border border-brand-cyan/40">${j.subjek || "TUSYEN"}</span>
-              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i> ${j.masa || ''}</span>
-            </div>
-            <h3 class="font-rajdhani font-bold text-lg text-white mb-2 leading-snug">${j.title || ''}</h3>
-            <p class="text-xs text-slate-300 flex items-center gap-1.5 mb-4">
-              <i data-lucide="calendar-check" class="w-4 h-4 text-brand-cyan"></i> ${j.tarikh_hari || ''}
-            </p>
+        <div class="pro-card p-5 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded font-bold">${j.subjek || 'TUSYEN'}</span>
+            <span class="text-xs text-slate-400">${j.masa || ''}</span>
           </div>
-          ${j.poster_url ? `
-            <div class="h-44 w-full rounded-xl overflow-hidden bg-black/50 border border-slate-800 mb-3 p-1">
-              <img src="${formatImageUrl(j.poster_url)}" class="w-full h-full object-contain cursor-pointer" onclick="openImageModal('${formatImageUrl(j.poster_url)}')">
-            </div>
-            <button onclick="openImageModal('${formatImageUrl(j.poster_url)}')" class="w-full py-2 text-center text-xs font-semibold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition flex items-center justify-center gap-2">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Papar Poster Penuh
-            </button>
-          ` : ''}
+          <h3 class="font-rajdhani font-bold text-base text-white mb-2">${j.title || ''}</h3>
+          <p class="text-xs text-slate-300 mb-3"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-brand-cyan"></i>${j.tarikh_hari || ''}</p>
+          ${j.poster_url ? `<a href="${formatImageUrl(j.poster_url)}" target="_blank" class="block w-full py-2 text-center text-xs font-bold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30">Buka Poster</a>` : ''}
         </div>
       `).join('');
     }
 
-    // ================= TENAGA PENGAJAR =================
     function renderGuru() {
       const container = document.getElementById('guru-container');
       if (!container) return;
       const list = portalData.guru || [];
       if (list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Senarai guru belum ditambah di Google Sheets.
-          </div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada maklumat guru.</div>`;
         return;
       }
       container.innerHTML = list.map(g => `
         <div class="pro-card p-4 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 border-2 border-purple-500/40 mb-3 p-1 flex items-center justify-center">
-            <img src="${formatImageUrl(g.image_url)}" onclick="openImageModal(this.src)" class="w-full h-full object-contain cursor-pointer" onerror="this.src='https://via.placeholder.com/150'">
+          <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 mb-2 p-1">
+            <img src="${formatImageUrl(g.image_url)}" class="w-full h-full object-contain">
           </div>
           <h4 class="font-rajdhani font-bold text-sm text-white">${g.nama || ''}</h4>
-          <span class="text-[11px] text-brand-cyan font-semibold my-1">${g.subjek || ''}</span>
-          <p class="text-[10px] text-slate-400 line-clamp-2">${g.keterangan || ''}</p>
+          <span class="text-[11px] text-brand-cyan">${g.subjek || ''}</span>
         </div>
       `).join('');
     }
 
-    // ================= BAHAN RUJUKAN =================
     function filterBahan() {
-      const filterEl = document.getElementById('filter-subjek');
-      const sel = filterEl ? filterEl.value : "SEMUA";
-      const list = portalData.bahan || [];
-      const filtered = sel === "SEMUA" ? list : list.filter(b => b.subjek === sel);
+      const filter = document.getElementById('filter-subjek').value;
       const container = document.getElementById('bahan-container');
-
       if (!container) return;
-
+      const list = portalData.bahan || [];
+      const filtered = filter === "SEMUA" ? list : list.filter(b => b.subjek === filter);
       if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada modul bahan untuk subjek ini di Google Sheets.
-          </div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan.</div>`;
         return;
       }
-
       container.innerHTML = filtered.map(b => `
-        <div class="pro-card p-5 rounded-2xl flex flex-col justify-between gap-4 border border-cyan-500/25 group">
+        <div class="pro-card p-4 rounded-2xl flex flex-col justify-between gap-3">
           <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-brand-cyan/30">${b.subjek || 'MODUL'}</span>
-              <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-brand-cyan"></i> ${b.tarikh || ''}</span>
-            </div>
-            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug mt-1 group-hover:text-brand-cyan transition">${b.tajuk || ''}</h4>
+            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded font-bold">${b.subjek || 'MODUL'}</span>
+            <h4 class="font-rajdhani font-bold text-base text-white mt-1">${b.tajuk || ''}</h4>
           </div>
-          <div class="pt-3 border-t border-slate-800/80">
-            <a href="${b.gdrive_url || '#'}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/15 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold transition flex items-center justify-center gap-2 border border-brand-cyan/40 shadow-[0_0_12px_rgba(0,242,254,0.15)]">
-              <i data-lucide="file-text" class="w-4 h-4"></i>
-              <span>Buka Bahan / Modul</span>
-              <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
-            </a>
-          </div>
+          <a href="${b.gdrive_url || '#'}" target="_blank" class="w-full py-2 rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold text-center border border-brand-cyan/30 flex items-center justify-center gap-1">
+            <span>Buka Modul</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       `).join('');
+      if (window.lucide) lucide.createIcons();
     }
 
-    // ================= RAKAMAN KELAS =================
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
       if (!container) return;
       const list = portalData.rakaman || [];
       if (list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl bg-slate-950/40">
-            Tiada rekod rakaman kelas di Google Sheets.
-          </div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada rakaman video.</div>`;
         return;
       }
       container.innerHTML = list.map(r => `
-        <div class="pro-card p-5 rounded-2xl border-red-500/20 hover:border-red-400/40 flex flex-col justify-between gap-4 group">
+        <div class="pro-card p-4 rounded-2xl flex flex-col justify-between gap-3">
           <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded font-bold uppercase border border-red-500/30">${r.subjek || 'RAKAMAN'}</span>
-              <span class="text-[10px] text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-red-400"></i> ${r.tarikh || ''}</span>
-            </div>
-            <h4 class="font-rajdhani font-bold text-lg text-white leading-snug group-hover:text-red-400 transition">${r.tajuk || ''}</h4>
+            <span class="text-[10px] bg-red-950 text-red-400 px-2 py-0.5 rounded font-bold">${r.subjek || 'VIDEO'}</span>
+            <h4 class="font-rajdhani font-bold text-base text-white mt-1">${r.tajuk || ''}</h4>
           </div>
-          <div class="pt-3 border-t border-slate-800/80">
-            <a href="${r.video_url || '#'}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 text-xs font-semibold transition flex items-center justify-center gap-2 border border-red-500/30 shadow-[0_0_12px_rgba(239,68,68,0.15)]">
-              <i data-lucide="play-circle" class="w-4 h-4"></i>
-              <span>Tonton Video Rakaman</span>
-              <i data-lucide="external-link" class="w-3.5 h-3.5 ml-auto opacity-75"></i>
-            </a>
-          </div>
+          <a href="${r.video_url || '#'}" target="_blank" class="w-full py-2 rounded-xl bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 text-xs font-bold text-center border border-red-500/30 flex items-center justify-center gap-1">
+            <span>Tonton Video</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       `).join('');
+      if (window.lucide) lucide.createIcons();
     }
 
-    // ================= MODALS & ADMIN CMS =================
-    function openImageModal(url) {
-      if (!url) return;
-      const modalImg = document.getElementById('modal-img-tag');
-      const imgModal = document.getElementById('image-modal');
-      if (modalImg) modalImg.src = url;
-      if (imgModal) {
-        imgModal.classList.remove('hidden');
-        imgModal.classList.add('flex');
-      }
-    }
-    function closeImageModal() {
-      const imgModal = document.getElementById('image-modal');
-      if (imgModal) {
-        imgModal.classList.add('hidden');
-        imgModal.classList.remove('flex');
-      }
-    }
-
-    function openAdminModal() {
-      const modal = document.getElementById('admin-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        renderAdminList();
-      }
-    }
-    function closeAdminModal() {
-      const modal = document.getElementById('admin-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-    }
+    // CMS MODAL
+    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     function verifyAdmin() {
-      const passInput = document.getElementById('admin-pass-input');
-      const p = passInput ? passInput.value : '';
-      if (p === ADMIN_PASSWORD) {
-        const authBox = document.getElementById('admin-auth-box');
-        const panel = document.getElementById('admin-panel');
-        if (authBox) authBox.classList.add('hidden');
-        if (panel) {
-          panel.classList.remove('hidden');
-          panel.classList.add('flex');
-        }
+      if (document.getElementById('admin-pass-input').value === ADMIN_PASSWORD) {
+        document.getElementById('admin-auth-box').classList.add('hidden');
+        document.getElementById('admin-panel').classList.remove('hidden');
+        document.getElementById('admin-panel').classList.add('flex');
         switchAdminTab('countdown');
-      } else {
-        alert("Kata laluan Admin Salah!");
-      }
-    }
-    function logoutAdmin() {
-      const authBox = document.getElementById('admin-auth-box');
-      const panel = document.getElementById('admin-panel');
-      const passInput = document.getElementById('admin-pass-input');
-      if (authBox) authBox.classList.remove('hidden');
-      if (panel) {
-        panel.classList.add('hidden');
-        panel.classList.remove('flex');
-      }
-      if (passInput) passInput.value = '';
+      } else { alert("Kata laluan salah!"); }
     }
 
     function switchAdminTab(tab) {
       activeAdminTab = tab;
       cancelEditMode();
-      document.querySelectorAll('.admin-tab-btn').forEach(b => {
-        b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300";
-      });
-      const activeBtn = document.getElementById(`tab-btn-${tab}`);
-      if (activeBtn) activeBtn.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300");
+      document.getElementById(`tab-btn-${tab}`).className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
       renderAdminForm();
       renderAdminList();
-      if (window.lucide) lucide.createIcons();
     }
 
     function renderAdminForm() {
       const f = document.getElementById('admin-form-fields');
-      const title = document.getElementById('admin-form-title');
-      if (!f) return;
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
-
       if (activeAdminTab === 'countdown') {
-        if (title) title.textContent = "Tambah Subjek Countdown SPM";
         f.innerHTML = `
-          <div>
-            <label class="block text-[11px] text-slate-400 mb-1">Nama Subjek</label>
-            <select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-400 mb-1">Tarikh Peperiksaan Sebenar (Auto Kira)</label>
-            <input type="date" id="adm-tarikh_iso" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          </div>
-          <div class="col-span-full">
-            <label class="block text-[11px] text-slate-400 mb-1">Teks Paparan Tarikh (Contoh: Isnin, 23 November 2026)</label>
-            <input type="text" id="adm-tarikh_teks" placeholder="cth: Isnin, 23 November 2026" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          </div>
+          <div><label class="block text-[10px] text-slate-400 mb-1">Subjek</label><select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select></div>
+          <div><label class="block text-[10px] text-slate-400 mb-1">Tarikh ISO (yyyy-mm-dd)</label><input type="date" id="adm-tarikh_iso" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+          <div class="col-span-full"><label class="block text-[10px] text-slate-400 mb-1">Teks Tarikh (cth: Isnin, 23 Nov 2026)</label><input type="text" id="adm-tarikh_teks" placeholder="cth: Isnin, 23 Nov 2026" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
         `;
       } else if (activeAdminTab === 'slider') {
-        if (title) title.textContent = "Tetapan & Tambah Slider Baharu";
         f.innerHTML = `
-          <input type="text" id="adm-badge" placeholder="Badge Kategori (cth: PENGUMUMAN KHAS)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-title" placeholder="Tajuk Utama Slider" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-image_url" placeholder="Link Gambar / Google Drive Link" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <textarea id="adm-deskripsi" placeholder="Teks Deskripsi / Keterangan Slider" rows="2" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
+          <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-title" placeholder="Tajuk" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-image_url" placeholder="Link Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <textarea id="adm-deskripsi" placeholder="Deskripsi" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
         `;
       } else if (activeAdminTab === 'jadual') {
-        if (title) title.textContent = "Tambah Jadual Kelas";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu (cth: Isnin, 8.30 PM)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-masa" placeholder="Tempoh (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-poster_url" placeholder="Link Gambar Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-title" placeholder="Tajuk" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-poster_url" placeholder="Link Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'guru') {
-        if (title) title.textContent = "Tambah Tenaga Pengajar";
         f.innerHTML = `
           <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-keterangan" placeholder="Keterangan Ringkas" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-image_url" placeholder="Link Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'bahan') {
-        if (title) title.textContent = "Tambah Bahan Rujukan & Modul";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul / Nota" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh" placeholder="Tarikh (cth: 30 Ogos 2026)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'rakaman') {
-        if (title) title.textContent = "Tambah Rakaman Video";
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Sesi Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-video_url" placeholder="Link YouTube / Google Drive" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh" placeholder="Tarikh Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-video_url" placeholder="Link Video" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       }
     }
 
     function renderAdminList() {
-      const listContainer = document.getElementById('admin-items-list');
-      const countEl = document.getElementById('current-tab-count');
-      if (!listContainer) return;
-
-      const items = portalData[activeAdminTab] || [];
-      if (countEl) countEl.textContent = `${items.length} Item`;
-
-      if (items.length === 0) {
-        listContainer.innerHTML = `<div class="p-4 bg-slate-900/60 rounded-xl text-center text-xs text-slate-500">Tiada rekod data di dalam bahagian ini.</div>`;
-        return;
-      }
-
-      listContainer.innerHTML = items.map((item, idx) => `
-        <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3 overflow-hidden">
-            <span class="text-xs font-mono text-brand-cyan">#${idx + 1}</span>
-            <div class="truncate">
-              <p class="text-xs font-bold text-white truncate">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</p>
-              <p class="text-[10px] text-slate-400 truncate">${item.tarikh_teks || item.tarikh_iso || item.badge || item.masa || item.deskripsi || ''}</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-1.5 flex-shrink-0">
-            <button onclick="editItem(${idx})" class="px-2.5 py-1 bg-cyan-500/10 hover:bg-brand-cyan text-brand-cyan hover:text-black rounded-lg text-xs font-bold transition">
-              Edit
-            </button>
-            <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2.5 py-1 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-lg text-xs font-bold transition">
-              Padam
-            </button>
+      const c = document.getElementById('admin-items-list');
+      const list = portalData[activeAdminTab] || [];
+      if (list.length === 0) { c.innerHTML = `<div class="p-3 text-center text-xs text-slate-500">Tiada rekod data.</div>`; return; }
+      c.innerHTML = list.map((item, idx) => `
+        <div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+          <div class="truncate mr-2"><span class="font-bold text-white">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</span> <span class="text-slate-400 text-[10px]">${item.tarikh_teks || item.badge || ''}</span></div>
+          <div class="flex gap-1.5 flex-shrink-0">
+            <button onclick="editItem(${idx})" class="px-2 py-0.5 bg-cyan-500/10 text-brand-cyan rounded">Edit</button>
+            <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded">Padam</button>
           </div>
         </div>
       `).join('');
-      if (window.lucide) lucide.createIcons();
     }
 
-    function editItem(index) {
-      const items = portalData[activeAdminTab] || [];
-      const item = items[index];
+    function editItem(idx) {
+      const item = portalData[activeAdminTab][idx];
       if (!item) return;
-
-      const editInput = document.getElementById('editing-row-index');
-      if (editInput) editInput.value = item.row_index;
-
-      const formTitle = document.getElementById('admin-form-title');
-      if (formTitle) formTitle.textContent = `Kemaskini Data #${index + 1}`;
-
-      const btnCancel = document.getElementById('btn-cancel-edit');
-      if (btnCancel) btnCancel.classList.remove('hidden');
-
-      const btnSave = document.getElementById('btn-save-item');
-      if (btnSave) {
-        btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">KEMASKINI ITEM INI</span>`;
-      }
-
+      document.getElementById('editing-row-index').value = item.row_index;
+      document.getElementById('btn-cancel-edit').classList.remove('hidden');
+      document.getElementById('btn-save-item').textContent = "KEMASKINI ITEM";
       const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
       inputs.forEach(input => {
-        const key = input.id.replace('adm-', '').toLowerCase();
-        if (item[key] !== undefined) {
-          if (input.type === 'date' && item[key]) {
-            input.value = String(item[key]).split('T')[0];
-          } else {
-            input.value = item[key];
-          }
-        }
+        const k = input.id.replace('adm-', '').toLowerCase();
+        if (item[k] !== undefined) input.value = item[k];
       });
-
-      if (window.lucide) lucide.createIcons();
-      const adminContainer = document.querySelector('#admin-panel > div.flex-1');
-      if (adminContainer) adminContainer.scrollTop = 0;
     }
 
     function cancelEditMode() {
-      const editInput = document.getElementById('editing-row-index');
-      if (editInput) editInput.value = "";
-
-      const btnCancel = document.getElementById('btn-cancel-edit');
-      if (btnCancel) btnCancel.classList.add('hidden');
-
-      const btnSave = document.getElementById('btn-save-item');
-      if (btnSave) {
-        btnSave.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">SIMPAN KE GOOGLE SHEETS</span>`;
-      }
-
+      document.getElementById('editing-row-index').value = "";
+      document.getElementById('btn-cancel-edit').classList.add('hidden');
+      document.getElementById('btn-save-item').textContent = "SIMPAN KE GOOGLE SHEETS";
       renderAdminForm();
-      if (window.lucide) lucide.createIcons();
     }
 
     async function saveCurrentItem() {
       const btn = document.getElementById('btn-save-item');
-      const editRowEl = document.getElementById('editing-row-index');
-      const editRow = editRowEl ? editRowEl.value : "";
-      const isUpdating = (editRow !== "" && editRow !== null && !isNaN(Number(editRow)));
-
+      const row = document.getElementById('editing-row-index').value;
+      const isUp = row !== "";
       let payload = {};
-      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
-      inputs.forEach(i => {
-        const fieldName = i.id.replace('adm-', '').toLowerCase();
-        payload[fieldName] = i.value;
+      document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea').forEach(i => {
+        payload[i.id.replace('adm-', '').toLowerCase()] = i.value;
       });
-
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 spin-fast"></i> <span>SEDANG MEMPROSES...</span>`;
-      }
-      if (window.lucide) lucide.createIcons();
+      btn.disabled = true; btn.textContent = "MEMPROSES...";
 
       try {
-        const requestBody = {
-          action: isUpdating ? "UPDATE" : "ADD",
-          sheetName: activeAdminTab,
-          data: payload,
-          rowIndex: isUpdating ? Number(editRow) : null,
-          password: ADMIN_PASSWORD
-        };
-
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(requestBody)
+          body: JSON.stringify({ action: isUp ? "UPDATE" : "ADD", sheetName: activeAdminTab, data: payload, rowIndex: isUp ? Number(row) : null, password: ADMIN_PASSWORD })
         });
-
-        const result = await res.json();
-        if (result.success) {
-          // Optimistic local update terus tunjuk di admin dan portal
-          if (isUpdating) {
-            const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(editRow));
-            if (idx !== -1) {
-              portalData[activeAdminTab][idx] = { ...portalData[activeAdminTab][idx], ...payload };
-            }
-          } else {
-            const newRowIdx = portalData[activeAdminTab].length + 2;
-            portalData[activeAdminTab].push({ ...payload, row_index: newRowIdx });
-          }
-
-          renderAll();
-          renderAdminList();
+        const r = await res.json();
+        if (r.success) {
+          alert("Berjaya disimpan!");
           cancelEditMode();
-          alert(result.message || "Berjaya!");
-
           await loadData();
-        } else {
-          alert("Ralat: " + (result.message || "Gagal memproses data!"));
-        }
-      } catch (e) {
-        alert("Ralat sambungan: " + e.message);
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          const finalLabel = isUpdating ? "KEMASKINI ITEM INI" : "SIMPAN KE GOOGLE SHEETS";
-          btn.innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> <span id="btn-save-text">${finalLabel}</span>`;
-        }
-        if (window.lucide) lucide.createIcons();
-      }
+        } else { alert("Ralat: " + r.message); }
+      } catch (e) { alert("Ralat sambungan: " + e.message); }
+      finally { btn.disabled = false; btn.textContent = isUp ? "KEMASKINI ITEM" : "SIMPAN KE GOOGLE SHEETS"; }
     }
 
     async function deleteItem(sheetName, rowIndex) {
-      if (!confirm("Adakah anda pasti mahu memadam item ini dari Google Sheets?")) return;
-
-      portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
-      renderAll();
-      renderAdminList();
-
+      if (!confirm("Padam item ini?")) return;
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'DELETE',
-            sheetName: sheetName,
-            rowIndex: rowIndex,
-            password: ADMIN_PASSWORD
-          })
+          body: JSON.stringify({ action: 'DELETE', sheetName: sheetName, rowIndex: rowIndex, password: ADMIN_PASSWORD })
         });
-        const result = await res.json();
-        if (result.success) {
-          alert("Berjaya dipadam!");
-          await loadData();
-        } else {
-          alert("Ralat: " + result.message);
-          await loadData();
-        }
-      } catch (e) {
-        alert("Ralat memadam data: " + e.message);
-        await loadData();
-      }
+        const r = await res.json();
+        if (r.success) { alert("Berjaya dipadam!"); await loadData(); }
+      } catch (e) { alert("Ralat: " + e.message); }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      loadData();
-      restartSliderTimer();
-    });
+    window.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
