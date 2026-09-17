@@ -337,7 +337,14 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
 
-    // Enkripsi tersembunyi (Base64 decode menghasilkan: maresm@gmtsadm1n)
+    // ==========================================
+    // TETAPAN MASA AUTO-SLIDE (MILLISECONDS)
+    // 5000 = 5 SAAT (Ubah nombor ini jika mahu laju/perlahan)
+    // ==========================================
+    const SLIDER_UTAMA_INTERVAL = 5000;
+    const SLIDER_GURU_INTERVAL = 5000;
+
+    // Enkripsi Base64 kata laluan: maresm@gmtsadm1n
     const _AUTH_ENC = "bWFyZXNtQGdtdHNhZG0xbg==";
     function _decodeKey(str) {
       try {
@@ -394,6 +401,8 @@
     let activeAdminTab = 'slider';
     let currentSlideIndex = 0;
     let currentGuruIndex = 0;
+    let sliderTimer = null;
+    let guruSliderTimer = null;
 
     async function loadData() {
       try {
@@ -412,6 +421,7 @@
         const pre = document.getElementById('global-preloader');
         if (pre) pre.style.display = 'none';
         renderAll();
+        initAutoSliders();
       }
     }
 
@@ -423,6 +433,30 @@
       renderRakaman();
       renderJadual();
       if (window.lucide) lucide.createIcons();
+    }
+
+    // ================= ENJIN AUTO-SLIDE =================
+    function initAutoSliders() {
+      startSliderTimer();
+      startGuruTimer();
+    }
+
+    function startSliderTimer() {
+      clearInterval(sliderTimer);
+      if (portalData.slider && portalData.slider.length > 1) {
+        sliderTimer = setInterval(() => {
+          nextSlide(false);
+        }, SLIDER_UTAMA_INTERVAL);
+      }
+    }
+
+    function startGuruTimer() {
+      clearInterval(guruSliderTimer);
+      if (portalData.guru && portalData.guru.length > 1) {
+        guruSliderTimer = setInterval(() => {
+          nextGuruSlide(false);
+        }, SLIDER_GURU_INTERVAL);
+      }
     }
 
     // ================= COUNTDOWN ENGINE =================
@@ -484,7 +518,7 @@
       const posterSrc = formatImageUrl(s.image_url);
 
       el.innerHTML = `
-        <div class="py-4 sm:py-6 px-3 sm:px-4">
+        <div class="py-4 sm:py-6 px-3 sm:px-4" onmouseenter="clearInterval(sliderTimer)" onmouseleave="startSliderTimer()">
           <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
             <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
               <img src="${posterSrc}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
@@ -500,10 +534,10 @@
               
               <div class="flex items-center gap-4">
                 <div class="flex items-center gap-2">
-                  <button onclick="prevSlide()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                  <button onclick="prevSlide(true)" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
                     <i data-lucide="chevron-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                   </button>
-                  <button onclick="nextSlide()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                  <button onclick="nextSlide(true)" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
                     <i data-lucide="chevron-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                   </button>
                 </div>
@@ -525,20 +559,22 @@
       `;
     }
 
-    function nextSlide() {
+    function nextSlide(userInitiated = false) {
       if (portalData.slider.length <= 1) return;
       currentSlideIndex = (currentSlideIndex + 1) % portalData.slider.length;
       renderSlider();
       if (window.lucide) lucide.createIcons();
+      if (userInitiated) startSliderTimer();
     }
-    function prevSlide() {
+    function prevSlide(userInitiated = false) {
       if (portalData.slider.length <= 1) return;
       currentSlideIndex = (currentSlideIndex === 0) ? (portalData.slider.length - 1) : (currentSlideIndex - 1);
       renderSlider();
       if (window.lucide) lucide.createIcons();
+      if (userInitiated) startSliderTimer();
     }
 
-    // ================= 2. POSTER SLIDER GURU =================
+    // ================= 2. POSTER SLIDER GURU (TENGAH TANPA TEKS) =================
     function renderGuruSlider() {
       const container = document.getElementById('guru-slider-wrapper');
       if (!container) return;
@@ -553,7 +589,7 @@
       const posterSrc = formatImageUrl(g.image_url);
 
       container.innerHTML = `
-        <div class="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-slate-950 p-4 sm:p-6 shadow-[0_0_30px_rgba(127,0,255,0.15)] flex flex-col items-center justify-center">
+        <div class="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-slate-950 p-4 sm:p-6 shadow-[0_0_30px_rgba(127,0,255,0.15)] flex flex-col items-center justify-center" onmouseenter="clearInterval(guruSliderTimer)" onmouseleave="startGuruTimer()">
           <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
             <img src="${posterSrc}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Poster Guru">
           </div>
@@ -561,7 +597,7 @@
             <img src="${posterSrc}" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" alt="Poster Guru">
           </div>
           <div class="relative z-10 mt-5 flex items-center justify-center gap-4">
-            <button onclick="prevGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
+            <button onclick="prevGuruSlide(true)" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
               <i data-lucide="chevron-left" class="w-5 h-5"></i>
             </button>
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800">
@@ -569,7 +605,7 @@
                 <span class="h-2 rounded-full transition-all ${i === (currentGuruIndex % list.length) ? 'bg-purple-500 w-6' : 'bg-slate-700 w-2'}"></span>
               `).join('')}
             </div>
-            <button onclick="nextGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
+            <button onclick="nextGuruSlide(true)" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
               <i data-lucide="chevron-right" class="w-5 h-5"></i>
             </button>
           </div>
@@ -577,18 +613,20 @@
       `;
     }
 
-    function nextGuruSlide() {
+    function nextGuruSlide(userInitiated = false) {
       if (portalData.guru.length <= 1) return;
       currentGuruIndex = (currentGuruIndex + 1) % portalData.guru.length;
       renderGuruSlider();
       if (window.lucide) lucide.createIcons();
+      if (userInitiated) startGuruTimer();
     }
 
-    function prevGuruSlide() {
+    function prevGuruSlide(userInitiated = false) {
       if (portalData.guru.length <= 1) return;
       currentGuruIndex = (currentGuruIndex === 0) ? (portalData.guru.length - 1) : (currentGuruIndex - 1);
       renderGuruSlider();
       if (window.lucide) lucide.createIcons();
+      if (userInitiated) startGuruTimer();
     }
 
     // ================= MODAL PRATONTON GAMBAR =================
@@ -660,7 +698,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= JADUAL TUSYEN (SEKSYEN PALING BAWAH) =================
+    // ================= JADUAL TUSYEN =================
     function renderJadual() {
       const container = document.getElementById('jadual-container');
       if (!container) return;
@@ -724,9 +762,14 @@
           <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
         `;
       } else if (activeAdminTab === 'guru') {
+        // ADA RUANG NAMA UNTUK RUJUKAN ADMIN SAHAJA
         f.innerHTML = `
           <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Link Gambar / Poster Guru (Google Drive / Direct URL)</label>
+            <label class="block text-[10px] text-slate-400 mb-1">Nama / Label Poster (Rujukan Admin Sahaja - Tidak keluar di laman web)</label>
+            <input type="text" id="adm-nama" placeholder="cth: Poster Cikgu Siti - Kimia SPM" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
+          </div>
+          <div class="col-span-full">
+            <label class="block text-[10px] text-slate-400 mb-1">Link Gambar Poster (Google Drive / URL Langsung)</label>
             <input type="text" id="adm-image_url" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
           </div>
         `;
@@ -760,12 +803,12 @@
       c.innerHTML = list.map((item, idx) => `
         <div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
           <div class="truncate mr-2">
-            <span class="font-bold text-white">${activeAdminTab === 'guru' ? `Poster #${idx + 1}` : (item.subjek || item.title || item.tajuk || 'Item')}</span> 
+            <span class="font-bold text-white">${activeAdminTab === 'guru' ? (item.nama ? item.nama : `Poster #${idx + 1}`) : (item.subjek || item.title || item.tajuk || 'Item')}</span> 
             <span class="text-slate-400 text-[10px] truncate block max-w-xs">${item.image_url || item.tarikh_hari || item.badge || ''}</span>
           </div>
           <div class="flex gap-1.5 flex-shrink-0">
-            <button onclick="editItem(${idx})" class="px-2 py-0.5 bg-cyan-500/10 text-brand-cyan rounded">Edit</button>
-            <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded">Padam</button>
+            <button onclick="editItem(${idx})" class="px-2 py-0.5 bg-cyan-500/10 text-brand-cyan rounded hover:bg-brand-cyan hover:text-black transition">Edit</button>
+            <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded hover:bg-red-500 hover:text-white transition">Padam</button>
           </div>
         </div>
       `).join('');
@@ -819,6 +862,7 @@
           renderAll();
           renderAdminList();
           cancelEditMode();
+          initAutoSliders();
           alert("Berjaya disimpan!");
           await loadData();
         } else { alert("Ralat: " + r.message); }
@@ -831,6 +875,7 @@
       portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
       renderAll();
       renderAdminList();
+      initAutoSliders();
 
       try {
         const res = await fetch(API_URL, {
