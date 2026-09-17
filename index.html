@@ -126,28 +126,26 @@
             <span class="font-orbitron font-black text-sm sm:text-lg text-white tracking-wide">MARESMAG</span>
             <span class="text-brand-cyan text-[10px] sm:text-xs px-1.5 py-0.5 rounded bg-cyan-950 border border-brand-cyan font-bold">METROVERSE</span>
           </div>
-          <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-rajdhani">Portal Rujukan PBW Tusyen MRSM Gerik, Perak</p>
+          <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-rajdhani">MRSM Gerik, Perak</p>
         </div>
       </a>
 
-      <!-- Desktop Links (Tersembunyi di Mobile) -->
+      <!-- Desktop Links (Susunan Baharu) -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
         <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
-        <a href="#jadual" class="hover:text-brand-cyan transition">Jadual</a>
-        <a href="#guru" class="hover:text-brand-cyan transition">Guru</a>
+        <a href="#guru" class="hover:text-brand-cyan transition">Tenaga Pengajar</a>
         <a href="#bahan" class="hover:text-brand-cyan transition">Bahan</a>
         <a href="#rakaman" class="hover:text-brand-cyan transition">Rakaman</a>
+        <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Tusyen</a>
       </div>
 
-      <!-- Right Action Items (Ikon Admin & Hamburger Mobile) -->
+      <!-- Action Items -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Ikon Tetapan Admin Sahaja -->
         <button onclick="openAdminModal()" title="Tetapan Admin" class="neon-icon-btn p-2 sm:p-2.5 rounded-xl text-brand-cyan flex items-center justify-center transition">
           <i data-lucide="settings" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
 
-        <!-- Butang Menu Hamburger (Hanya dipaparkan di Mobile) -->
         <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-brand-cyan transition flex items-center justify-center">
           <i id="mobile-menu-icon" data-lucide="menu" class="w-5 h-5"></i>
         </button>
@@ -155,16 +153,13 @@
 
     </div>
 
-    <!-- Dropdown Menu Mobile Friendly -->
+    <!-- Dropdown Menu Mobile -->
     <div id="mobile-menu" class="hidden lg:hidden flex-col gap-2 pt-3 pb-2 border-t border-slate-800/80 mt-2 font-rajdhani font-bold text-xs uppercase text-slate-300">
       <a href="#utama" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="home" class="w-4 h-4 text-brand-cyan"></i> <span>Utama</span>
       </a>
       <a href="#countdown-spm" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="hourglass" class="w-4 h-4 text-brand-cyan"></i> <span>Countdown SPM</span>
-      </a>
-      <a href="#jadual" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
-        <i data-lucide="calendar" class="w-4 h-4 text-brand-cyan"></i> <span>Jadual Kelas</span>
       </a>
       <a href="#guru" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="award" class="w-4 h-4 text-brand-cyan"></i> <span>Tenaga Pengajar</span>
@@ -175,13 +170,16 @@
       <a href="#rakaman" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="video" class="w-4 h-4 text-brand-cyan"></i> <span>Rakaman Kelas</span>
       </a>
+      <a href="#jadual" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="calendar" class="w-4 h-4 text-brand-cyan"></i> <span>Jadual Kelas</span>
+      </a>
     </div>
   </nav>
 
-  <!-- ================= SEKSYEN UTAMA (#utama) ================= -->
+  <!-- ================= 1. SEKSYEN UTAMA (#utama) ================= -->
   <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
-  <!-- ================= COUNTDOWN SPM ================= -->
+  <!-- ================= 2. COUNTDOWN SPM ================= -->
   <section id="countdown-spm" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -189,33 +187,43 @@
           <i data-lucide="hourglass" class="w-6 h-6 animate-pulse"></i>
         </div>
         <div>
-          <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA (SPM) 2026</h2>
-          <p class="text-xs text-slate-400">Jadual peperiksaan mengikut subjek SPM</p>
+          <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA</h2>
+          <p class="text-xs text-slate-400">Detik peperiksaan mengikut subjek SPM</p>
         </div>
       </div>
       <span class="text-[10px] sm:text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30">
-        SPM COUNTDOWN
+        Kiraan Auto
       </span>
     </div>
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- ================= 1. JADUAL ================= -->
-  <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
-    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-  </section>
-
-  <!-- ================= 2. TENAGA PENGAJAR ================= -->
+  <!-- ================= 3. TENAGA PENGAJAR (POSTER SLIDER PENUH DI TENGAH TANPA TEKS) ================= -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
-    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5"></div>
+    <div class="flex items-center gap-3 mb-6 border-b border-slate-800 pb-3">
+      <div class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
+        <i data-lucide="award" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">BARISAN GURU & TENAGA PENGAJAR</h2>
+        <p class="text-xs text-slate-400">Koleksi poster profil guru & pakar subjek SPM</p>
+      </div>
+    </div>
+    <div id="guru-slider-wrapper"></div>
   </section>
 
-  <!-- ================= 3. BAHAN ================= -->
+  <!-- ================= 4. BAHAN & MODUL ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3 mb-6">
-      <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+          <i data-lucide="folder" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
+          <p class="text-xs text-slate-400">Bahan rujukan pantas dari Google Drive</p>
+        </div>
+      </div>
       <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs rounded-xl px-3 py-1.5 outline-none w-full sm:w-auto">
         <option value="SEMUA">Semua Subjek</option>
         <option value="Bahasa Melayu">Bahasa Melayu</option>
@@ -234,15 +242,37 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 4. RAKAMAN ================= -->
-  <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
-    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
+  <!-- ================= 5. RAKAMAN KELAS ================= -->
+  <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-3 mb-6 border-b border-slate-800 pb-3">
+      <div class="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
+        <i data-lucide="video" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">ARKIB RAKAMAN KELAS</h2>
+        <p class="text-xs text-slate-400">Tonton semula sesi bimbingan bersama guru</p>
+      </div>
+    </div>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- ================= 6. JADUAL KELAS TUSYEN (SEKSYEN PALING BAWAH) ================= -->
+  <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
+    <div class="flex items-center gap-3 mb-6 border-b border-slate-800 pb-3">
+      <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
+        <i data-lucide="calendar" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">JADUAL KELAS TUSYEN</h2>
+        <p class="text-xs text-slate-400">Jadual pengukuhan & bengkel persediaan peperiksaan</p>
+      </div>
+    </div>
+    <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
   <!-- ================= FOOTER ================= -->
   <footer class="mt-auto glass-nav py-6 text-center text-xs text-slate-500">
-    © 2026 MARESMAG METROVERSE | MRSM Gerik | www.mhafiznj.com
+    © 2026 MARESMAG METROVERSE | MRSM Gerik
   </footer>
 
   <!-- ================= IMAGE MODAL (POPUP SKRIN PENUH) ================= -->
@@ -274,14 +304,14 @@
         <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs hover:bg-cyan-300 transition">LOG MASUK</button>
       </div>
 
-      <!-- Panel (Slider, Jadual, Guru, Bahan, Rakaman) -->
+      <!-- Panel (Slider, Guru/Poster, Bahan, Rakaman, Jadual) -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
-          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black flex-shrink-0">1. Slider & Poster</button>
-          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">2. Jadual</button>
-          <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">3. Guru</button>
-          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">4. Bahan</button>
-          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">5. Rakaman</button>
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black flex-shrink-0">1. Poster Utama</button>
+          <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">2. Poster Guru</button>
+          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">3. Bahan Drive</button>
+          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">4. Rakaman</button>
+          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">5. Jadual Tusyen</button>
         </div>
 
         <div class="flex-1 overflow-y-auto space-y-4 pr-1">
@@ -307,7 +337,7 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
 
-    // Hash Kriptografi SHA-256 kata laluan admin (Tidak boleh didekod melalui Inspect Element)
+    // Hash Kriptografi SHA-256 kata laluan admin
     const ADMIN_HASH = "81ba8319e71ecf15fc62ce40b4ff6f75dbfe5a92cfa729bc3534b8cb6a2dfa7c";
     let CURRENT_SESSION_TOKEN = "";
 
@@ -317,7 +347,6 @@
       return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // Navigasi Mudah Alih
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const icon = document.getElementById('mobile-menu-icon');
@@ -362,6 +391,7 @@
     let portalData = { slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
     let activeAdminTab = 'slider';
     let currentSlideIndex = 0;
+    let currentGuruIndex = 0;
 
     async function loadData() {
       try {
@@ -386,14 +416,14 @@
     function renderAll() {
       renderCountdown();
       renderSlider();
-      renderJadual();
-      renderGuru();
+      renderGuruSlider();
       filterBahan();
       renderRakaman();
+      renderJadual();
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= ENJIN COUNTDOWN SPM =================
+    // ================= COUNTDOWN ENGINE =================
     function calculateDaysLeft(isoDate) {
       if (!isoDate) return null;
       try {
@@ -435,7 +465,7 @@
       }).join('');
     }
 
-    // ================= SEKSYEN SLIDER BESAR =================
+    // ================= 1. POSTER SLIDER UTAMA =================
     function renderSlider() {
       const el = document.getElementById('utama');
       if (!el) return;
@@ -506,6 +536,68 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    // ================= 2. POSTER SLIDER GURU (TENGAH, TANPA TEKS) =================
+    function renderGuruSlider() {
+      const container = document.getElementById('guru-slider-wrapper');
+      if (!container) return;
+      const list = portalData.guru || [];
+
+      if (!Array.isArray(list) || list.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-3xl">Tiada poster guru dimuat naik lagi di Google Sheets.</div>`;
+        return;
+      }
+
+      const g = list[currentGuruIndex % list.length];
+      const posterSrc = formatImageUrl(g.image_url);
+
+      container.innerHTML = `
+        <div class="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-slate-950 p-4 sm:p-6 shadow-[0_0_30px_rgba(127,0,255,0.15)] flex flex-col items-center justify-center">
+          
+          <!-- Background Glow Blur -->
+          <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+            <img src="${posterSrc}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Poster Guru">
+          </div>
+
+          <!-- Poster di Tengah-Tengah (Pusat Utama) -->
+          <div class="relative z-10 w-full max-w-2xl h-[340px] sm:h-[460px] md:h-[550px] rounded-2xl overflow-hidden bg-black/50 border border-purple-500/30 flex items-center justify-center p-2 group cursor-pointer" onclick="openImageModal('${posterSrc}')" title="Klik untuk paparan skrin penuh">
+            <img src="${posterSrc}" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" alt="Poster Guru">
+          </div>
+
+          <!-- Navigasi Slider Poster Guru (Bawah Gambar) -->
+          <div class="relative z-10 mt-5 flex items-center justify-center gap-4">
+            <button onclick="prevGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800">
+              ${list.map((_, i) => `
+                <span class="h-2 rounded-full transition-all ${i === (currentGuruIndex % list.length) ? 'bg-purple-500 w-6' : 'bg-slate-700 w-2'}"></span>
+              `).join('')}
+            </div>
+
+            <button onclick="nextGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function nextGuruSlide() {
+      if (portalData.guru.length <= 1) return;
+      currentGuruIndex = (currentGuruIndex + 1) % portalData.guru.length;
+      renderGuruSlider();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function prevGuruSlide() {
+      if (portalData.guru.length <= 1) return;
+      currentGuruIndex = (currentGuruIndex === 0) ? (portalData.guru.length - 1) : (currentGuruIndex - 1);
+      renderGuruSlider();
+      if (window.lucide) lucide.createIcons();
+    }
+
     // ================= MODAL PRATONTON GAMBAR =================
     function openImageModal(url) {
       if (!url) return;
@@ -525,48 +617,6 @@
         modal.classList.add('hidden');
         modal.classList.remove('flex');
       }
-    }
-
-    // ================= JADUAL TUSYEN =================
-    function renderJadual() {
-      const container = document.getElementById('jadual-container');
-      if (!container) return;
-      const list = portalData.jadual || [];
-      if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual kelas tusyen yang terkini.</div>`;
-        return;
-      }
-      container.innerHTML = list.map(j => `
-        <div class="pro-card p-5 rounded-2xl">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded font-bold">${j.subjek || 'TUSYEN'}</span>
-            <span class="text-xs text-slate-400">${j.masa || ''}</span>
-          </div>
-          <h3 class="font-rajdhani font-bold text-base text-white mb-2">${j.title || ''}</h3>
-          <p class="text-xs text-slate-300 mb-3"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-brand-cyan"></i>${j.tarikh_hari || ''}</p>
-          ${j.poster_url ? `<button onclick="openImageModal('${formatImageUrl(j.poster_url)}')" class="block w-full py-2 text-center text-xs font-bold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition">Buka Poster Penuh</button>` : ''}
-        </div>
-      `).join('');
-    }
-
-    // ================= TENAGA PENGAJAR =================
-    function renderGuru() {
-      const container = document.getElementById('guru-container');
-      if (!container) return;
-      const list = portalData.guru || [];
-      if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada profil guru dimasukkan lagi.</div>`;
-        return;
-      }
-      container.innerHTML = list.map(g => `
-        <div class="pro-card p-4 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 mb-2 p-1 cursor-pointer" onclick="openImageModal('${formatImageUrl(g.image_url)}')">
-            <img src="${formatImageUrl(g.image_url)}" class="w-full h-full object-contain">
-          </div>
-          <h4 class="font-rajdhani font-bold text-xs sm:text-sm text-white">${g.nama || ''}</h4>
-          <span class="text-[10px] sm:text-[11px] text-brand-cyan">${g.subjek || ''}</span>
-        </div>
-      `).join('');
     }
 
     // ================= BAHAN RUJUKAN =================
@@ -617,7 +667,29 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= ADMIN CMS =================
+    // ================= JADUAL TUSYEN (SEKSYEN PALING BAWAH) =================
+    function renderJadual() {
+      const container = document.getElementById('jadual-container');
+      if (!container) return;
+      const list = portalData.jadual || [];
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual kelas tusyen dimasukkan lagi.</div>`;
+        return;
+      }
+      container.innerHTML = list.map(j => `
+        <div class="pro-card p-5 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded font-bold">${j.subjek || 'TUSYEN'}</span>
+            <span class="text-xs text-slate-400">${j.masa || ''}</span>
+          </div>
+          <h3 class="font-rajdhani font-bold text-base text-white mb-2">${j.title || ''}</h3>
+          <p class="text-xs text-slate-300 mb-3"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-brand-cyan"></i>${j.tarikh_hari || ''}</p>
+          ${j.poster_url ? `<button onclick="openImageModal('${formatImageUrl(j.poster_url)}')" class="block w-full py-2 text-center text-xs font-bold rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-brand-cyan/30 transition">Buka Poster Penuh</button>` : ''}
+        </div>
+      `).join('');
+    }
+
+    // ================= ADMIN CMS (5 KATEGORI) =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     
@@ -626,8 +698,8 @@
       const computedHash = await computeSHA256(pass);
 
       if (computedHash === ADMIN_HASH) {
-        CURRENT_SESSION_TOKEN = pass; // Disimpan dalam ingatan pembolehubah sesi untuk kiriman API sahaja
-        document.getElementById('admin-pass-input').value = ""; // Padam nilai daripada DOM serta-merta
+        CURRENT_SESSION_TOKEN = pass;
+        document.getElementById('admin-pass-input').value = "";
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('flex');
@@ -657,19 +729,13 @@
           <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
           <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
         `;
-      } else if (activeAdminTab === 'jadual') {
-        f.innerHTML = `
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
-          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-poster_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-        `;
       } else if (activeAdminTab === 'guru') {
+        // HANYA MASUKKAN LINK POSTER GURU (MUDAH & CEPAT)
         f.innerHTML = `
-          <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
-          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <div class="col-span-full">
+            <label class="block text-[10px] text-slate-400 mb-1">Link Gambar / Poster Guru (Google Drive / Direct URL)</label>
+            <input type="text" id="adm-image_url" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
+          </div>
         `;
       } else if (activeAdminTab === 'bahan') {
         f.innerHTML = `
@@ -683,6 +749,14 @@
           <input type="text" id="adm-tajuk" placeholder="Tajuk Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
           <input type="text" id="adm-video_url" placeholder="Link Video YouTube/Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
+      } else if (activeAdminTab === 'jadual') {
+        f.innerHTML = `
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-poster_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+        `;
       }
     }
 
@@ -692,7 +766,10 @@
       if (list.length === 0) { c.innerHTML = `<div class="p-3 text-center text-xs text-slate-500">Tiada rekod data.</div>`; return; }
       c.innerHTML = list.map((item, idx) => `
         <div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
-          <div class="truncate mr-2"><span class="font-bold text-white">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</span> <span class="text-slate-400 text-[10px]">${item.tarikh_hari || item.badge || ''}</span></div>
+          <div class="truncate mr-2">
+            <span class="font-bold text-white">${activeAdminTab === 'guru' ? `Poster #${idx + 1}` : (item.subjek || item.title || item.tajuk || 'Item')}</span> 
+            <span class="text-slate-400 text-[10px] truncate block max-w-xs">${item.image_url || item.tarikh_hari || item.badge || ''}</span>
+          </div>
           <div class="flex gap-1.5 flex-shrink-0">
             <button onclick="editItem(${idx})" class="px-2 py-0.5 bg-cyan-500/10 text-brand-cyan rounded">Edit</button>
             <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded">Padam</button>
