@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARESMAG METROVERSE | MRSM Gerik</title>
+  <title>MARESMAG METROVERSE | Portal Tusyen MRSM Gerik</title>
+  
+  <!-- Favicon Logo Rasmi MRSM -->
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG">
+  
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
@@ -34,6 +41,7 @@
       }
     }
   </script>
+
   <style>
     body {
       background-color: #02040a;
@@ -72,11 +80,43 @@
       border: 1px solid #00F2FE;
     }
     .neon-btn:hover { background: #00F2FE; color: #02040a; }
+
+    @keyframes spinPulse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .spin-fast {
+      animation: spinPulse 0.8s linear infinite;
+    }
+
+    [data-netlify-deploy-id], .netlify-badge, #netlify-drawer, iframe[src*="netlify"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #02040a; }
+    ::-webkit-scrollbar-thumb { background: #00F2FE; border-radius: 3px; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- NAVBAR -->
+  <!-- ================= SATU SAHAJA LOADING AWAL ================= -->
+  <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
+    <div class="relative flex items-center justify-center mb-5">
+      <div class="w-16 h-16 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_20px_rgba(0,242,254,0.4)]"></div>
+      <div class="absolute w-9 h-9 rounded-xl overflow-hidden bg-slate-900 border border-brand-cyan/40 p-1 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" referrerpolicy="no-referrer" class="w-full h-full object-contain animate-pulse" alt="MRSM">
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+      <span class="font-orbitron text-xs font-bold text-white tracking-widest">MEMUATKAN DATA PORTAL...</span>
+    </div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
   <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="flex items-center gap-3">
@@ -88,6 +128,8 @@
           <p class="text-[10px] text-slate-400 uppercase font-rajdhani">MRSM Gerik, Perak</p>
         </div>
       </a>
+
+      <!-- LINK NAVBAR GUNA #utama -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
         <a href="#utama" class="hover:text-brand-cyan">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan">Countdown SPM</a>
@@ -96,6 +138,7 @@
         <a href="#bahan" class="hover:text-brand-cyan">Bahan</a>
         <a href="#rakaman" class="hover:text-brand-cyan">Rakaman</a>
       </div>
+
       <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold text-brand-cyan flex items-center gap-2">
         <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
         <span>PANEL ADMIN</span>
@@ -103,10 +146,10 @@
     </div>
   </nav>
 
-  <!-- SEKSYEN UTAMA (#utama - KOSONG TULEN) -->
+  <!-- ================= SEKSYEN UTAMA (#utama - MUTLAK KOSONG JIKA TIADA DATA DI SHEETS) ================= -->
   <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
-  <!-- COUNTDOWN SPM -->
+  <!-- ================= COUNTDOWN SPM ================= -->
   <section id="countdown-spm" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -119,22 +162,23 @@
         </div>
       </div>
     </div>
+    <!-- KONTENA KAD COUNTDOWN -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- JADUAL -->
+  <!-- ================= JADUAL ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
     <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- GURU -->
+  <!-- ================= GURU ================= -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
     <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
   </section>
 
-  <!-- BAHAN -->
+  <!-- ================= BAHAN ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
       <h2 class="font-orbitron text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
@@ -156,17 +200,18 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- RAKAMAN -->
+  <!-- ================= RAKAMAN ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="mt-auto glass-nav py-6 text-center text-xs text-slate-500">
     © 2026 MARESMAG METROVERSE | MRSM Gerik
   </footer>
 
-  <!-- ADMIN MODAL -->
+  <!-- ================= ADMIN CMS MODAL ================= -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
     <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-6 relative max-h-[90vh] flex flex-col">
       <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
@@ -178,7 +223,7 @@
         <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs">LOG MASUK</button>
       </div>
 
-      <!-- Panel -->
+      <!-- Dashboard Panel -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
           <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
@@ -208,6 +253,7 @@
     </div>
   </div>
 
+  <!-- ================= JAVASCRIPT ================= -->
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
     const ADMIN_PASSWORD = "maresm@gmtsadm1n";
@@ -224,6 +270,7 @@
       return url;
     }
 
+    // SEMUA KATEGORI BERMULA KOSONG MUTLAK
     let portalData = { countdown: [], slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
     let activeAdminTab = 'countdown';
     let currentSlideIndex = 0;
@@ -241,7 +288,7 @@
           portalData.rakaman = Array.isArray(data.rakaman) ? data.rakaman : [];
         }
       } catch (err) {
-        console.warn(err);
+        console.warn("Makluman:", err);
       } finally {
         const pre = document.getElementById('global-preloader');
         if (pre) pre.style.display = 'none';
@@ -250,33 +297,101 @@
     }
 
     function renderAll() {
-      renderSlider();
-      renderCountdown();
-      renderJadual();
-      renderGuru();
-      filterBahan();
-      renderRakaman();
+      // Countdown dijalankan dahulu supaya sentiasa terpapar
+      try { renderCountdown(); } catch (e) { console.error("Countdown error:", e); }
+      try { renderSlider(); } catch (e) { console.error("Slider error:", e); }
+      try { renderJadual(); } catch (e) { console.error("Jadual error:", e); }
+      try { renderGuru(); } catch (e) { console.error("Guru error:", e); }
+      try { filterBahan(); } catch (e) { console.error("Bahan error:", e); }
+      try { renderRakaman(); } catch (e) { console.error("Rakaman error:", e); }
       if (window.lucide) lucide.createIcons();
     }
 
-    // 100% TIADA DUMMY PADA SLIDER
+    // ================= ENJIN COUNTDOWN (KEBAL FORMAT & TERUS PAPAR) =================
+    function calculateDaysLeft(rawDate) {
+      if (!rawDate) return null;
+      try {
+        let s = String(rawDate).trim();
+        if (s.includes('T')) s = s.split('T')[0];
+        
+        // Sokongan jika tarikh format DD/MM/YYYY atau DD-MM-YYYY
+        const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+        let target;
+        if (dmy) {
+          target = new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+        } else {
+          target = new Date(s);
+        }
+
+        if (isNaN(target.getTime())) return null;
+
+        const today = new Date();
+        target.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        return Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function renderCountdown() {
+      const container = document.getElementById('countdown-container');
+      if (!container) return;
+      const list = portalData.countdown || [];
+
+      if (!Array.isArray(list) || list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(c => {
+        // Toleransi nama lajur dari Google Sheets
+        const namaSubjek = c.subjek || c.nama || c.tajuk || c.subject || 'Subjek SPM';
+        const tarikhPaparan = c.tarikh_teks || c.tarikh || c.tarikh_iso || '';
+        const tarikhKira = c.tarikh_iso || c.tarikh || c.tarikh_teks;
+        const days = calculateDaysLeft(tarikhKira);
+
+        let text = days === null ? "-" : (days === 0 ? "HARI INI!" : (days < 0 ? "Tamat" : `${days} hari lagi`));
+        let color = days === 0 ? "text-emerald-400 font-bold animate-pulse" : (days < 0 ? "text-slate-500" : "text-sky-400");
+
+        return `
+          <div class="countdown-card p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
+                <h3 class="font-rajdhani font-bold text-lg text-white leading-tight">${namaSubjek}</h3>
+              </div>
+              <p class="text-xs text-slate-400 pl-6 mb-4">${tarikhPaparan}</p>
+            </div>
+            <div class="pl-6">
+              <span class="text-xl font-bold font-rajdhani ${color}">${text}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ================= SLIDER #utama (100% KOSONG JIKA TIADA DATA DI SHEETS) =================
     function renderSlider() {
       const el = document.getElementById('utama');
       if (!el) return;
       const list = portalData.slider || [];
-      if (list.length === 0) {
+
+      // Jika tiada data dalam Google Sheets, kosongkan terus tanpa sebarang rupa poster
+      if (!Array.isArray(list) || list.length === 0) {
         el.innerHTML = "";
         el.style.display = "none";
         return;
       }
+
       el.style.display = "block";
       const s = list[currentSlideIndex % list.length];
       el.innerHTML = `
         <div class="py-6 px-4">
           <div class="pro-card rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[350px]">
             <div class="w-full md:w-1/2">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-950 border border-brand-cyan text-brand-cyan mb-2 inline-block">${s.badge || 'PENGUMUMAN'}</span>
-              <h1 class="font-orbitron font-extrabold text-2xl md:text-3xl text-white mb-2">${s.title || ''}</h1>
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded bg-cyan-950 border border-brand-cyan text-brand-cyan mb-2 inline-block">${s.badge || 'PENGUMUMAN'}</span>
+              <h1 class="font-orbitron font-extrabold text-2xl md:text-3xl text-white mb-2 leading-tight">${s.title || ''}</h1>
               <p class="text-xs text-slate-300 font-light mb-4">${s.deskripsi || ''}</p>
               <div class="flex items-center gap-2">
                 <button onclick="prevSlide()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 hover:border-brand-cyan text-brand-cyan"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
@@ -304,50 +419,13 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    function calculateDaysLeft(rawDate) {
-      if (!rawDate) return 0;
-      let d = String(rawDate).trim().split('T')[0];
-      if (d.includes('/')) { const p = d.split('/'); if (p.length === 3) d = `${p[2]}-${p[1]}-${p[0]}`; }
-      const target = new Date(d);
-      if (isNaN(target.getTime())) return 0;
-      const today = new Date();
-      target.setHours(0,0,0,0); today.setHours(0,0,0,0);
-      return Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-    }
-
-    function renderCountdown() {
-      const container = document.getElementById('countdown-container');
-      if (!container) return;
-      const list = portalData.countdown || [];
-      if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.</div>`;
-        return;
-      }
-      container.innerHTML = list.map(c => {
-        const days = calculateDaysLeft(c.tarikh_iso || c.tarikh_teks);
-        let text = days === 0 ? "HARI INI!" : (days < 0 ? "Tamat" : `${days} hari lagi`);
-        let color = days === 0 ? "text-emerald-400 font-bold animate-pulse" : (days < 0 ? "text-slate-500" : "text-sky-400");
-        return `
-          <div class="countdown-card p-4 rounded-2xl flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-2 mb-1">
-                <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
-                <h3 class="font-rajdhani font-bold text-base text-white">${c.subjek || ''}</h3>
-              </div>
-              <p class="text-xs text-slate-400 pl-6 mb-3">${c.tarikh_teks || c.tarikh_iso || ''}</p>
-            </div>
-            <div class="pl-6"><span class="text-lg font-bold font-rajdhani ${color}">${text}</span></div>
-          </div>
-        `;
-      }).join('');
-    }
-
+    // ================= JADUAL TUSYEN =================
     function renderJadual() {
       const container = document.getElementById('jadual-container');
       if (!container) return;
       const list = portalData.jadual || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual kelas tusyen.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual kelas tusyen dimasukkan lagi.</div>`;
         return;
       }
       container.innerHTML = list.map(j => `
@@ -363,12 +441,13 @@
       `).join('');
     }
 
+    // ================= TENAGA PENGAJAR =================
     function renderGuru() {
       const container = document.getElementById('guru-container');
       if (!container) return;
       const list = portalData.guru || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada maklumat guru.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada maklumat guru dimasukkan lagi.</div>`;
         return;
       }
       container.innerHTML = list.map(g => `
@@ -382,6 +461,7 @@
       `).join('');
     }
 
+    // ================= BAHAN RUJUKAN =================
     function filterBahan() {
       const filter = document.getElementById('filter-subjek').value;
       const container = document.getElementById('bahan-container');
@@ -389,7 +469,7 @@
       const list = portalData.bahan || [];
       const filtered = filter === "SEMUA" ? list : list.filter(b => b.subjek === filter);
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan untuk subjek ini.</div>`;
         return;
       }
       container.innerHTML = filtered.map(b => `
@@ -406,12 +486,13 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    // ================= RAKAMAN KELAS =================
     function renderRakaman() {
       const container = document.getElementById('rakaman-container');
       if (!container) return;
       const list = portalData.rakaman || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada rakaman video.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada rakaman video ditemui.</div>`;
         return;
       }
       container.innerHTML = list.map(r => `
@@ -428,7 +509,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // CMS MODAL
+    // ================= ADMIN CMS =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     function verifyAdmin() {
@@ -461,23 +542,23 @@
       } else if (activeAdminTab === 'slider') {
         f.innerHTML = `
           <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-title" placeholder="Tajuk" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-image_url" placeholder="Link Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <textarea id="adm-deskripsi" placeholder="Deskripsi" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
+          <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
         `;
       } else if (activeAdminTab === 'jadual') {
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-title" placeholder="Tajuk" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-poster_url" placeholder="Link Poster" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-poster_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'guru') {
         f.innerHTML = `
           <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-image_url" placeholder="Link Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       } else if (activeAdminTab === 'bahan') {
         f.innerHTML = `
@@ -489,7 +570,7 @@
         f.innerHTML = `
           <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
           <input type="text" id="adm-tajuk" placeholder="Tajuk Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-video_url" placeholder="Link Video" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-video_url" placeholder="Link Video YouTube/Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
         `;
       }
     }
@@ -547,8 +628,18 @@
         });
         const r = await res.json();
         if (r.success) {
-          alert("Berjaya disimpan!");
+          // KEMASKINI SERTA-MERTA (OPTIMISTIC UPDATE) SUPAYA TERUS KELUAR DI LAMAN UTAMA
+          if (isUp) {
+            const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(row));
+            if (idx !== -1) portalData[activeAdminTab][idx] = { ...portalData[activeAdminTab][idx], ...payload };
+          } else {
+            portalData[activeAdminTab].push({ ...payload, row_index: portalData[activeAdminTab].length + 2 });
+          }
+
+          renderAll();
+          renderAdminList();
           cancelEditMode();
+          alert("Berjaya disimpan!");
           await loadData();
         } else { alert("Ralat: " + r.message); }
       } catch (e) { alert("Ralat sambungan: " + e.message); }
@@ -557,6 +648,10 @@
 
     async function deleteItem(sheetName, rowIndex) {
       if (!confirm("Padam item ini?")) return;
+      portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
+      renderAll();
+      renderAdminList();
+
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
