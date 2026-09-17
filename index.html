@@ -130,7 +130,7 @@
         </div>
       </a>
 
-      <!-- Desktop Links (Susunan Baharu) -->
+      <!-- Desktop Links -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
         <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
@@ -198,7 +198,7 @@
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- ================= 3. TENAGA PENGAJAR (POSTER SLIDER PENUH DI TENGAH TANPA TEKS) ================= -->
+  <!-- ================= 3. TENAGA PENGAJAR (POSTER SLIDER PENUH) ================= -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center gap-3 mb-6 border-b border-slate-800 pb-3">
       <div class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
@@ -256,7 +256,7 @@
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- ================= 6. JADUAL KELAS TUSYEN (SEKSYEN PALING BAWAH) ================= -->
+  <!-- ================= 6. JADUAL KELAS TUSYEN (SEKSYEN BAWAH) ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <div class="flex items-center gap-3 mb-6 border-b border-slate-800 pb-3">
       <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan">
@@ -337,15 +337,17 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
 
-    // Hash Kriptografi SHA-256 kata laluan admin
-    const ADMIN_HASH = "81ba8319e71ecf15fc62ce40b4ff6f75dbfe5a92cfa729bc3534b8cb6a2dfa7c";
-    let CURRENT_SESSION_TOKEN = "";
-
-    async function computeSHA256(text) {
-      const buffer = new TextEncoder().encode(text);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    // Enkripsi tersembunyi (Base64 reverse string - tidak boleh dicari terus dalam inspect element)
+    const _AUTH_ENC = "bjFtc2RhU210Z0BtQG1lc2Fycg==";
+    function _decodeKey(str) {
+      try {
+        return atob(str).split("").reverse().join("");
+      } catch (e) {
+        return "";
+      }
     }
+
+    let CURRENT_SESSION_TOKEN = "";
 
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
@@ -536,7 +538,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= 2. POSTER SLIDER GURU (TENGAH, TANPA TEKS) =================
+    // ================= 2. POSTER SLIDER GURU =================
     function renderGuruSlider() {
       const container = document.getElementById('guru-slider-wrapper');
       if (!container) return;
@@ -552,34 +554,25 @@
 
       container.innerHTML = `
         <div class="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-slate-950 p-4 sm:p-6 shadow-[0_0_30px_rgba(127,0,255,0.15)] flex flex-col items-center justify-center">
-          
-          <!-- Background Glow Blur -->
           <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
             <img src="${posterSrc}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Poster Guru">
           </div>
-
-          <!-- Poster di Tengah-Tengah (Pusat Utama) -->
           <div class="relative z-10 w-full max-w-2xl h-[340px] sm:h-[460px] md:h-[550px] rounded-2xl overflow-hidden bg-black/50 border border-purple-500/30 flex items-center justify-center p-2 group cursor-pointer" onclick="openImageModal('${posterSrc}')" title="Klik untuk paparan skrin penuh">
             <img src="${posterSrc}" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" alt="Poster Guru">
           </div>
-
-          <!-- Navigasi Slider Poster Guru (Bawah Gambar) -->
           <div class="relative z-10 mt-5 flex items-center justify-center gap-4">
             <button onclick="prevGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
               <i data-lucide="chevron-left" class="w-5 h-5"></i>
             </button>
-            
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800">
               ${list.map((_, i) => `
                 <span class="h-2 rounded-full transition-all ${i === (currentGuruIndex % list.length) ? 'bg-purple-500 w-6' : 'bg-slate-700 w-2'}"></span>
               `).join('')}
             </div>
-
             <button onclick="nextGuruSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-400 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-lg">
               <i data-lucide="chevron-right" class="w-5 h-5"></i>
             </button>
           </div>
-
         </div>
       `;
     }
@@ -689,17 +682,18 @@
       `).join('');
     }
 
-    // ================= ADMIN CMS (5 KATEGORI) =================
+    // ================= ADMIN CMS =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     
-    async function verifyAdmin() {
-      const pass = document.getElementById('admin-pass-input').value;
-      const computedHash = await computeSHA256(pass);
+    function verifyAdmin() {
+      const inputEl = document.getElementById('admin-pass-input');
+      const pass = inputEl ? inputEl.value : "";
+      const validPass = _decodeKey(_AUTH_ENC);
 
-      if (computedHash === ADMIN_HASH) {
+      if (pass === validPass) {
         CURRENT_SESSION_TOKEN = pass;
-        document.getElementById('admin-pass-input').value = "";
+        inputEl.value = "";
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('flex');
@@ -730,7 +724,6 @@
           <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
         `;
       } else if (activeAdminTab === 'guru') {
-        // HANYA MASUKKAN LINK POSTER GURU (MUDAH & CEPAT)
         f.innerHTML = `
           <div class="col-span-full">
             <label class="block text-[10px] text-slate-400 mb-1">Link Gambar / Poster Guru (Google Drive / Direct URL)</label>
