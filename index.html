@@ -49,7 +49,7 @@
       background-attachment: fixed;
     }
     .glass-nav {
-      background: rgba(2, 4, 10, 0.88);
+      background: rgba(2, 4, 10, 0.92);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(0, 242, 254, 0.15);
     }
@@ -72,11 +72,16 @@
       border-color: rgba(0, 242, 254, 0.55);
       transform: translateY(-2px);
     }
-    .neon-btn {
+    .neon-icon-btn {
       background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.2));
       border: 1px solid #00F2FE;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
     }
-    .neon-btn:hover { background: #00F2FE; color: #02040a; }
+    .neon-icon-btn:hover {
+      background: #00F2FE;
+      color: #02040a;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+    }
 
     @keyframes spinPulse {
       0% { transform: rotate(0deg); }
@@ -108,31 +113,68 @@
   </div>
 
   <!-- ================= NAVBAR ================= -->
-  <nav class="sticky top-0 z-40 glass-nav px-4 lg:px-10 py-3.5">
+  <nav class="sticky top-0 z-40 glass-nav px-3 sm:px-6 lg:px-10 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-400/40 p-1 flex items-center justify-center">
+      
+      <!-- Logo & Branding -->
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-400/40 p-1 flex items-center justify-center flex-shrink-0">
           <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" alt="MRSM" class="w-full h-full object-contain">
         </div>
         <div>
-          <span class="font-orbitron font-black text-lg text-white">MARESMAG <span class="text-brand-cyan text-xs px-2 py-0.5 rounded bg-cyan-950 border border-brand-cyan">METROVERSE</span></span>
-          <p class="text-[10px] text-slate-400 uppercase font-rajdhani">MRSM Gerik, Perak</p>
+          <div class="flex items-center gap-1.5">
+            <span class="font-orbitron font-black text-sm sm:text-lg text-white tracking-wide">MARESMAG</span>
+            <span class="text-brand-cyan text-[10px] sm:text-xs px-1.5 py-0.5 rounded bg-cyan-950 border border-brand-cyan font-bold">METROVERSE</span>
+          </div>
+          <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-rajdhani">MRSM Gerik, Perak</p>
         </div>
       </a>
 
+      <!-- Desktop Links (Tersembunyi di Mobile) -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
-        <a href="#utama" class="hover:text-brand-cyan">Utama</a>
-        <a href="#countdown-spm" class="hover:text-brand-cyan">Countdown SPM</a>
-        <a href="#jadual" class="hover:text-brand-cyan">Jadual</a>
-        <a href="#guru" class="hover:text-brand-cyan">Guru</a>
-        <a href="#bahan" class="hover:text-brand-cyan">Bahan</a>
-        <a href="#rakaman" class="hover:text-brand-cyan">Rakaman</a>
+        <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
+        <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
+        <a href="#jadual" class="hover:text-brand-cyan transition">Jadual</a>
+        <a href="#guru" class="hover:text-brand-cyan transition">Guru</a>
+        <a href="#bahan" class="hover:text-brand-cyan transition">Bahan</a>
+        <a href="#rakaman" class="hover:text-brand-cyan transition">Rakaman</a>
       </div>
 
-      <button onclick="openAdminModal()" class="neon-btn px-4 py-2 rounded-lg text-xs font-rajdhani font-bold text-brand-cyan flex items-center gap-2">
-        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
-        <span>PANEL ADMIN</span>
-      </button>
+      <!-- Right Action Items (Ikon Admin & Hamburger Mobile) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Ikon Tetapan Admin Sahaja -->
+        <button onclick="openAdminModal()" title="Tetapan Admin" class="neon-icon-btn p-2 sm:p-2.5 rounded-xl text-brand-cyan flex items-center justify-center transition">
+          <i data-lucide="settings" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+        </button>
+
+        <!-- Butang Menu Hamburger (Hanya dipaparkan di Mobile) -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-brand-cyan transition flex items-center justify-center">
+          <i id="mobile-menu-icon" data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Dropdown Menu Mobile Friendly -->
+    <div id="mobile-menu" class="hidden lg:hidden flex-col gap-2 pt-3 pb-2 border-t border-slate-800/80 mt-2 font-rajdhani font-bold text-xs uppercase text-slate-300">
+      <a href="#utama" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="home" class="w-4 h-4 text-brand-cyan"></i> <span>Utama</span>
+      </a>
+      <a href="#countdown-spm" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="hourglass" class="w-4 h-4 text-brand-cyan"></i> <span>Countdown SPM</span>
+      </a>
+      <a href="#jadual" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="calendar" class="w-4 h-4 text-brand-cyan"></i> <span>Jadual Kelas</span>
+      </a>
+      <a href="#guru" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="award" class="w-4 h-4 text-brand-cyan"></i> <span>Tenaga Pengajar</span>
+      </a>
+      <a href="#bahan" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="folder" class="w-4 h-4 text-brand-cyan"></i> <span>Bahan & Modul</span>
+      </a>
+      <a href="#rakaman" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
+        <i data-lucide="video" class="w-4 h-4 text-brand-cyan"></i> <span>Rakaman Kelas</span>
+      </a>
     </div>
   </nav>
 
@@ -147,11 +189,11 @@
           <i data-lucide="hourglass" class="w-6 h-6 animate-pulse"></i>
         </div>
         <div>
-          <h2 class="font-orbitron text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA</h2>
+          <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA</h2>
           <p class="text-xs text-slate-400">Detik peperiksaan mengikut subjek SPM</p>
         </div>
       </div>
-      <span class="text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30">
+      <span class="text-[10px] sm:text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30">
         Kiraan Auto
       </span>
     </div>
@@ -160,21 +202,21 @@
 
   <!-- ================= 1. JADUAL ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
+    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
     <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
   <!-- ================= 2. TENAGA PENGAJAR ================= -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
-    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
+    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
+    <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5"></div>
   </section>
 
   <!-- ================= 3. BAHAN ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
-      <h2 class="font-orbitron text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
-      <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs rounded-xl px-3 py-1.5 outline-none">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3 mb-6">
+      <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
+      <select id="filter-subjek" onchange="filterBahan()" class="bg-slate-900 border border-brand-cyan/40 text-brand-cyan text-xs rounded-xl px-3 py-1.5 outline-none w-full sm:w-auto">
         <option value="SEMUA">Semua Subjek</option>
         <option value="Bahasa Melayu">Bahasa Melayu</option>
         <option value="Bahasa Inggeris">Bahasa Inggeris</option>
@@ -194,7 +236,7 @@
 
   <!-- ================= 4. RAKAMAN ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
-    <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
+    <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
@@ -217,23 +259,29 @@
   </div>
 
   <!-- ================= ADMIN CMS MODAL ================= -->
-  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
-    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-6 relative max-h-[90vh] flex flex-col">
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-5 sm:p-6 relative max-h-[90vh] flex flex-col">
       <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
       
+      <!-- Login Box -->
       <div id="admin-auth-box" class="py-10 text-center max-w-sm mx-auto w-full">
-        <h3 class="font-orbitron text-lg font-bold text-white mb-4">PANEL ADMIN</h3>
-        <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white mb-3 outline-none">
-        <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs">LOG MASUK</button>
+        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-brand-cyan/30 text-brand-cyan flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-orbitron text-lg font-bold text-white mb-1">PENGESAHAN ADMIN</h3>
+        <p class="text-xs text-slate-400 mb-4 font-rajdhani">Sila masukkan kata laluan keselamatan</p>
+        <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white mb-3 outline-none focus:border-brand-cyan transition" onkeypress="if(event.key === 'Enter') verifyAdmin()">
+        <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs hover:bg-cyan-300 transition">LOG MASUK</button>
       </div>
 
+      <!-- Panel (Slider, Jadual, Guru, Bahan, Rakaman) -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
-          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Slider & Poster</button>
-          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual</button>
-          <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
-          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan</button>
-          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">5. Rakaman</button>
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black flex-shrink-0">1. Slider & Poster</button>
+          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">2. Jadual</button>
+          <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">3. Guru</button>
+          <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">4. Bahan</button>
+          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">5. Rakaman</button>
         </div>
 
         <div class="flex-1 overflow-y-auto space-y-4 pr-1">
@@ -241,7 +289,7 @@
             <h4 class="font-rajdhani font-bold text-white text-sm mb-3" id="admin-form-title">Tambah Data</h4>
             <input type="hidden" id="editing-row-index" value="">
             <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"></div>
-            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2 bg-brand-cyan text-black font-bold text-xs rounded-xl">SIMPAN KE GOOGLE SHEETS</button>
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2 bg-brand-cyan text-black font-bold text-xs rounded-xl hover:bg-cyan-300 transition">SIMPAN KE GOOGLE SHEETS</button>
             <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden w-full mt-2 text-xs text-amber-400 hover:underline">Batal Edit</button>
           </div>
 
@@ -258,11 +306,33 @@
   <!-- ================= JAVASCRIPT ================= -->
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
-    const ADMIN_PASSWORD = "maresm@gmtsadm1n";
 
-    // ==========================================
-    // 11 SUBJEK COUNTDOWN SPM MENGIKUT JADUAL SEBENAR
-    // ==========================================
+    // Hash Kriptografi SHA-256 kata laluan admin (Tidak boleh didekod melalui Inspect Element)
+    const ADMIN_HASH = "81ba8319e71ecf15fc62ce40b4ff6f75dbfe5a92cfa729bc3534b8cb6a2dfa7c";
+    let CURRENT_SESSION_TOKEN = "";
+
+    async function computeSHA256(text) {
+      const buffer = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Navigasi Mudah Alih
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (menu) {
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+        if (icon) {
+          const isOpen = menu.classList.contains('flex');
+          icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+          if (window.lucide) lucide.createIcons();
+        }
+      }
+    }
+
+    // 11 SUBJEK COUNTDOWN SPM
     const SPM_TIMETABLE = [
       { subjek: "Bahasa Melayu", tarikh_iso: "2026-11-23", tarikh_teks: "Isnin, 23 November 2026" },
       { subjek: "Bahasa Inggeris", tarikh_iso: "2026-11-24", tarikh_teks: "Selasa, 24 November 2026" },
@@ -349,23 +419,23 @@
         let color = days === 0 ? "text-emerald-400 font-bold animate-pulse" : (days < 0 ? "text-slate-500" : "text-sky-400");
 
         return `
-          <div class="countdown-card p-5 rounded-2xl flex flex-col justify-between">
+          <div class="countdown-card p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
-                <h3 class="font-rajdhani font-bold text-lg text-white leading-tight">${c.subjek}</h3>
+                <h3 class="font-rajdhani font-bold text-base sm:text-lg text-white leading-tight">${c.subjek}</h3>
               </div>
-              <p class="text-xs text-slate-400 pl-6 mb-4">${c.tarikh_teks}</p>
+              <p class="text-xs text-slate-400 pl-6 mb-3 sm:mb-4">${c.tarikh_teks}</p>
             </div>
             <div class="pl-6">
-              <span class="text-xl font-bold font-rajdhani ${color}">${text}</span>
+              <span class="text-lg sm:text-xl font-bold font-rajdhani ${color}">${text}</span>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    // ================= SEKSYEN SLIDER BESAR & POPUP =================
+    // ================= SEKSYEN SLIDER BESAR =================
     function renderSlider() {
       const el = document.getElementById('utama');
       if (!el) return;
@@ -382,27 +452,27 @@
       const posterSrc = formatImageUrl(s.image_url);
 
       el.innerHTML = `
-        <div class="py-6 px-4">
+        <div class="py-4 sm:py-6 px-3 sm:px-4">
           <div class="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-slate-950 min-h-[380px] md:h-[500px] shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col md:flex-row items-center justify-between">
             <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
               <img src="${posterSrc}" class="w-full h-full object-cover filter blur-3xl scale-125" alt="Blur Background">
             </div>
 
-            <div class="relative z-10 w-full md:w-1/2 p-6 sm:p-10 md:p-12 flex flex-col justify-center order-2 md:order-1">
+            <div class="relative z-10 w-full md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
               <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/90 border border-brand-cyan/50 text-brand-cyan text-xs font-rajdhani font-bold w-fit mb-3">
                 <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
                 <span>${s.badge || 'PENGUMUMAN'}</span>
               </div>
-              <h1 class="font-orbitron font-extrabold text-2xl sm:text-3xl md:text-4xl text-white mb-3 leading-tight">${s.title || ''}</h1>
-              <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">${s.deskripsi || ''}</p>
+              <h1 class="font-orbitron font-extrabold text-xl sm:text-2xl md:text-4xl text-white mb-2 sm:mb-3 leading-tight">${s.title || ''}</h1>
+              <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-4 sm:mb-6">${s.deskripsi || ''}</p>
               
               <div class="flex items-center gap-4">
                 <div class="flex items-center gap-2">
-                  <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                  <button onclick="prevSlide()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                    <i data-lucide="chevron-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                   </button>
-                  <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
-                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                  <button onclick="nextSlide()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-500/40 text-brand-cyan flex items-center justify-center hover:bg-brand-cyan hover:text-black transition shadow-lg">
+                    <i data-lucide="chevron-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                   </button>
                 </div>
                 <div class="flex items-center gap-1.5">
@@ -413,7 +483,7 @@
               </div>
             </div>
 
-            <div class="relative z-10 w-full md:w-1/2 h-72 sm:h-96 md:h-[440px] p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
+            <div class="relative z-10 w-full md:w-1/2 h-64 sm:h-80 md:h-[440px] p-3 sm:p-4 md:p-6 flex items-center justify-center order-1 md:order-2">
               <div class="w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-cyan-500/20 flex items-center justify-center p-2 group cursor-pointer" onclick="openImageModal('${posterSrc}')" title="Klik untuk paparan skrin penuh">
                 <img src="${posterSrc}" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105" alt="Poster Slider">
               </div>
@@ -490,11 +560,11 @@
       }
       container.innerHTML = list.map(g => `
         <div class="pro-card p-4 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 mb-2 p-1 cursor-pointer" onclick="openImageModal('${formatImageUrl(g.image_url)}')">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 mb-2 p-1 cursor-pointer" onclick="openImageModal('${formatImageUrl(g.image_url)}')">
             <img src="${formatImageUrl(g.image_url)}" class="w-full h-full object-contain">
           </div>
-          <h4 class="font-rajdhani font-bold text-sm text-white">${g.nama || ''}</h4>
-          <span class="text-[11px] text-brand-cyan">${g.subjek || ''}</span>
+          <h4 class="font-rajdhani font-bold text-xs sm:text-sm text-white">${g.nama || ''}</h4>
+          <span class="text-[10px] sm:text-[11px] text-brand-cyan">${g.subjek || ''}</span>
         </div>
       `).join('');
     }
@@ -547,24 +617,31 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= ADMIN CMS (5 KATEGORI SHEETS) =================
+    // ================= ADMIN CMS =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     
-    function verifyAdmin() {
-      if (document.getElementById('admin-pass-input').value === ADMIN_PASSWORD) {
+    async function verifyAdmin() {
+      const pass = document.getElementById('admin-pass-input').value;
+      const computedHash = await computeSHA256(pass);
+
+      if (computedHash === ADMIN_HASH) {
+        CURRENT_SESSION_TOKEN = pass; // Disimpan dalam ingatan pembolehubah sesi untuk kiriman API sahaja
+        document.getElementById('admin-pass-input').value = ""; // Padam nilai daripada DOM serta-merta
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('flex');
         switchAdminTab('slider');
-      } else { alert("Kata laluan salah!"); }
+      } else { 
+        alert("Kata laluan salah!"); 
+      }
     }
 
     function switchAdminTab(tab) {
       activeAdminTab = tab;
       cancelEditMode();
-      document.querySelectorAll('.admin-tab-btn').forEach(b => b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300");
-      document.getElementById(`tab-btn-${tab}`).className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black";
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0");
+      document.getElementById(`tab-btn-${tab}`).className = "admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black flex-shrink-0";
       renderAdminForm();
       renderAdminList();
     }
@@ -575,36 +652,36 @@
 
       if (activeAdminTab === 'slider') {
         f.innerHTML = `
-          <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></textarea>
+          <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
         `;
       } else if (activeAdminTab === 'jadual') {
         f.innerHTML = `
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-poster_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+          <input type="text" id="adm-title" placeholder="Tajuk Sesi" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-tarikh_hari" placeholder="Hari & Waktu" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-masa" placeholder="Masa (cth: 2 Jam)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-poster_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       } else if (activeAdminTab === 'guru') {
         f.innerHTML = `
-          <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="adm-nama" placeholder="Nama Guru" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+          <input type="text" id="adm-image_url" placeholder="Link Gambar Profil" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       } else if (activeAdminTab === 'bahan') {
         f.innerHTML = `
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       } else if (activeAdminTab === 'rakaman') {
         f.innerHTML = `
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" id="adm-video_url" placeholder="Link Video YouTube/Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+          <input type="text" id="adm-tajuk" placeholder="Tajuk Video" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="adm-video_url" placeholder="Link Video YouTube/Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
         `;
       }
     }
@@ -658,7 +735,7 @@
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: isUp ? "UPDATE" : "ADD", sheetName: activeAdminTab, data: payload, rowIndex: isUp ? Number(row) : null, password: ADMIN_PASSWORD })
+          body: JSON.stringify({ action: isUp ? "UPDATE" : "ADD", sheetName: activeAdminTab, data: payload, rowIndex: isUp ? Number(row) : null, password: CURRENT_SESSION_TOKEN })
         });
         const r = await res.json();
         if (r.success) {
@@ -689,7 +766,7 @@
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'DELETE', sheetName: sheetName, rowIndex: rowIndex, password: ADMIN_PASSWORD })
+          body: JSON.stringify({ action: 'DELETE', sheetName: sheetName, rowIndex: rowIndex, password: CURRENT_SESSION_TOKEN })
         });
         const r = await res.json();
         if (r.success) { alert("Berjaya dipadam!"); await loadData(); }
