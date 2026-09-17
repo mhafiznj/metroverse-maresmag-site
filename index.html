@@ -337,11 +337,11 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
 
-    // Enkripsi tersembunyi (Base64 reverse string - tidak boleh dicari terus dalam inspect element)
-    const _AUTH_ENC = "bjFtc2RhU210Z0BtQG1lc2Fycg==";
+    // Enkripsi tersembunyi (Base64 decode menghasilkan: maresm@gmtsadm1n)
+    const _AUTH_ENC = "bWFyZXNtQGdtdHNhZG0xbg==";
     function _decodeKey(str) {
       try {
-        return atob(str).split("").reverse().join("");
+        return atob(str);
       } catch (e) {
         return "";
       }
@@ -688,7 +688,7 @@
     
     function verifyAdmin() {
       const inputEl = document.getElementById('admin-pass-input');
-      const pass = inputEl ? inputEl.value : "";
+      const pass = inputEl ? inputEl.value.trim() : "";
       const validPass = _decodeKey(_AUTH_ENC);
 
       if (pass === validPass) {
