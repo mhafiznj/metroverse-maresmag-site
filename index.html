@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARESMAG METROVERSE | Portal Tusyen MRSM Gerik</title>
+  <title>MARESMAG METROVERSE | MRSM Gerik</title>
   
+  <!-- Favicon Logo Rasmi MRSM -->
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG">
   
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -99,7 +102,7 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= PRELOADER RINGKAS ================= -->
+  <!-- ================= SATU SAHAJA LOADING AWAL ================= -->
   <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
     <div class="relative flex items-center justify-center mb-5">
       <div class="w-16 h-16 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_20px_rgba(0,242,254,0.4)]"></div>
@@ -109,7 +112,7 @@
     </div>
     <div class="flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
-      <span class="font-orbitron text-xs font-bold text-white tracking-widest">MEMUATKAN PORTAL...</span>
+      <span class="font-orbitron text-xs font-bold text-white tracking-widest">MEMUATKAN DATA PORTAL...</span>
     </div>
   </div>
 
@@ -126,6 +129,7 @@
         </div>
       </a>
 
+      <!-- LINK NAVBAR GUNA #utama -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
         <a href="#utama" class="hover:text-brand-cyan">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan">Countdown SPM</a>
@@ -142,7 +146,7 @@
     </div>
   </nav>
 
-  <!-- ================= SEKSYEN UTAMA (#utama) ================= -->
+  <!-- ================= SEKSYEN UTAMA (#utama - MUTLAK KOSONG JIKA TIADA DATA DI SHEETS) ================= -->
   <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
   <!-- ================= COUNTDOWN SPM ================= -->
@@ -154,29 +158,27 @@
         </div>
         <div>
           <h2 class="font-orbitron text-xl font-bold text-white">COUNTDOWN SIJIL PELAJARAN MALAYSIA</h2>
-          <p class="text-xs text-slate-400">Detik peperiksaan mengikut subjek SPM</p>
+          <p class="text-xs text-slate-400">Detik peperiksaan mengikut subjek</p>
         </div>
       </div>
-      <span class="text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30">
-        Kiraan Auto
-      </span>
     </div>
+    <!-- KONTENA KAD COUNTDOWN -->
     <div id="countdown-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- ================= 1. JADUAL ================= -->
+  <!-- ================= JADUAL ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">JADUAL KELAS TUSYEN</h2>
     <div id="jadual-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- ================= 2. TENAGA PENGAJAR ================= -->
+  <!-- ================= GURU ================= -->
   <section id="guru" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">TENAGA PENGAJAR</h2>
     <div id="guru-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
   </section>
 
-  <!-- ================= 3. BAHAN ================= -->
+  <!-- ================= BAHAN ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
       <h2 class="font-orbitron text-xl font-bold text-white">BAHAN & MODUL SPM</h2>
@@ -198,7 +200,7 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 4. RAKAMAN ================= -->
+  <!-- ================= RAKAMAN ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <h2 class="font-orbitron text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">ARKIB RAKAMAN KELAS</h2>
     <div id="rakaman-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -214,15 +216,18 @@
     <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-6 relative max-h-[90vh] flex flex-col">
       <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
       
+      <!-- Login Box -->
       <div id="admin-auth-box" class="py-10 text-center max-w-sm mx-auto w-full">
         <h3 class="font-orbitron text-lg font-bold text-white mb-4">PANEL ADMIN</h3>
         <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white mb-3 outline-none">
         <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs">LOG MASUK</button>
       </div>
 
+      <!-- Dashboard Panel -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
-          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">1. Slider & Poster</button>
+          <button onclick="switchAdminTab('countdown')" id="tab-btn-countdown" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black">⏱️ Countdown SPM</button>
+          <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">1. Slider & Poster</button>
           <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">2. Jadual</button>
           <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">3. Guru</button>
           <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300">4. Bahan</button>
@@ -253,22 +258,6 @@
     const API_URL = "https://script.google.com/macros/s/AKfycby3hjBDOqBGel0qKTFx5UKX8gv1CSda_Xf0yL-ZBPkqMhSRcpBftB4NMl9dXJt9V9_9ag/exec";
     const ADMIN_PASSWORD = "maresm@gmtsadm1n";
 
-    // ==========================================
-    // DATA TETAP COUNTDOWN SPM (SUNTING DI SINI)
-    // ==========================================
-    const SPM_TIMETABLE = [
-      { subjek: "Bahasa Melayu (Kertas 1 & 2)", tarikh_iso: "2026-11-23", tarikh_teks: "Isnin, 23 Nov 2026" },
-      { subjek: "Bahasa Inggeris (Kertas 1 & 2)", tarikh_iso: "2026-11-24", tarikh_teks: "Selasa, 24 Nov 2026" },
-      { subjek: "Sejarah (Kertas 1 & 2)", tarikh_iso: "2026-11-26", tarikh_teks: "Khamis, 26 Nov 2026" },
-      { subjek: "Matematik", tarikh_iso: "2026-11-30", tarikh_teks: "Isnin, 30 Nov 2026" },
-      { subjek: "Pendidikan Islam / Moral", tarikh_iso: "2026-12-02", tarikh_teks: "Rabu, 02 Dis 2026" },
-      { subjek: "Matematik Tambahan", tarikh_iso: "2026-12-07", tarikh_teks: "Isnin, 07 Dis 2026" },
-      { subjek: "Fizik", tarikh_iso: "2026-12-09", tarikh_teks: "Rabu, 09 Dis 2026" },
-      { subjek: "Kimia", tarikh_iso: "2026-12-14", tarikh_teks: "Isnin, 14 Dis 2026" },
-      { subjek: "Biologi", tarikh_iso: "2026-12-16", tarikh_teks: "Rabu, 16 Dis 2026" },
-      { subjek: "Prinsip Perakaunan", tarikh_iso: "2026-12-21", tarikh_teks: "Isnin, 21 Dis 2026" }
-    ];
-
     const subjekList = ["Bahasa Melayu", "Bahasa Inggeris", "Sejarah", "Matematik", "Matematik Tambahan", "Fizik", "Kimia", "Biologi", "Prinsip Perakaunan", "Pendidikan Islam", "Pendidikan Moral"];
 
     function formatImageUrl(url) {
@@ -281,8 +270,9 @@
       return url;
     }
 
-    let portalData = { slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
-    let activeAdminTab = 'slider';
+    // SEMUA KATEGORI BERMULA KOSONG MUTLAK
+    let portalData = { countdown: [], slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
+    let activeAdminTab = 'countdown';
     let currentSlideIndex = 0;
 
     async function loadData() {
@@ -290,6 +280,7 @@
         const res = await fetch(`${API_URL}?t=${Date.now()}`);
         const data = await res.json();
         if (data && !data.error) {
+          portalData.countdown = Array.isArray(data.countdown) ? data.countdown : [];
           portalData.slider = Array.isArray(data.slider) ? data.slider : [];
           portalData.jadual = Array.isArray(data.jadual) ? data.jadual : [];
           portalData.guru = Array.isArray(data.guru) ? data.guru : [];
@@ -306,20 +297,32 @@
     }
 
     function renderAll() {
-      renderCountdown();
-      renderSlider();
-      renderJadual();
-      renderGuru();
-      filterBahan();
-      renderRakaman();
+      // Countdown dijalankan dahulu supaya sentiasa terpapar
+      try { renderCountdown(); } catch (e) { console.error("Countdown error:", e); }
+      try { renderSlider(); } catch (e) { console.error("Slider error:", e); }
+      try { renderJadual(); } catch (e) { console.error("Jadual error:", e); }
+      try { renderGuru(); } catch (e) { console.error("Guru error:", e); }
+      try { filterBahan(); } catch (e) { console.error("Bahan error:", e); }
+      try { renderRakaman(); } catch (e) { console.error("Rakaman error:", e); }
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= COUNTDOWN ENGINE =================
-    function calculateDaysLeft(isoDate) {
-      if (!isoDate) return null;
+    // ================= ENJIN COUNTDOWN (KEBAL FORMAT & TERUS PAPAR) =================
+    function calculateDaysLeft(rawDate) {
+      if (!rawDate) return null;
       try {
-        const target = new Date(isoDate);
+        let s = String(rawDate).trim();
+        if (s.includes('T')) s = s.split('T')[0];
+        
+        // Sokongan jika tarikh format DD/MM/YYYY atau DD-MM-YYYY
+        const dmy = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+        let target;
+        if (dmy) {
+          target = new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+        } else {
+          target = new Date(s);
+        }
+
         if (isNaN(target.getTime())) return null;
 
         const today = new Date();
@@ -334,9 +337,20 @@
     function renderCountdown() {
       const container = document.getElementById('countdown-container');
       if (!container) return;
+      const list = portalData.countdown || [];
 
-      container.innerHTML = SPM_TIMETABLE.map(c => {
-        const days = calculateDaysLeft(c.tarikh_iso);
+      if (!Array.isArray(list) || list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada jadual subjek SPM dimasukkan lagi di Google Sheets.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(c => {
+        // Toleransi nama lajur dari Google Sheets
+        const namaSubjek = c.subjek || c.nama || c.tajuk || c.subject || 'Subjek SPM';
+        const tarikhPaparan = c.tarikh_teks || c.tarikh || c.tarikh_iso || '';
+        const tarikhKira = c.tarikh_iso || c.tarikh || c.tarikh_teks;
+        const days = calculateDaysLeft(tarikhKira);
+
         let text = days === null ? "-" : (days === 0 ? "HARI INI!" : (days < 0 ? "Tamat" : `${days} hari lagi`));
         let color = days === 0 ? "text-emerald-400 font-bold animate-pulse" : (days < 0 ? "text-slate-500" : "text-sky-400");
 
@@ -345,9 +359,9 @@
             <div>
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
-                <h3 class="font-rajdhani font-bold text-lg text-white leading-tight">${c.subjek}</h3>
+                <h3 class="font-rajdhani font-bold text-lg text-white leading-tight">${namaSubjek}</h3>
               </div>
-              <p class="text-xs text-slate-400 pl-6 mb-4">${c.tarikh_teks}</p>
+              <p class="text-xs text-slate-400 pl-6 mb-4">${tarikhPaparan}</p>
             </div>
             <div class="pl-6">
               <span class="text-xl font-bold font-rajdhani ${color}">${text}</span>
@@ -357,13 +371,13 @@
       }).join('');
     }
 
-    // ================= SLIDER (#utama) =================
+    // ================= SLIDER #utama (100% KOSONG JIKA TIADA DATA DI SHEETS) =================
     function renderSlider() {
       const el = document.getElementById('utama');
       if (!el) return;
       const list = portalData.slider || [];
 
-      // JIKA TIADA DATA DALAM SHEETS, HAPUSKAN TERUS TANPA PAPARAN DUMMY
+      // Jika tiada data dalam Google Sheets, kosongkan terus tanpa sebarang rupa poster
       if (!Array.isArray(list) || list.length === 0) {
         el.innerHTML = "";
         el.style.display = "none";
@@ -433,7 +447,7 @@
       if (!container) return;
       const list = portalData.guru || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada profil guru dimasukkan lagi.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada maklumat guru dimasukkan lagi.</div>`;
         return;
       }
       container.innerHTML = list.map(g => `
@@ -478,7 +492,7 @@
       if (!container) return;
       const list = portalData.rakaman || [];
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada rakaman video dimasukkan lagi.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada rakaman video ditemui.</div>`;
         return;
       }
       container.innerHTML = list.map(r => `
@@ -495,16 +509,15 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= ADMIN CMS (5 KATEGORI SHEETS) =================
+    // ================= ADMIN CMS =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
-    
     function verifyAdmin() {
       if (document.getElementById('admin-pass-input').value === ADMIN_PASSWORD) {
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('flex');
-        switchAdminTab('slider');
+        switchAdminTab('countdown');
       } else { alert("Kata laluan salah!"); }
     }
 
@@ -520,8 +533,13 @@
     function renderAdminForm() {
       const f = document.getElementById('admin-form-fields');
       const opt = subjekList.map(s => `<option value="${s}">${s}</option>`).join('');
-
-      if (activeAdminTab === 'slider') {
+      if (activeAdminTab === 'countdown') {
+        f.innerHTML = `
+          <div><label class="block text-[10px] text-slate-400 mb-1">Subjek</label><select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">${opt}</select></div>
+          <div><label class="block text-[10px] text-slate-400 mb-1">Tarikh ISO (yyyy-mm-dd)</label><input type="date" id="adm-tarikh_iso" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+          <div class="col-span-full"><label class="block text-[10px] text-slate-400 mb-1">Teks Tarikh (cth: Isnin, 23 Nov 2026)</label><input type="text" id="adm-tarikh_teks" placeholder="cth: Isnin, 23 Nov 2026" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+        `;
+      } else if (activeAdminTab === 'slider') {
         f.innerHTML = `
           <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
           <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
@@ -563,7 +581,7 @@
       if (list.length === 0) { c.innerHTML = `<div class="p-3 text-center text-xs text-slate-500">Tiada rekod data.</div>`; return; }
       c.innerHTML = list.map((item, idx) => `
         <div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
-          <div class="truncate mr-2"><span class="font-bold text-white">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</span> <span class="text-slate-400 text-[10px]">${item.tarikh_hari || item.badge || ''}</span></div>
+          <div class="truncate mr-2"><span class="font-bold text-white">${item.subjek || item.title || item.nama || item.tajuk || 'Item'}</span> <span class="text-slate-400 text-[10px]">${item.tarikh_teks || item.badge || ''}</span></div>
           <div class="flex gap-1.5 flex-shrink-0">
             <button onclick="editItem(${idx})" class="px-2 py-0.5 bg-cyan-500/10 text-brand-cyan rounded">Edit</button>
             <button onclick="deleteItem('${activeAdminTab}', ${item.row_index})" class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded">Padam</button>
@@ -610,6 +628,7 @@
         });
         const r = await res.json();
         if (r.success) {
+          // KEMASKINI SERTA-MERTA (OPTIMISTIC UPDATE) SUPAYA TERUS KELUAR DI LAMAN UTAMA
           if (isUp) {
             const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(row));
             if (idx !== -1) portalData[activeAdminTab][idx] = { ...portalData[activeAdminTab][idx], ...payload };
