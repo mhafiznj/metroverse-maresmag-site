@@ -98,7 +98,7 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-cyan selection:text-black">
 
-  <!-- ================= PRELOADER RINGKAS ================= -->
+  <!-- ================= PRELOADER ================= -->
   <div id="global-preloader" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center transition-opacity duration-300">
     <div class="relative flex items-center justify-center mb-5">
       <div class="w-16 h-16 rounded-full border-2 border-brand-cyan/20 border-t-brand-cyan spin-fast shadow-[0_0_20px_rgba(0,242,254,0.4)]"></div>
@@ -115,8 +115,6 @@
   <!-- ================= NAVBAR ================= -->
   <nav class="sticky top-0 z-40 glass-nav px-3 sm:px-6 lg:px-10 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      
-      <!-- Logo & Branding -->
       <a href="#" class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-cyan-400/40 p-1 flex items-center justify-center flex-shrink-0">
           <img src="https://upload.wikimedia.org/wikipedia/en/0/00/MRSM_Logo.PNG" alt="MRSM" class="w-full h-full object-contain">
@@ -130,7 +128,6 @@
         </div>
       </a>
 
-      <!-- Desktop Links -->
       <div class="hidden lg:flex items-center space-x-6 text-xs font-rajdhani font-bold uppercase text-slate-300">
         <a href="#utama" class="hover:text-brand-cyan transition">Utama</a>
         <a href="#countdown-spm" class="hover:text-brand-cyan transition">Countdown SPM</a>
@@ -140,20 +137,17 @@
         <a href="#jadual" class="hover:text-brand-cyan transition">Jadual Siri</a>
       </div>
 
-      <!-- Action Items -->
       <div class="flex items-center gap-2 sm:gap-3">
         <button onclick="openAdminModal()" title="Tetapan Admin" class="neon-icon-btn p-2 sm:p-2.5 rounded-xl text-brand-cyan flex items-center justify-center transition">
           <i data-lucide="settings" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
-
         <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-brand-cyan transition flex items-center justify-center">
           <i id="mobile-menu-icon" data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
-
     </div>
 
-    <!-- Dropdown Menu Mobile -->
+    <!-- Mobile Dropdown -->
     <div id="mobile-menu" class="hidden lg:hidden flex-col gap-2 pt-3 pb-2 border-t border-slate-800/80 mt-2 font-rajdhani font-bold text-xs uppercase text-slate-300">
       <a href="#utama" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="home" class="w-4 h-4 text-brand-cyan"></i> <span>Utama</span>
@@ -176,7 +170,7 @@
     </div>
   </nav>
 
-  <!-- ================= 1. SEKSYEN UTAMA (#utama) ================= -->
+  <!-- ================= 1. UTAMA ================= -->
   <section id="utama" class="max-w-7xl mx-auto w-full"></section>
 
   <!-- ================= 2. COUNTDOWN SPM ================= -->
@@ -242,7 +236,7 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 5. RAKAMAN KELAS MENGIKUT SIRI TUSYEN ================= -->
+  <!-- ================= 5. RAKAMAN KELAS MENGIKUT SIRI (ACCORDION) ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -251,7 +245,7 @@
         </div>
         <div>
           <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">ARKIB RAKAMAN KELAS</h2>
-          <p class="text-xs text-slate-400">Pilih siri tusyen untuk melihat rakaman video mengikut subjek</p>
+          <p class="text-xs text-slate-400">Pilih sesi untuk melihat rakaman video semua subjek</p>
         </div>
       </div>
       <span class="text-[10px] sm:text-[11px] font-mono text-red-400 bg-red-950/70 px-3 py-1 rounded-full border border-red-500/30">
@@ -261,7 +255,7 @@
     <div id="rakaman-siri-container" class="space-y-4"></div>
   </section>
 
-  <!-- ================= 6. JADUAL KELAS TUSYEN MENGIKUT SIRI (ACCORDION & STATUS RIBBON) ================= -->
+  <!-- ================= 6. JADUAL KELAS TUSYEN MENGIKUT SIRI ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -270,15 +264,13 @@
         </div>
         <div>
           <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">JADUAL KELAS TUSYEN</h2>
-          <p class="text-xs text-slate-400">Pilih siri tusyen untuk melihat senarai jadual & status kelas</p>
+          <p class="text-xs text-slate-400">Pilih sesi untuk melihat jadual & status kelas</p>
         </div>
       </div>
       <span class="text-[10px] sm:text-[11px] font-mono text-brand-cyan bg-cyan-950/80 px-3 py-1 rounded-full border border-brand-cyan/30">
-        Jadual Berperingkat
+        Jadual Sesi
       </span>
     </div>
-
-    <!-- KONTENA JADUAL SIRI (EXPAND / COLLAPSE) -->
     <div id="jadual-siri-container" class="space-y-4"></div>
   </section>
 
@@ -287,7 +279,7 @@
     © 2026 MARESMAG METROVERSE | MRSM Gerik | www.mhafiznj.com
   </footer>
 
-  <!-- ================= IMAGE MODAL ================= -->
+  <!-- ================= MODAL PREVIEW GAMBAR ================= -->
   <div id="image-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6" onclick="closeImageModal()">
     <div class="relative w-full max-w-5xl max-h-[92vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
       <button onclick="closeImageModal()" class="absolute -top-10 right-0 p-1.5 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white transition flex items-center gap-1 text-xs">
@@ -302,7 +294,7 @@
 
   <!-- ================= ADMIN CMS MODAL ================= -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-3 sm:p-4">
-    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-3xl w-full p-5 sm:p-6 relative max-h-[90vh] flex flex-col">
+    <div class="bg-slate-950 border border-brand-cyan/50 rounded-3xl max-w-4xl w-full p-5 sm:p-6 relative max-h-[92vh] flex flex-col">
       <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
       
       <!-- Login Box -->
@@ -316,27 +308,29 @@
         <button onclick="verifyAdmin()" class="w-full py-2.5 bg-brand-cyan text-black font-bold rounded-xl text-xs hover:bg-cyan-300 transition">LOG MASUK</button>
       </div>
 
-      <!-- Panel -->
+      <!-- Panel Content -->
       <div id="admin-panel" class="hidden flex-col h-full overflow-hidden">
         <div class="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-thin">
           <button onclick="switchAdminTab('slider')" id="tab-btn-slider" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-cyan text-black flex-shrink-0">1. Poster Utama</button>
           <button onclick="switchAdminTab('guru')" id="tab-btn-guru" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">2. Poster Guru</button>
           <button onclick="switchAdminTab('bahan')" id="tab-btn-bahan" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">3. Bahan Drive</button>
-          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">4. Rakaman (Siri)</button>
-          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">5. Jadual (Siri)</button>
+          <button onclick="switchAdminTab('rakaman')" id="tab-btn-rakaman" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">4. Rakaman Siri</button>
+          <button onclick="switchAdminTab('jadual')" id="tab-btn-jadual" class="admin-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 flex-shrink-0">5. Jadual Siri</button>
         </div>
 
         <div class="flex-1 overflow-y-auto space-y-4 pr-1">
-          <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-4">
-            <h4 class="font-rajdhani font-bold text-white text-sm mb-3" id="admin-form-title">Tambah Data</h4>
+          <div class="bg-slate-900/90 border border-brand-cyan/30 rounded-2xl p-4 sm:p-5">
+            <h4 class="font-rajdhani font-bold text-white text-base mb-3 flex items-center justify-between" id="admin-form-title">
+              <span>Tambah / Kemaskini Data</span>
+            </h4>
             <input type="hidden" id="editing-row-index" value="">
-            <div id="admin-form-fields" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"></div>
-            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2 bg-brand-cyan text-black font-bold text-xs rounded-xl hover:bg-cyan-300 transition">SIMPAN KE GOOGLE SHEETS</button>
+            <div id="admin-form-fields" class="space-y-4 mb-4"></div>
+            <button onclick="saveCurrentItem()" id="btn-save-item" class="w-full py-2.5 bg-brand-cyan text-black font-bold text-xs rounded-xl hover:bg-cyan-300 transition">SIMPAN KE GOOGLE SHEETS</button>
             <button onclick="cancelEditMode()" id="btn-cancel-edit" class="hidden w-full mt-2 text-xs text-amber-400 hover:underline">Batal Edit</button>
           </div>
 
           <div>
-            <h4 class="text-xs font-bold text-slate-400 mb-2">Senarai Data Semasa:</h4>
+            <h4 class="text-xs font-bold text-slate-400 mb-2">Senarai Rekod Semasa:</h4>
             <div id="admin-items-list" class="space-y-2"></div>
           </div>
         </div>
@@ -354,11 +348,7 @@
 
     const _AUTH_ENC = "bWFyZXNtQGdtdHNhZG0xbg==";
     function _decodeKey(str) {
-      try {
-        return atob(str);
-      } catch (e) {
-        return "";
-      }
+      try { return atob(str); } catch (e) { return ""; }
     }
 
     let CURRENT_SESSION_TOKEN = "";
@@ -377,7 +367,6 @@
       }
     }
 
-    // 11 SUBJEK COUNTDOWN SPM
     const SPM_TIMETABLE = [
       { subjek: "Bahasa Melayu", tarikh_iso: "2026-11-23", tarikh_teks: "Isnin, 23 November 2026" },
       { subjek: "Bahasa Inggeris", tarikh_iso: "2026-11-24", tarikh_teks: "Selasa, 24 November 2026" },
@@ -411,7 +400,6 @@
     let sliderTimer = null;
     let guruSliderTimer = null;
 
-    // Status Buka/Tutup Accordion
     let openSiriSet = new Set();
     let openJadualSiriSet = new Set();
 
@@ -446,7 +434,6 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= ENJIN AUTO-SLIDE =================
     function initAutoSliders() {
       startSliderTimer();
       startGuruTimer();
@@ -455,28 +442,22 @@
     function startSliderTimer() {
       clearInterval(sliderTimer);
       if (portalData.slider && portalData.slider.length > 1) {
-        sliderTimer = setInterval(() => {
-          nextSlide(false);
-        }, SLIDER_UTAMA_INTERVAL);
+        sliderTimer = setInterval(() => { nextSlide(false); }, SLIDER_UTAMA_INTERVAL);
       }
     }
 
     function startGuruTimer() {
       clearInterval(guruSliderTimer);
       if (portalData.guru && portalData.guru.length > 1) {
-        guruSliderTimer = setInterval(() => {
-          nextGuruSlide(false);
-        }, SLIDER_GURU_INTERVAL);
+        guruSliderTimer = setInterval(() => { nextGuruSlide(false); }, SLIDER_GURU_INTERVAL);
       }
     }
 
-    // ================= COUNTDOWN ENGINE =================
     function calculateDaysLeft(isoDate) {
       if (!isoDate) return null;
       try {
         const target = new Date(isoDate);
         if (isNaN(target.getTime())) return null;
-
         const today = new Date();
         target.setHours(0, 0, 0, 0);
         today.setHours(0, 0, 0, 0);
@@ -512,7 +493,6 @@
       }).join('');
     }
 
-    // ================= 1. POSTER SLIDER UTAMA =================
     function renderSlider() {
       const el = document.getElementById('utama');
       if (!el) return;
@@ -585,7 +565,6 @@
       if (userInitiated) startSliderTimer();
     }
 
-    // ================= 2. POSTER SLIDER GURU =================
     function renderGuruSlider() {
       const container = document.getElementById('guru-slider-wrapper');
       if (!container) return;
@@ -640,7 +619,6 @@
       if (userInitiated) startGuruTimer();
     }
 
-    // ================= MODAL PRATONTON GAMBAR =================
     function openImageModal(url) {
       if (!url) return;
       const modal = document.getElementById('image-modal');
@@ -661,7 +639,6 @@
       }
     }
 
-    // ================= BAHAN RUJUKAN =================
     function filterBahan() {
       const filter = document.getElementById('filter-subjek').value;
       const container = document.getElementById('bahan-container');
@@ -686,7 +663,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= 5. RAKAMAN KELAS MENGIKUT SIRI (ACCORDION) =================
+    // ================= 5. RAKAMAN KELAS MENGIKUT SIRI =================
     function toggleSiri(siriName) {
       if (openSiriSet.has(siriName)) {
         openSiriSet.delete(siriName);
@@ -709,7 +686,7 @@
 
       const grouped = {};
       list.forEach(item => {
-        const siriKey = (item.siri && item.siri.trim()) ? item.siri.trim() : "Siri Tusyen";
+        const siriKey = (item.siri && item.siri.trim()) ? item.siri.trim() : "Sesi Kelas Umum";
         if (!grouped[siriKey]) grouped[siriKey] = [];
         grouped[siriKey].push(item);
       });
@@ -725,7 +702,6 @@
 
         return `
           <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950/70 shadow-lg transition-all duration-300 ${isOpen ? 'border-red-500/40 shadow-[0_0_20px_rgba(239,68,68,0.1)]' : 'hover:border-slate-700'}">
-            
             <button onclick="toggleSiri('${siriTitle.replace(/'/g, "\\'")}')" class="w-full px-5 py-4 flex items-center justify-between gap-4 text-left transition bg-slate-900/50 hover:bg-slate-900">
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-xl ${isOpen ? 'bg-red-500 text-white' : 'bg-red-500/10 text-red-400'} border border-red-500/30 flex items-center justify-center font-bold text-xs font-orbitron transition-colors">
@@ -733,13 +709,13 @@
                 </div>
                 <div>
                   <h3 class="font-orbitron font-bold text-sm sm:text-base text-white">${siriTitle}</h3>
-                  <p class="text-[11px] text-slate-400 font-rajdhani">Mengandungi ${videoList.length} video rakaman subjek</p>
+                  <p class="text-[11px] text-slate-400 font-rajdhani">Mengandungi ${videoList.length} rakaman video</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-3">
                 <span class="hidden sm:inline-block text-[10px] uppercase font-mono px-2.5 py-0.5 rounded-full ${isOpen ? 'bg-red-500/20 text-red-300 border border-red-500/40' : 'bg-slate-800 text-slate-400'}">
-                  ${isOpen ? 'Buka' : 'Tutup'}
+                  ${isOpen ? 'Tutup' : 'Buka'}
                 </span>
                 <i data-lucide="${isOpen ? 'chevron-up' : 'chevron-down'}" class="w-5 h-5 text-slate-400 transition-transform"></i>
               </div>
@@ -753,7 +729,7 @@
                       <div>
                         <div class="flex items-center justify-between mb-2">
                           <span class="text-[10px] bg-red-950/90 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider">${v.subjek || 'SUBJEK'}</span>
-                          <span class="text-[10px] text-slate-500"><i data-lucide="play-circle" class="w-3 h-3 inline mr-1 text-red-400"></i>Rakaman</span>
+                          <span class="text-[10px] text-slate-500"><i data-lucide="play-circle" class="w-3 h-3 inline mr-1 text-red-400"></i>Video</span>
                         </div>
                         <h4 class="font-rajdhani font-bold text-sm sm:text-base text-white leading-snug">${v.tajuk || 'Sesi Pembelajaran'}</h4>
                       </div>
@@ -773,7 +749,7 @@
       }).join('');
     }
 
-    // ================= 6. JADUAL KELAS MENGIKUT SIRI (ACCORDION & STATUS RIBBON) =================
+    // ================= 6. JADUAL MENGIKUT SIRI (BANNER STATUS PADA TAJUK SIRI) =================
     function toggleJadualSiri(siriName) {
       if (openJadualSiriSet.has(siriName)) {
         openJadualSiriSet.delete(siriName);
@@ -794,10 +770,9 @@
         return;
       }
 
-      // Kumpulkan jadual mengikut Siri
       const grouped = {};
       list.forEach(item => {
-        const siriKey = (item.siri && item.siri.trim()) ? item.siri.trim() : "Siri Tusyen";
+        const siriKey = (item.siri && item.siri.trim()) ? item.siri.trim() : "Sesi Kelas Umum";
         if (!grouped[siriKey]) grouped[siriKey] = [];
         grouped[siriKey].push(item);
       });
@@ -811,30 +786,43 @@
         const isOpen = openJadualSiriSet.has(siriTitle);
         const kelasList = grouped[siriTitle];
 
+        // Tentukan status siri: jika ada mana-mana kelas AKAN DATANG, banner siri = AKAN DATANG
+        const hasAkanDatang = kelasList.some(k => !k.status || k.status.toUpperCase() === 'AKAN DATANG');
+        const siriStatus = hasAkanDatang ? "AKAN DATANG" : "SELESAI";
+        const siriBadgeClass = hasAkanDatang 
+          ? "bg-emerald-950/90 text-emerald-400 border border-emerald-500/40 shadow-[0_0_12px_rgba(52,211,153,0.3)] animate-pulse" 
+          : "bg-slate-800 text-slate-400 border border-slate-700";
+
         return `
           <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950/70 shadow-lg transition-all duration-300 ${isOpen ? 'border-brand-cyan/40 shadow-[0_0_20px_rgba(0,242,254,0.1)]' : 'hover:border-slate-700'}">
             
-            <!-- HEADER BUTANG SIRI JADUAL (TEKAN UNTUK HIDE / UNHIDE) -->
+            <!-- HEADER BUTANG SIRI DENGAN BANNER STATUS -->
             <button onclick="toggleJadualSiri('${siriTitle.replace(/'/g, "\\'")}')" class="w-full px-5 py-4 flex items-center justify-between gap-4 text-left transition bg-slate-900/50 hover:bg-slate-900">
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-xl ${isOpen ? 'bg-brand-cyan text-black' : 'bg-cyan-500/10 text-brand-cyan'} border border-cyan-500/30 flex items-center justify-center font-bold text-xs font-orbitron transition-colors">
                   ${sIdx + 1}
                 </div>
                 <div>
-                  <h3 class="font-orbitron font-bold text-sm sm:text-base text-white">${siriTitle}</h3>
-                  <p class="text-[11px] text-slate-400 font-rajdhani">Mengandungi ${kelasList.length} sesi kelas tusyen</p>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-orbitron font-bold text-sm sm:text-base text-white">${siriTitle}</h3>
+                    <!-- BANNER STATUS PADA TAJUK SIRI -->
+                    <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold font-mono tracking-wider ${siriBadgeClass}">
+                      ${siriStatus}
+                    </span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 font-rajdhani mt-0.5">Mengandungi ${kelasList.length} subjek berjadual</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-3">
                 <span class="hidden sm:inline-block text-[10px] uppercase font-mono px-2.5 py-0.5 rounded-full ${isOpen ? 'bg-cyan-500/20 text-cyan-300 border border-brand-cyan/40' : 'bg-slate-800 text-slate-400'}">
-                  ${isOpen ? 'Buka' : 'Tutup'}
+                  ${isOpen ? 'Tutup' : 'Buka'}
                 </span>
                 <i data-lucide="${isOpen ? 'chevron-up' : 'chevron-down'}" class="w-5 h-5 text-slate-400 transition-transform"></i>
               </div>
             </button>
 
-            <!-- KANDUNGAN JADUAL KELAS DALAM SIRI TERSEBUT -->
+            <!-- KANDUNGAN SUBJEK DALAM SIRI JADUAL -->
             ${isOpen ? `
               <div class="p-4 sm:p-5 border-t border-slate-800/80 bg-slate-950/40">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -842,28 +830,25 @@
                     const isSelesai = (j.status && j.status.toUpperCase() === 'SELESAI');
                     const badgeClass = isSelesai 
                       ? "bg-slate-800 text-slate-400 border border-slate-700" 
-                      : "bg-emerald-950/90 text-emerald-400 border border-emerald-500/40 shadow-[0_0_10px_rgba(52,211,153,0.3)] animate-pulse";
+                      : "bg-emerald-950/90 text-emerald-400 border border-emerald-500/40";
                     const statusText = isSelesai ? "SELESAI" : "AKAN DATANG";
 
                     return `
-                      <div class="relative pro-card p-5 rounded-2xl flex flex-col justify-between gap-3 overflow-hidden ${isSelesai ? 'opacity-70' : ''}">
-                        
-                        <!-- RIBBON / LABEL STATUS KELAS -->
+                      <div class="relative pro-card p-5 rounded-2xl flex flex-col justify-between gap-3 overflow-hidden ${isSelesai ? 'opacity-65' : ''}">
                         <div class="flex items-center justify-between">
                           <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2.5 py-0.5 rounded font-bold uppercase tracking-wider">${j.subjek || 'TUSYEN'}</span>
-                          <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold font-mono tracking-wider ${badgeClass}">
+                          <span class="text-[10px] px-2 py-0.5 rounded-full font-bold font-mono tracking-wider ${badgeClass}">
                             ${statusText}
                           </span>
                         </div>
 
                         <div>
-                          <h4 class="font-rajdhani font-bold text-base text-white mb-2 leading-snug">${j.title || 'Sesi Kelas Tusyen'}</h4>
+                          <h4 class="font-rajdhani font-bold text-base text-white mb-2 leading-snug">${j.title || 'Topik Bengkel'}</h4>
                           <div class="space-y-1 text-xs text-slate-300 font-rajdhani">
                             <p class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-cyan"></i>${j.tarikh_hari || '-'}</p>
                             <p class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i>${j.masa || '-'}</p>
                           </div>
                         </div>
-
                       </div>
                     `;
                   }).join('')}
@@ -912,76 +897,84 @@
 
       if (activeAdminTab === 'slider') {
         f.innerHTML = `
-          <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input type="text" id="adm-badge" placeholder="Badge (cth: PENGUMUMAN)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+            <input type="text" id="adm-title" placeholder="Tajuk Poster" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+            <input type="text" id="adm-image_url" placeholder="Link Poster Gambar" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+            <textarea id="adm-deskripsi" placeholder="Deskripsi Ringkas" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none"></textarea>
+          </div>
         `;
       } else if (activeAdminTab === 'guru') {
         f.innerHTML = `
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Nama / Label Poster (Rujukan Admin Sahaja - Tidak keluar di laman web)</label>
-            <input type="text" id="adm-nama" placeholder="cth: Poster Cikgu Siti - Kimia SPM" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
-          </div>
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Link Gambar Poster (Google Drive / URL Langsung)</label>
-            <input type="text" id="adm-image_url" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
+          <div class="space-y-3">
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Nama / Label Poster (Rujukan Admin Sahaja)</label>
+              <input type="text" id="adm-nama" placeholder="cth: Poster Cikgu Siti - Kimia SPM" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Link Gambar Poster (Google Drive / URL Langsung)</label>
+              <input type="text" id="adm-image_url" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-brand-cyan">
+            </div>
           </div>
         `;
       } else if (activeAdminTab === 'bahan') {
         f.innerHTML = `
-          <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
-          <input type="text" id="adm-tajuk" placeholder="Tajuk Modul" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <select id="adm-subjek" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">${opt}</select>
+            <input type="text" id="adm-tajuk" placeholder="Tajuk Modul" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+            <input type="text" id="adm-gdrive_url" placeholder="Link Google Drive" class="col-span-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          </div>
         `;
       } else if (activeAdminTab === 'rakaman') {
+        // BORANG BERPUSAT SIRI RAKAMAN (SENARAI SEMUA SUBJEK SERENTAK)
         f.innerHTML = `
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Nama Siri / Sesi Tusyen</label>
-            <input type="text" id="adm-siri" placeholder="cth: Siri 1 : Bengkel Pecutan Awal" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
+          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-red-500/30 mb-3">
+            <label class="block text-xs font-bold text-red-400 mb-1">TAJUK SIRI / SESI (Cth: SESI KELAS 1 / SIRI 1 PECUTAN SPM)</label>
+            <input type="text" id="adm-batch-siri" placeholder="Masukkan Nama Sesi / Siri..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-red-400 font-bold">
+            <p class="text-[10px] text-slate-400 mt-1">Isi tajuk topik dan link Drive bagi subjek yang terlibat di bawah. Subjek yang dibiarkan kosong tidak akan disimpan.</p>
           </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Pilih Subjek</label>
-            <select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">${opt}</select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Tajuk / Topik Sesi</label>
-            <input type="text" id="adm-tajuk" placeholder="cth: Teknik Menjawab Kertas 2" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
-          </div>
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Link Video Google Drive</label>
-            <input type="text" id="adm-video_url" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
+
+          <div class="max-h-72 overflow-y-auto space-y-2.5 pr-1">
+            ${subjekList.map((sbj, idx) => `
+              <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+                <span class="text-[11px] font-bold text-brand-cyan block mb-1.5">${idx + 1}.${sbj}</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input type="text" id="adm-batch-tajuk-${idx}" placeholder="Tajuk / Topik Pembelajaran" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+                  <input type="text" id="adm-batch-url-${idx}" placeholder="Link Video Google Drive" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+                </div>
+              </div>
+            `).join('')}
           </div>
         `;
       } else if (activeAdminTab === 'jadual') {
-        // BORANG JADUAL MENGIKUT SIRI & PILIHAN STATUS (SELESAI / AKAN DATANG)
+        // BORANG BERPUSAT SIRI JADUAL (SENARAI SEMUA SUBJEK + BANNER STATUS)
         f.innerHTML = `
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Nama Siri / Fasa Tusyen</label>
-            <input type="text" id="adm-siri" placeholder="cth: Siri 1 : Fasa Pecutan SPM" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
+          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-cyan-500/30 mb-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-brand-cyan mb-1">TAJUK SIRI / SESI (Cth: SESI KELAS 1)</label>
+              <input type="text" id="adm-batch-jadual-siri" placeholder="Masukkan Nama Sesi / Siri..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-brand-cyan mb-1">STATUS KESELURUHAN SIRI</label>
+              <select id="adm-batch-jadual-status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
+                <option value="AKAN DATANG">🟢 AKAN DATANG</option>
+                <option value="SELESAI">⚪ SELESAI</option>
+              </select>
+            </div>
+            <p class="col-span-full text-[10px] text-slate-400">Isi maklumat bagi subjek yang mempunyai kelas di bawah. Subjek yang dibiarkan kosong tidak akan disimpan.</p>
           </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Subjek</label>
-            <select id="adm-subjek" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">${opt}</select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Status Kelas</label>
-            <select id="adm-status" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
-              <option value="AKAN DATANG">🟢 AKAN DATANG</option>
-              <option value="SELESAI">⚪ SELESAI</option>
-            </select>
-          </div>
-          <div class="col-span-full">
-            <label class="block text-[10px] text-slate-400 mb-1">Tajuk / Topik Bengkel</label>
-            <input type="text" id="adm-title" placeholder="cth: Pecutan Markah KBAT & Kertas 2" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Hari & Tarikh</label>
-            <input type="text" id="adm-tarikh_hari" placeholder="cth: Sabtu, 10 Oktober 2026" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Masa / Jam</label>
-            <input type="text" id="adm-masa" placeholder="cth: 8.30 Malam - 10.30 Malam" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan">
+
+          <div class="max-h-72 overflow-y-auto space-y-2.5 pr-1">
+            ${subjekList.map((sbj, idx) => `
+              <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+                <span class="text-[11px] font-bold text-brand-cyan block mb-1.5">${idx + 1}.${sbj}</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <input type="text" id="adm-batch-jtitle-${idx}" placeholder="Tajuk Bengkel / Topik" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+                  <input type="text" id="adm-batch-jhari-${idx}" placeholder="Hari & Tarikh (Cth: Sabtu, 10 Okt)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+                  <input type="text" id="adm-batch-jmasa-${idx}" placeholder="Masa (Cth: 8.30 - 10.30 Malam)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+                </div>
+              </div>
+            `).join('')}
           </div>
         `;
       }
@@ -999,10 +992,10 @@
         if (activeAdminTab === 'guru') {
           displayTitle = item.nama ? item.nama : `Poster #${idx + 1}`;
         } else if (activeAdminTab === 'rakaman') {
-          displayTitle = `[${item.siri || 'Siri'}] - ${item.subjek || 'Subjek'}`;
+          displayTitle = `[${item.siri || 'Sesi'}] - ${item.subjek || 'Subjek'}`;
           displaySub = item.tajuk || '';
         } else if (activeAdminTab === 'jadual') {
-          displayTitle = `[${item.siri || 'Siri'}] - ${item.subjek || 'Subjek'} (${item.status || 'AKAN DATANG'})`;
+          displayTitle = `[${item.siri || 'Sesi'}] - ${item.subjek || 'Subjek'} (${item.status || 'AKAN DATANG'})`;
           displaySub = `${item.title || ''} • ${item.tarikh_hari || ''}`;
         }
 
@@ -1024,14 +1017,42 @@
     function editItem(idx) {
       const item = portalData[activeAdminTab][idx];
       if (!item) return;
+
       document.getElementById('editing-row-index').value = item.row_index;
       document.getElementById('btn-cancel-edit').classList.remove('hidden');
       document.getElementById('btn-save-item').textContent = "KEMASKINI ITEM";
-      const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
-      inputs.forEach(input => {
-        const k = input.id.replace('adm-', '').toLowerCase();
-        if (item[k] !== undefined) input.value = item[k];
-      });
+
+      if (activeAdminTab === 'rakaman') {
+        const siriInput = document.getElementById('adm-batch-siri');
+        if (siriInput) siriInput.value = item.siri || "";
+        const sIdx = subjekList.indexOf(item.subjek);
+        if (sIdx !== -1) {
+          const tInput = document.getElementById(`adm-batch-tajuk-${sIdx}`);
+          const uInput = document.getElementById(`adm-batch-url-${sIdx}`);
+          if (tInput) tInput.value = item.tajuk || "";
+          if (uInput) uInput.value = item.video_url || "";
+        }
+      } else if (activeAdminTab === 'jadual') {
+        const siriInput = document.getElementById('adm-batch-jadual-siri');
+        const statusInput = document.getElementById('adm-batch-jadual-status');
+        if (siriInput) siriInput.value = item.siri || "";
+        if (statusInput) statusInput.value = item.status || "AKAN DATANG";
+        const sIdx = subjekList.indexOf(item.subjek);
+        if (sIdx !== -1) {
+          const tInput = document.getElementById(`adm-batch-jtitle-${sIdx}`);
+          const hInput = document.getElementById(`adm-batch-jhari-${sIdx}`);
+          const mInput = document.getElementById(`adm-batch-jmasa-${sIdx}`);
+          if (tInput) tInput.value = item.title || "";
+          if (hInput) hInput.value = item.tarikh_hari || "";
+          if (mInput) mInput.value = item.masa || "";
+        }
+      } else {
+        const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
+        inputs.forEach(input => {
+          const k = input.id.replace('adm-', '').toLowerCase();
+          if (item[k] !== undefined) input.value = item[k];
+        });
+      }
     }
 
     function cancelEditMode() {
@@ -1045,36 +1066,120 @@
       const btn = document.getElementById('btn-save-item');
       const row = document.getElementById('editing-row-index').value;
       const isUp = row !== "";
-      let payload = {};
-      document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea').forEach(i => {
-        payload[i.id.replace('adm-', '').toLowerCase()] = i.value;
-      });
-      btn.disabled = true; btn.textContent = "MEMPROSES...";
+
+      btn.disabled = true; 
+      btn.textContent = "MEMPROSES DATA...";
 
       try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: isUp ? "UPDATE" : "ADD", sheetName: activeAdminTab, data: payload, rowIndex: isUp ? Number(row) : null, password: CURRENT_SESSION_TOKEN })
-        });
-        const r = await res.json();
-        if (r.success) {
-          if (isUp) {
-            const idx = portalData[activeAdminTab].findIndex(x => Number(x.row_index) === Number(row));
-            if (idx !== -1) portalData[activeAdminTab][idx] = { ...portalData[activeAdminTab][idx], ...payload };
-          } else {
-            portalData[activeAdminTab].push({ ...payload, row_index: portalData[activeAdminTab].length + 2 });
+        if (activeAdminTab === 'rakaman' && !isUp) {
+          // SIMPAN BATCH RAKAMAN UNTUK SEMUA SUBJEK DALAM SIRI
+          const siriName = (document.getElementById('adm-batch-siri').value || '').trim();
+          if (!siriName) { alert("Sila masukkan Tajuk Siri/Sesi terlebih dahulu!"); btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return; }
+
+          let itemsToSave = [];
+          subjekList.forEach((sbj, idx) => {
+            const tajukVal = (document.getElementById(`adm-batch-tajuk-${idx}`).value || '').trim();
+            const urlVal = (document.getElementById(`adm-batch-url-${idx}`).value || '').trim();
+            if (tajukVal || urlVal) {
+              itemsToSave.push({ siri: siriName, subjek: sbj, tajuk: tajukVal, video_url: urlVal });
+            }
+          });
+
+          if (itemsToSave.length === 0) {
+            alert("Sila isi sekurang-kurangnya satu subjek!");
+            btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return;
           }
 
-          renderAll();
-          renderAdminList();
-          cancelEditMode();
-          initAutoSliders();
-          alert("Berjaya disimpan!");
-          await loadData();
-        } else { alert("Ralat: " + r.message); }
-      } catch (e) { alert("Ralat sambungan: " + e.message); }
-      finally { btn.disabled = false; btn.textContent = isUp ? "KEMASKINI ITEM" : "SIMPAN KE GOOGLE SHEETS"; }
+          for (const item of itemsToSave) {
+            await fetch(API_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ action: "ADD", sheetName: "rakaman", data: item, password: CURRENT_SESSION_TOKEN })
+            });
+          }
+
+        } else if (activeAdminTab === 'jadual' && !isUp) {
+          // SIMPAN BATCH JADUAL UNTUK SEMUA SUBJEK DALAM SIRI
+          const siriName = (document.getElementById('adm-batch-jadual-siri').value || '').trim();
+          const siriStatus = document.getElementById('adm-batch-jadual-status').value;
+          if (!siriName) { alert("Sila masukkan Tajuk Siri/Sesi terlebih dahulu!"); btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return; }
+
+          let itemsToSave = [];
+          subjekList.forEach((sbj, idx) => {
+            const titleVal = (document.getElementById(`adm-batch-jtitle-${idx}`).value || '').trim();
+            const hariVal = (document.getElementById(`adm-batch-jhari-${idx}`).value || '').trim();
+            const masaVal = (document.getElementById(`adm-batch-jmasa-${idx}`).value || '').trim();
+            if (titleVal || hariVal || masaVal) {
+              itemsToSave.push({ siri: siriName, subjek: sbj, title: titleVal, tarikh_hari: hariVal, masa: masaVal, status: siriStatus });
+            }
+          });
+
+          if (itemsToSave.length === 0) {
+            alert("Sila isi sekurang-kurangnya satu subjek!");
+            btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return;
+          }
+
+          for (const item of itemsToSave) {
+            await fetch(API_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ action: "ADD", sheetName: "jadual", data: item, password: CURRENT_SESSION_TOKEN })
+            });
+          }
+
+        } else {
+          // MODUL BIASA ATAU KEMASKINI ITEM TUNGGAL
+          let payload = {};
+          if (activeAdminTab === 'rakaman') {
+            const siriName = (document.getElementById('adm-batch-siri').value || '').trim();
+            const origItem = portalData[activeAdminTab].find(x => Number(x.row_index) === Number(row));
+            const sbj = origItem ? origItem.subjek : subjekList[0];
+            const sIdx = subjekList.indexOf(sbj);
+            payload = {
+              siri: siriName,
+              subjek: sbj,
+              tajuk: (document.getElementById(`adm-batch-tajuk-${sIdx}`).value || '').trim(),
+              video_url: (document.getElementById(`adm-batch-url-${sIdx}`).value || '').trim()
+            };
+          } else if (activeAdminTab === 'jadual') {
+            const siriName = (document.getElementById('adm-batch-jadual-siri').value || '').trim();
+            const siriStatus = document.getElementById('adm-batch-jadual-status').value;
+            const origItem = portalData[activeAdminTab].find(x => Number(x.row_index) === Number(row));
+            const sbj = origItem ? origItem.subjek : subjekList[0];
+            const sIdx = subjekList.indexOf(sbj);
+            payload = {
+              siri: siriName,
+              subjek: sbj,
+              status: siriStatus,
+              title: (document.getElementById(`adm-batch-jtitle-${sIdx}`).value || '').trim(),
+              tarikh_hari: (document.getElementById(`adm-batch-jhari-${sIdx}`).value || '').trim(),
+              masa: (document.getElementById(`adm-batch-jmasa-${sIdx}`).value || '').trim()
+            };
+          } else {
+            document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea').forEach(i => {
+              payload[i.id.replace('adm-', '').toLowerCase()] = i.value;
+            });
+          }
+
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: isUp ? "UPDATE" : "ADD", sheetName: activeAdminTab, data: payload, rowIndex: isUp ? Number(row) : null, password: CURRENT_SESSION_TOKEN })
+          });
+          const r = await res.json();
+          if (!r.success) throw new Error(r.message);
+        }
+
+        cancelEditMode();
+        alert("Berjaya disimpan!");
+        await loadData();
+
+      } catch (e) { 
+        alert("Ralat: " + e.message); 
+      } finally { 
+        btn.disabled = false; 
+        btn.textContent = isUp ? "KEMASKINI ITEM" : "SIMPAN KE GOOGLE SHEETS"; 
+      }
     }
 
     async function deleteItem(sheetName, rowIndex) {
@@ -1082,7 +1187,6 @@
       portalData[sheetName] = (portalData[sheetName] || []).filter(x => Number(x.row_index) !== Number(rowIndex));
       renderAll();
       renderAdminList();
-      initAutoSliders();
 
       try {
         const res = await fetch(API_URL, {
