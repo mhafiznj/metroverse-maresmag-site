@@ -206,7 +206,7 @@
     <div id="guru-slider-wrapper"></div>
   </section>
 
-  <!-- ================= 4. BAHAN & MODUL ================= -->
+  <!-- ================= 4. BAHAN & MODUL (KAD DIPERKECILKAN LEBIH KEMAS) ================= -->
   <section id="bahan" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3 mb-6">
       <div class="flex items-center gap-3">
@@ -233,7 +233,8 @@
         <option value="Pendidikan Moral">Pendidikan Moral</option>
       </select>
     </div>
-    <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    <!-- KAD COMPACT GRID: 2 LAJUR (MOBILE), 3-4 LAJUR (DESKTOP) -->
+    <div id="bahan-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
   </section>
 
   <!-- ================= 5. RAKAMAN KELAS ================= -->
@@ -654,31 +655,41 @@
       }
     }
 
+    // ================= 4. BAHAN RUJUKAN (KAD PADAT & KEMAS) =================
     function filterBahan() {
       const filter = document.getElementById('filter-subjek').value;
       const container = document.getElementById('bahan-container');
       if (!container) return;
       const list = portalData.bahan || [];
       const filtered = filter === "SEMUA" ? list : list.filter(b => b.subjek === filter);
+      
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan untuk subjek ini.</div>`;
+        container.innerHTML = `<div class="col-span-full py-6 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">Tiada modul bahan untuk subjek ini.</div>`;
         return;
       }
+
       container.innerHTML = filtered.map(b => `
-        <div class="pro-card p-4 rounded-2xl flex flex-col justify-between gap-3">
+        <div class="pro-card p-3 sm:p-3.5 rounded-xl flex flex-col justify-between gap-2.5 hover:border-cyan-400/50 transition">
           <div>
-            <span class="text-[10px] bg-cyan-950 text-brand-cyan px-2 py-0.5 rounded font-bold">${b.subjek || 'MODUL'}</span>
-            <h4 class="font-rajdhani font-bold text-base text-white mt-1">${b.tajuk || ''}</h4>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[9px] bg-cyan-950/90 text-brand-cyan px-2 py-0.5 rounded font-bold uppercase tracking-wider">${b.subjek || 'MODUL'}</span>
+              <i data-lucide="folder-down" class="w-3.5 h-3.5 text-slate-500"></i>
+            </div>
+            <h4 class="font-rajdhani font-bold text-xs sm:text-sm text-white leading-snug line-clamp-2" title="${b.tajuk || ''}">
+              ${b.tajuk || 'Modul Pembelajaran'}
+            </h4>
           </div>
-          <a href="${b.gdrive_url || '#'}" target="_blank" class="w-full py-2 rounded-xl bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-xs font-bold text-center border border-brand-cyan/30 flex items-center justify-center gap-1 transition">
-            <span>Buka Modul</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <a href="${b.gdrive_url || '#'}" target="_blank" class="w-full py-1.5 px-2 rounded-lg bg-cyan-500/10 hover:bg-brand-cyan hover:text-black text-brand-cyan text-[11px] font-bold text-center border border-brand-cyan/30 flex items-center justify-center gap-1 transition">
+            <span>Buka Modul</span> 
+            <i data-lucide="external-link" class="w-3 h-3"></i>
           </a>
         </div>
       `).join('');
+
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= 5. RAKAMAN KELAS (COLLAPSIBLE FIX) =================
+    // ================= 5. RAKAMAN KELAS =================
     function toggleSiri(siriKey) {
       if (openSiriSet.has(siriKey)) {
         openSiriSet.delete(siriKey);
@@ -766,7 +777,7 @@
       }).join('');
     }
 
-    // ================= 6. JADUAL MENGIKUT SIRI (COLLAPSIBLE FIX) =================
+    // ================= 6. JADUAL MENGIKUT SIRI =================
     function toggleJadualSiri(siriKey) {
       if (openJadualSiriSet.has(siriKey)) {
         openJadualSiriSet.delete(siriKey);
