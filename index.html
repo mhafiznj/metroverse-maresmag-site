@@ -402,20 +402,11 @@
       return "Sesi Kelas";
     }
 
-    // Fungsi pembersih teks mentah untuk mengelakkan penukaran format automatik Google Sheets
-    function cleanText(val) {
+    // Paparkan terus teks mentah yang diisi oleh pengguna
+    function rawText(val) {
       if (val === null || val === undefined) return "-";
-      let str = String(val).trim();
-      if (!str) return "-";
-      // Singkirkan format panjang ISO (cth: 2026-10-10T16:00:00.000Z)
-      if (str.includes("T") && str.endsWith("Z")) {
-        return str.split("T")[0];
-      }
-      // Singkirkan format waktu lalai GMT sekiranya ditukar secara automatik
-      if (str.includes("GMT") || str.includes("00:00:00")) {
-        return str.split("00:00:00")[0].trim();
-      }
-      return str;
+      const str = String(val).trim();
+      return str === "" ? "-" : str;
     }
 
     let portalData = { slider: [], jadual: [], guru: [], bahan: [], rakaman: [] };
@@ -792,7 +783,7 @@
       }).join('');
     }
 
-    // ================= 6. JADUAL MENGIKUT SIRI (TEKS MENTAH DIKEKALKAN) =================
+    // ================= 6. JADUAL MENGIKUT SIRI (TEKS MENTAH TULIN) =================
     function toggleJadualSiri(siriKey) {
       if (openJadualSiriSet.has(siriKey)) {
         openJadualSiriSet.delete(siriKey);
@@ -873,10 +864,6 @@
                       : "bg-emerald-950/90 text-emerald-400 border border-emerald-500/40";
                     const statusText = isSelesai ? "SELESAI" : "AKAN DATANG";
 
-                    // Menggunakan cleanText() untuk mengekalkan teks mentah
-                    const tarikhDisplay = cleanText(j.tarikh_hari);
-                    const masaDisplay = cleanText(j.masa);
-
                     return `
                       <div class="relative pro-card p-5 rounded-2xl flex flex-col justify-between gap-3 overflow-hidden ${isSelesai ? 'opacity-65' : ''}">
                         <div class="flex items-center justify-between">
@@ -889,8 +876,9 @@
                         <div>
                           <h4 class="font-rajdhani font-bold text-base text-white mb-2 leading-snug">${j.title || 'Topik Bengkel'}</h4>
                           <div class="space-y-1 text-xs text-slate-300 font-rajdhani">
-                            <p class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-cyan flex-shrink-0"></i><span>${tarikhDisplay}</span></p>
-                            <p class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan flex-shrink-0"></i><span>${masaDisplay}</span></p>
+                            <!-- Cetak terus apa sahaja teks yang ditaip -->
+                            <p class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-cyan flex-shrink-0"></i><span>${rawText(j.tarikh_hari)}</span></p>
+                            <p class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan flex-shrink-0"></i><span>${rawText(j.masa)}</span></p>
                           </div>
                         </div>
                       </div>
@@ -1067,9 +1055,9 @@
           </button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <input type="text" value="${cleanText(titleVal)}" placeholder="Tajuk Bengkel / Topik" class="dyn-jadual-title w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-          <input type="text" value="${cleanText(hariVal)}" placeholder="Hari & Tarikh (Cth: Sabtu, 10 Okt)" class="dyn-jadual-hari w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-          <input type="text" value="${cleanText(masaVal)}" placeholder="Masa (Cth: 8.30 - 10.30 Malam)" class="dyn-jadual-masa w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+          <input type="text" value="${titleVal}" placeholder="Tajuk Bengkel / Topik" class="dyn-jadual-title w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+          <input type="text" value="${hariVal}" placeholder="Hari & Tarikh (Cth: Sabtu, 10 Okt)" class="dyn-jadual-hari w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+          <input type="text" value="${masaVal}" placeholder="Masa (Cth: 8.30 - 10.30 Malam)" class="dyn-jadual-masa w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
         </div>
       `;
       c.appendChild(div);
@@ -1083,7 +1071,7 @@
       
       c.innerHTML = list.map((item, idx) => {
         let displayTitle = item.subjek || item.title || item.tajuk || 'Item';
-        let displaySub = cleanText(item.tarikh_hari) || item.image_url || item.badge || '';
+        let displaySub = rawText(item.tarikh_hari) || item.image_url || item.badge || '';
 
         if (activeAdminTab === 'guru') {
           displayTitle = item.nama ? item.nama : `Poster #${idx + 1}`;
@@ -1092,7 +1080,7 @@
           displaySub = item.tajuk || '';
         } else if (activeAdminTab === 'jadual') {
           displayTitle = `[${getSiriName(item)}] - ${item.subjek || 'Subjek'} (${item.status || 'AKAN DATANG'})`;
-          displaySub = `${item.title || ''} • ${cleanText(item.tarikh_hari)}`;
+          displaySub = `${item.title || ''} • ${rawText(item.tarikh_hari)}`;
         }
 
         return `
@@ -1134,7 +1122,7 @@
         const c = document.getElementById('dynamic-jadual-rows-container');
         if (c) {
           c.innerHTML = "";
-          addDynamicJadualRow(item.subjek, item.title, cleanText(item.tarikh_hari), cleanText(item.masa));
+          addDynamicJadualRow(item.subjek, item.title, rawText(item.tarikh_hari), rawText(item.masa));
         }
       } else {
         const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
