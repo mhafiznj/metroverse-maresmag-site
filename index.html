@@ -412,6 +412,9 @@
     let openSiriSet = new Set();
     let openJadualSiriSet = new Set();
 
+    let isRakamanInitialLoaded = false;
+    let isJadualInitialLoaded = false;
+
     let dynamicRakamanRowCounter = 0;
     let dynamicJadualRowCounter = 0;
 
@@ -675,7 +678,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // ================= 5. RAKAMAN KELAS =================
+    // ================= 5. RAKAMAN KELAS (COLLAPSIBLE FIX) =================
     function toggleSiri(siriKey) {
       if (openSiriSet.has(siriKey)) {
         openSiriSet.delete(siriKey);
@@ -704,8 +707,10 @@
       });
 
       const siriKeys = Object.keys(grouped);
-      if (openSiriSet.size === 0 && siriKeys.length > 0) {
+
+      if (!isRakamanInitialLoaded && siriKeys.length > 0) {
         openSiriSet.add(siriKeys[0]);
+        isRakamanInitialLoaded = true;
       }
 
       container.innerHTML = siriKeys.map((siriTitle, sIdx) => {
@@ -761,7 +766,7 @@
       }).join('');
     }
 
-    // ================= 6. JADUAL MENGIKUT SIRI =================
+    // ================= 6. JADUAL MENGIKUT SIRI (COLLAPSIBLE FIX) =================
     function toggleJadualSiri(siriKey) {
       if (openJadualSiriSet.has(siriKey)) {
         openJadualSiriSet.delete(siriKey);
@@ -790,8 +795,10 @@
       });
 
       const siriKeys = Object.keys(grouped);
-      if (openJadualSiriSet.size === 0 && siriKeys.length > 0) {
+
+      if (!isJadualInitialLoaded && siriKeys.length > 0) {
         openJadualSiriSet.add(siriKeys[0]);
+        isJadualInitialLoaded = true;
       }
 
       container.innerHTML = siriKeys.map((siriTitle, sIdx) => {
