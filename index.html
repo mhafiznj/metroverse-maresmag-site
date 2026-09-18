@@ -147,7 +147,7 @@
       </div>
     </div>
 
-    <!-- Mobile Dropdown -->
+    <!-- Dropdown Menu Mobile -->
     <div id="mobile-menu" class="hidden lg:hidden flex-col gap-2 pt-3 pb-2 border-t border-slate-800/80 mt-2 font-rajdhani font-bold text-xs uppercase text-slate-300">
       <a href="#utama" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-cyan-950/60 hover:text-brand-cyan transition flex items-center gap-2">
         <i data-lucide="home" class="w-4 h-4 text-brand-cyan"></i> <span>Utama</span>
@@ -236,7 +236,7 @@
     <div id="bahan-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
-  <!-- ================= 5. RAKAMAN KELAS MENGIKUT SIRI (ACCORDION) ================= -->
+  <!-- ================= 5. RAKAMAN KELAS ================= -->
   <section id="rakaman" class="py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -245,7 +245,7 @@
         </div>
         <div>
           <h2 class="font-orbitron text-lg sm:text-xl font-bold text-white">ARKIB RAKAMAN KELAS</h2>
-          <p class="text-xs text-slate-400">Pilih sesi untuk melihat rakaman video semua subjek</p>
+          <p class="text-xs text-slate-400">Pilih sesi untuk melihat rakaman video mengikut subjek</p>
         </div>
       </div>
       <span class="text-[10px] sm:text-[11px] font-mono text-red-400 bg-red-950/70 px-3 py-1 rounded-full border border-red-500/30">
@@ -255,7 +255,7 @@
     <div id="rakaman-siri-container" class="space-y-4"></div>
   </section>
 
-  <!-- ================= 6. JADUAL KELAS TUSYEN MENGIKUT SIRI ================= -->
+  <!-- ================= 6. JADUAL KELAS TUSYEN ================= -->
   <section id="jadual" class="py-10 px-4 max-w-7xl mx-auto w-full mb-16">
     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
       <div class="flex items-center gap-3">
@@ -402,6 +402,10 @@
 
     let openSiriSet = new Set();
     let openJadualSiriSet = new Set();
+
+    // Kaunter baris dinamik untuk Rakaman & Jadual
+    let dynamicRakamanRowCounter = 0;
+    let dynamicJadualRowCounter = 0;
 
     async function loadData() {
       try {
@@ -749,7 +753,7 @@
       }).join('');
     }
 
-    // ================= 6. JADUAL MENGIKUT SIRI (BANNER STATUS PADA TAJUK SIRI) =================
+    // ================= 6. JADUAL MENGIKUT SIRI =================
     function toggleJadualSiri(siriName) {
       if (openJadualSiriSet.has(siriName)) {
         openJadualSiriSet.delete(siriName);
@@ -786,7 +790,6 @@
         const isOpen = openJadualSiriSet.has(siriTitle);
         const kelasList = grouped[siriTitle];
 
-        // Tentukan status siri: jika ada mana-mana kelas AKAN DATANG, banner siri = AKAN DATANG
         const hasAkanDatang = kelasList.some(k => !k.status || k.status.toUpperCase() === 'AKAN DATANG');
         const siriStatus = hasAkanDatang ? "AKAN DATANG" : "SELESAI";
         const siriBadgeClass = hasAkanDatang 
@@ -796,7 +799,6 @@
         return `
           <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950/70 shadow-lg transition-all duration-300 ${isOpen ? 'border-brand-cyan/40 shadow-[0_0_20px_rgba(0,242,254,0.1)]' : 'hover:border-slate-700'}">
             
-            <!-- HEADER BUTANG SIRI DENGAN BANNER STATUS -->
             <button onclick="toggleJadualSiri('${siriTitle.replace(/'/g, "\\'")}')" class="w-full px-5 py-4 flex items-center justify-between gap-4 text-left transition bg-slate-900/50 hover:bg-slate-900">
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-xl ${isOpen ? 'bg-brand-cyan text-black' : 'bg-cyan-500/10 text-brand-cyan'} border border-cyan-500/30 flex items-center justify-center font-bold text-xs font-orbitron transition-colors">
@@ -805,7 +807,6 @@
                 <div>
                   <div class="flex items-center gap-2">
                     <h3 class="font-orbitron font-bold text-sm sm:text-base text-white">${siriTitle}</h3>
-                    <!-- BANNER STATUS PADA TAJUK SIRI -->
                     <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold font-mono tracking-wider ${siriBadgeClass}">
                       ${siriStatus}
                     </span>
@@ -822,7 +823,6 @@
               </div>
             </button>
 
-            <!-- KANDUNGAN SUBJEK DALAM SIRI JADUAL -->
             ${isOpen ? `
               <div class="p-4 sm:p-5 border-t border-slate-800/80 bg-slate-950/40">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -861,7 +861,7 @@
       }).join('');
     }
 
-    // ================= ADMIN CMS =================
+    // ================= ADMIN CMS (DINAMIK PER SUBJEK) =================
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
     
@@ -926,58 +926,114 @@
           </div>
         `;
       } else if (activeAdminTab === 'rakaman') {
-        // BORANG BERPUSAT SIRI RAKAMAN (SENARAI SEMUA SUBJEK SERENTAK)
+        // RAKAMAN: DINAMIK "ADD SUBJEK"
+        dynamicRakamanRowCounter = 0;
         f.innerHTML = `
-          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-red-500/30 mb-3">
-            <label class="block text-xs font-bold text-red-400 mb-1">TAJUK SIRI / SESI (Cth: SESI KELAS 1 / SIRI 1 PECUTAN SPM)</label>
-            <input type="text" id="adm-batch-siri" placeholder="Masukkan Nama Sesi / Siri..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-red-400 font-bold">
-            <p class="text-[10px] text-slate-400 mt-1">Isi tajuk topik dan link Drive bagi subjek yang terlibat di bawah. Subjek yang dibiarkan kosong tidak akan disimpan.</p>
+          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-red-500/30">
+            <label class="block text-xs font-bold text-red-400 mb-1">TAJUK SIRI / SESI</label>
+            <input type="text" id="adm-dynamic-siri" placeholder="Cth: SESI KELAS 1 / SIRI 1 PECUTAN SPM" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-red-400 font-bold">
           </div>
 
-          <div class="max-h-72 overflow-y-auto space-y-2.5 pr-1">
-            ${subjekList.map((sbj, idx) => `
-              <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
-                <span class="text-[11px] font-bold text-brand-cyan block mb-1.5">${idx + 1}.${sbj}</span>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <input type="text" id="adm-batch-tajuk-${idx}" placeholder="Tajuk / Topik Pembelajaran" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-                  <input type="text" id="adm-batch-url-${idx}" placeholder="Link Video Google Drive" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-                </div>
-              </div>
-            `).join('')}
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs font-bold text-slate-300">Senarai Subjek Di Bawah Sesi Ini:</span>
+            <button type="button" onclick="addDynamicRakamanRow()" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white border border-red-500/40 text-xs font-bold flex items-center gap-1.5 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tambah Subjek</span>
+            </button>
           </div>
+
+          <div id="dynamic-rakaman-rows-container" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
         `;
+        addDynamicRakamanRow(); // Paparkan satu baris awal
       } else if (activeAdminTab === 'jadual') {
-        // BORANG BERPUSAT SIRI JADUAL (SENARAI SEMUA SUBJEK + BANNER STATUS)
+        // JADUAL: DINAMIK "ADD SUBJEK" + STATUS KESELURUHAN
+        dynamicJadualRowCounter = 0;
         f.innerHTML = `
-          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-cyan-500/30 mb-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-cyan-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-bold text-brand-cyan mb-1">TAJUK SIRI / SESI (Cth: SESI KELAS 1)</label>
-              <input type="text" id="adm-batch-jadual-siri" placeholder="Masukkan Nama Sesi / Siri..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
+              <label class="block text-xs font-bold text-brand-cyan mb-1">TAJUK SIRI / SESI</label>
+              <input type="text" id="adm-dynamic-jadual-siri" placeholder="Cth: SESI KELAS 1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
             </div>
             <div>
-              <label class="block text-xs font-bold text-brand-cyan mb-1">STATUS KESELURUHAN SIRI</label>
-              <select id="adm-batch-jadual-status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
+              <label class="block text-xs font-bold text-brand-cyan mb-1">STATUS BANNER SIRI</label>
+              <select id="adm-dynamic-jadual-status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-cyan font-bold">
                 <option value="AKAN DATANG">🟢 AKAN DATANG</option>
                 <option value="SELESAI">⚪ SELESAI</option>
               </select>
             </div>
-            <p class="col-span-full text-[10px] text-slate-400">Isi maklumat bagi subjek yang mempunyai kelas di bawah. Subjek yang dibiarkan kosong tidak akan disimpan.</p>
           </div>
 
-          <div class="max-h-72 overflow-y-auto space-y-2.5 pr-1">
-            ${subjekList.map((sbj, idx) => `
-              <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
-                <span class="text-[11px] font-bold text-brand-cyan block mb-1.5">${idx + 1}.${sbj}</span>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <input type="text" id="adm-batch-jtitle-${idx}" placeholder="Tajuk Bengkel / Topik" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-                  <input type="text" id="adm-batch-jhari-${idx}" placeholder="Hari & Tarikh (Cth: Sabtu, 10 Okt)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-                  <input type="text" id="adm-batch-jmasa-${idx}" placeholder="Masa (Cth: 8.30 - 10.30 Malam)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
-                </div>
-              </div>
-            `).join('')}
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs font-bold text-slate-300">Senarai Subjek Di Bawah Sesi Ini:</span>
+            <button type="button" onclick="addDynamicJadualRow()" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-brand-cyan hover:text-black text-brand-cyan border border-cyan-500/40 text-xs font-bold flex items-center gap-1.5 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tambah Subjek</span>
+            </button>
           </div>
+
+          <div id="dynamic-jadual-rows-container" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
         `;
+        addDynamicJadualRow(); // Paparkan satu baris awal
       }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Menambah baris subjek bagi modul Rakaman
+    function addDynamicRakamanRow(subjekVal = "", tajukVal = "", urlVal = "") {
+      const c = document.getElementById('dynamic-rakaman-rows-container');
+      if (!c) return;
+      const rowId = `rakaman-row-${dynamicRakamanRowCounter++}`;
+      const opt = subjekList.map(s => `<option value="${s}" ${s === subjekVal ? 'selected' : ''}>${s}</option>`).join('');
+
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = "p-3 bg-slate-950 border border-slate-800 rounded-xl relative space-y-2";
+      div.innerHTML = `
+        <div class="flex items-center justify-between">
+          <select class="dyn-rakaman-subjek bg-slate-900 border border-slate-700 text-brand-cyan text-xs rounded-lg px-2.5 py-1 outline-none font-bold">
+            ${opt}
+          </select>
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-1 rounded text-slate-500 hover:text-red-400 transition" title="Padam subjek ini">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <input type="text" value="${tajukVal}" placeholder="Tajuk / Topik Pembelajaran" class="dyn-rakaman-tajuk w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-red-400">
+          <input type="text" value="${urlVal}" placeholder="Link Video Google Drive" class="dyn-rakaman-url w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-red-400">
+        </div>
+      `;
+      c.appendChild(div);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Menambah baris subjek bagi modul Jadual
+    function addDynamicJadualRow(subjekVal = "", titleVal = "", hariVal = "", masaVal = "") {
+      const c = document.getElementById('dynamic-jadual-rows-container');
+      if (!c) return;
+      const rowId = `jadual-row-${dynamicJadualRowCounter++}`;
+      const opt = subjekList.map(s => `<option value="${s}" ${s === subjekVal ? 'selected' : ''}>${s}</option>`).join('');
+
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = "p-3 bg-slate-950 border border-slate-800 rounded-xl relative space-y-2";
+      div.innerHTML = `
+        <div class="flex items-center justify-between">
+          <select class="dyn-jadual-subjek bg-slate-900 border border-slate-700 text-brand-cyan text-xs rounded-lg px-2.5 py-1 outline-none font-bold">
+            ${opt}
+          </select>
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-1 rounded text-slate-500 hover:text-red-400 transition" title="Padam subjek ini">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <input type="text" value="${titleVal}" placeholder="Tajuk Bengkel / Topik" class="dyn-jadual-title w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+          <input type="text" value="${hariVal}" placeholder="Hari & Tarikh (Cth: Sabtu, 10 Okt)" class="dyn-jadual-hari w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+          <input type="text" value="${masaVal}" placeholder="Masa (Cth: 8.30 - 10.30 Malam)" class="dyn-jadual-masa w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+        </div>
+      `;
+      c.appendChild(div);
+      if (window.lucide) lucide.createIcons();
     }
 
     function renderAdminList() {
@@ -1023,28 +1079,22 @@
       document.getElementById('btn-save-item').textContent = "KEMASKINI ITEM";
 
       if (activeAdminTab === 'rakaman') {
-        const siriInput = document.getElementById('adm-batch-siri');
+        const siriInput = document.getElementById('adm-dynamic-siri');
         if (siriInput) siriInput.value = item.siri || "";
-        const sIdx = subjekList.indexOf(item.subjek);
-        if (sIdx !== -1) {
-          const tInput = document.getElementById(`adm-batch-tajuk-${sIdx}`);
-          const uInput = document.getElementById(`adm-batch-url-${sIdx}`);
-          if (tInput) tInput.value = item.tajuk || "";
-          if (uInput) uInput.value = item.video_url || "";
+        const c = document.getElementById('dynamic-rakaman-rows-container');
+        if (c) {
+          c.innerHTML = "";
+          addDynamicRakamanRow(item.subjek, item.tajuk, item.video_url);
         }
       } else if (activeAdminTab === 'jadual') {
-        const siriInput = document.getElementById('adm-batch-jadual-siri');
-        const statusInput = document.getElementById('adm-batch-jadual-status');
+        const siriInput = document.getElementById('adm-dynamic-jadual-siri');
+        const statusInput = document.getElementById('adm-dynamic-jadual-status');
         if (siriInput) siriInput.value = item.siri || "";
         if (statusInput) statusInput.value = item.status || "AKAN DATANG";
-        const sIdx = subjekList.indexOf(item.subjek);
-        if (sIdx !== -1) {
-          const tInput = document.getElementById(`adm-batch-jtitle-${sIdx}`);
-          const hInput = document.getElementById(`adm-batch-jhari-${sIdx}`);
-          const mInput = document.getElementById(`adm-batch-jmasa-${sIdx}`);
-          if (tInput) tInput.value = item.title || "";
-          if (hInput) hInput.value = item.tarikh_hari || "";
-          if (mInput) mInput.value = item.masa || "";
+        const c = document.getElementById('dynamic-jadual-rows-container');
+        if (c) {
+          c.innerHTML = "";
+          addDynamicJadualRow(item.subjek, item.title, item.tarikh_hari, item.masa);
         }
       } else {
         const inputs = document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea');
@@ -1072,21 +1122,23 @@
 
       try {
         if (activeAdminTab === 'rakaman' && !isUp) {
-          // SIMPAN BATCH RAKAMAN UNTUK SEMUA SUBJEK DALAM SIRI
-          const siriName = (document.getElementById('adm-batch-siri').value || '').trim();
+          // BATCH INSERT RAKAMAN DARI SUBJEK YANG DITAMBAH
+          const siriName = (document.getElementById('adm-dynamic-siri').value || '').trim();
           if (!siriName) { alert("Sila masukkan Tajuk Siri/Sesi terlebih dahulu!"); btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return; }
 
+          const rows = document.querySelectorAll('#dynamic-rakaman-rows-container > div');
           let itemsToSave = [];
-          subjekList.forEach((sbj, idx) => {
-            const tajukVal = (document.getElementById(`adm-batch-tajuk-${idx}`).value || '').trim();
-            const urlVal = (document.getElementById(`adm-batch-url-${idx}`).value || '').trim();
+          rows.forEach(r => {
+            const sbj = r.querySelector('.dyn-rakaman-subjek').value;
+            const tajukVal = (r.querySelector('.dyn-rakaman-tajuk').value || '').trim();
+            const urlVal = (r.querySelector('.dyn-rakaman-url').value || '').trim();
             if (tajukVal || urlVal) {
               itemsToSave.push({ siri: siriName, subjek: sbj, tajuk: tajukVal, video_url: urlVal });
             }
           });
 
           if (itemsToSave.length === 0) {
-            alert("Sila isi sekurang-kurangnya satu subjek!");
+            alert("Sila isi sekurang-kurangnya satu subjek dengan tajuk atau link video!");
             btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return;
           }
 
@@ -1099,23 +1151,25 @@
           }
 
         } else if (activeAdminTab === 'jadual' && !isUp) {
-          // SIMPAN BATCH JADUAL UNTUK SEMUA SUBJEK DALAM SIRI
-          const siriName = (document.getElementById('adm-batch-jadual-siri').value || '').trim();
-          const siriStatus = document.getElementById('adm-batch-jadual-status').value;
+          // BATCH INSERT JADUAL DARI SUBJEK YANG DITAMBAH
+          const siriName = (document.getElementById('adm-dynamic-jadual-siri').value || '').trim();
+          const siriStatus = document.getElementById('adm-dynamic-jadual-status').value;
           if (!siriName) { alert("Sila masukkan Tajuk Siri/Sesi terlebih dahulu!"); btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return; }
 
+          const rows = document.querySelectorAll('#dynamic-jadual-rows-container > div');
           let itemsToSave = [];
-          subjekList.forEach((sbj, idx) => {
-            const titleVal = (document.getElementById(`adm-batch-jtitle-${idx}`).value || '').trim();
-            const hariVal = (document.getElementById(`adm-batch-jhari-${idx}`).value || '').trim();
-            const masaVal = (document.getElementById(`adm-batch-jmasa-${idx}`).value || '').trim();
+          rows.forEach(r => {
+            const sbj = r.querySelector('.dyn-jadual-subjek').value;
+            const titleVal = (r.querySelector('.dyn-jadual-title').value || '').trim();
+            const hariVal = (r.querySelector('.dyn-jadual-hari').value || '').trim();
+            const masaVal = (r.querySelector('.dyn-jadual-masa').value || '').trim();
             if (titleVal || hariVal || masaVal) {
               itemsToSave.push({ siri: siriName, subjek: sbj, title: titleVal, tarikh_hari: hariVal, masa: masaVal, status: siriStatus });
             }
           });
 
           if (itemsToSave.length === 0) {
-            alert("Sila isi sekurang-kurangnya satu subjek!");
+            alert("Sila isi sekurang-kurangnya satu subjek dengan butiran kelas!");
             btn.disabled = false; btn.textContent = "SIMPAN KE GOOGLE SHEETS"; return;
           }
 
@@ -1128,32 +1182,28 @@
           }
 
         } else {
-          // MODUL BIASA ATAU KEMASKINI ITEM TUNGGAL
+          // KEMASKINI ITEM TUNGGAL ATAU MODUL BIASA
           let payload = {};
           if (activeAdminTab === 'rakaman') {
-            const siriName = (document.getElementById('adm-batch-siri').value || '').trim();
-            const origItem = portalData[activeAdminTab].find(x => Number(x.row_index) === Number(row));
-            const sbj = origItem ? origItem.subjek : subjekList[0];
-            const sIdx = subjekList.indexOf(sbj);
+            const siriName = (document.getElementById('adm-dynamic-siri').value || '').trim();
+            const firstRow = document.querySelector('#dynamic-rakaman-rows-container > div');
             payload = {
               siri: siriName,
-              subjek: sbj,
-              tajuk: (document.getElementById(`adm-batch-tajuk-${sIdx}`).value || '').trim(),
-              video_url: (document.getElementById(`adm-batch-url-${sIdx}`).value || '').trim()
+              subjek: firstRow ? firstRow.querySelector('.dyn-rakaman-subjek').value : subjekList[0],
+              tajuk: firstRow ? (firstRow.querySelector('.dyn-rakaman-tajuk').value || '').trim() : '',
+              video_url: firstRow ? (firstRow.querySelector('.dyn-rakaman-url').value || '').trim() : ''
             };
           } else if (activeAdminTab === 'jadual') {
-            const siriName = (document.getElementById('adm-batch-jadual-siri').value || '').trim();
-            const siriStatus = document.getElementById('adm-batch-jadual-status').value;
-            const origItem = portalData[activeAdminTab].find(x => Number(x.row_index) === Number(row));
-            const sbj = origItem ? origItem.subjek : subjekList[0];
-            const sIdx = subjekList.indexOf(sbj);
+            const siriName = (document.getElementById('adm-dynamic-jadual-siri').value || '').trim();
+            const siriStatus = document.getElementById('adm-dynamic-jadual-status').value;
+            const firstRow = document.querySelector('#dynamic-jadual-rows-container > div');
             payload = {
               siri: siriName,
-              subjek: sbj,
+              subjek: firstRow ? firstRow.querySelector('.dyn-jadual-subjek').value : subjekList[0],
               status: siriStatus,
-              title: (document.getElementById(`adm-batch-jtitle-${sIdx}`).value || '').trim(),
-              tarikh_hari: (document.getElementById(`adm-batch-jhari-${sIdx}`).value || '').trim(),
-              masa: (document.getElementById(`adm-batch-jmasa-${sIdx}`).value || '').trim()
+              title: firstRow ? (firstRow.querySelector('.dyn-jadual-title').value || '').trim() : '',
+              tarikh_hari: firstRow ? (firstRow.querySelector('.dyn-jadual-hari').value || '').trim() : '',
+              masa: firstRow ? (firstRow.querySelector('.dyn-jadual-masa').value || '').trim() : ''
             };
           } else {
             document.querySelectorAll('#admin-form-fields input, #admin-form-fields select, #admin-form-fields textarea').forEach(i => {
